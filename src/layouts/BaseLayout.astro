@@ -107,9 +107,26 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
 
     <footer class="site-footer">
       <div class="wrap site-footer__inner">
-        <p>&copy; {new Date().getFullYear()} {site.name}</p>
+        <p>
+          &copy; {new Date().getFullYear()} {site.name}
+          <span aria-hidden="true"> · </span>
+          <span>
+            Izradio{' '}
+            {
+              site.company.url ? (
+                <a href={site.company.url} rel="noopener">{site.company.name}</a>
+              ) : (
+                <strong>{site.company.name}</strong>
+              )
+            }
+          </span>
+        </p>
         <p>
           <a href="/blog">Vodiči</a>
+          <span aria-hidden="true"> · </span>
+          <a href="/o-sajtu/">O sajtu</a>
+          <span aria-hidden="true"> · </span>
+          <a href="/privatnost/">Privatnost</a>
           <span aria-hidden="true"> · </span>
           <a href="/rss.xml">RSS</a>
         </p>

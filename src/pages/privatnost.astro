@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site, monetization, analytics } from '../config/site';
+
+const adsOn = monetization.ads.enabled && monetization.ads.client;
+const analyticsOn = Boolean(analytics.cloudflareToken);
+const updated = new Date('2026-08-06').toLocaleDateString('sr-Latn-RS', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<BaseLayout
+  title="Politika privatnosti"
+  description="Koje podatke sajt prikuplja, čime meri posetu i kako se ophodi prema affiliate linkovima."
+>
+  <h1>Politika privatnosti</h1>
+  <p class="post__lead">Poslednja izmena: {updated}.</p>
+
+  <div class="prose">
+    <h2>Ukratko</h2>
+    <p>
+      Sajt ne traži prijavu, ne pravi naloge i ne prikuplja lične podatke. Nema
+      formulara, nema komentara, nema newsletter-a. Ako samo čitaš tekstove, o
+      tebi se ne čuva ništa po čemu bi mogao biti prepoznat.
+    </p>
+
+    <h2>Kolačići</h2>
+    {
+      adsOn ? (
+        <p>
+          Sajt prikazuje oglase preko Google AdSense-a, koji <strong>koristi
+          kolačiće</strong> za prikaz i merenje oglasa. Njima možeš da upravljaš
+          u podešavanjima svog browsera, kao i preko Google-ovih podešavanja
+          oglasa.
+        </p>
+      ) : (
+        <p>
+          <strong>Sajt trenutno ne postavlja nijedan kolačić.</strong> Jedino
+          što se čuva u tvom browseru je izbor svetle ili tamne teme, i to u
+          lokalnoj memoriji browsera (<code>localStorage</code>) — nikad se ne
+          šalje nigde, i briše se kad obrišeš podatke sajta.
+        </p>
+      )
+    }
+
+    <h2>Merenje posete</h2>
+    {
+      analyticsOn ? (
+        <p>
+          Koristi se <strong>Cloudflare Web Analytics</strong>. Ono meri broj
+          poseta i koje stranice se čitaju, ali <strong>ne koristi kolačiće</strong>,
+          ne pravi otisak uređaja (fingerprinting) i ne prati te kroz vreme ni
+          preko drugih sajtova. Podaci se vide zbirno — koliko je ljudi otvorilo
+          koji tekst — a ne ko su.
+        </p>
+      ) : (
+        <p>Poseta se trenutno ne meri nikakvim alatom.</p>
+      )
+    }
+    <p>
+      Nezavisno od toga, veb server beleži tehničke zapise pristupa (IP adresa,
+      vreme, tražena adresa, tip browsera), što je uobičajeno i neophodno za rad
+      i bezbednost servera. Ti zapisi se ne koriste za profilisanje.
+    </p>
+
+    <h2>Affiliate linkovi</h2>
+    <p>
+      Pojedini tekstovi sadrže affiliate linkove ka prodavcima hardvera. Ako
+      preko takvog linka kupiš proizvod, sajt dobija malu proviziju —
+      <strong>bez ikakvog dodatnog troška za tebe</strong>. Takvi linkovi su
+      označeni u samom tekstu, a preporuke se ne biraju po visini provizije.
+    </p>
+    <p>
+      Klikom na affiliate link odlaziš na sajt prodavca, gde važe njihova
+      pravila privatnosti i njihovi kolačići — na to ovaj sajt ne utiče.
+    </p>
+
+    <h2>Spoljne usluge</h2>
+    <ul>
+      <li><strong>Cloudflare</strong> — DNS i zaštita saobraćaja ka sajtu.</li>
+      {analyticsOn && <li><strong>Cloudflare Web Analytics</strong> — merenje posete, bez kolačića.</li>}
+      {adsOn && <li><strong>Google AdSense</strong> — prikaz oglasa, koristi kolačiće.</li>}
+    </ul>
+
+    <h2>Tvoja prava</h2>
+    <p>
+      Pošto se lični podaci ne prikupljaju, nema baze iz koje bi se nešto
+      brisalo ili izvozilo. Ako ipak imaš pitanje u vezi sa privatnošću, piši na
+      <a href={`mailto:${site.email}`}>{site.email}</a>.
+    </p>
+
+    <h2>Izmene</h2>
+    <p>
+      Ako se nešto promeni — na primer kad krenu oglasi — ova stranica se menja
+      pre nego što promena stupi na snagu, uz novi datum na vrhu.
+    </p>
+  </div>
+</BaseLayout>

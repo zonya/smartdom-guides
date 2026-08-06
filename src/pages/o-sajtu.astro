@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
+---
+
+<BaseLayout
+  title="O sajtu"
+  description="Ko piše SmartDom Guides, zašto, i kako da stupiš u kontakt."
+>
+  <h1>O sajtu</h1>
+  <p class="post__lead">
+    Vodiči za pametan dom i Linux, pisani na srpskom, za ljude koji tek
+    počinju.
+  </p>
+
+  <div class="prose">
+    <h2>Zašto ovaj sajt</h2>
+    <p>
+      Kad sam prvi put sklapao pametan dom, najviše vremena nisam potrošio na
+      podešavanje nego na traženje odgovora na jednostavna pitanja: koji
+      protokol, koji dongle, da li mi ovo uopšte treba. Odgovori su postojali —
+      ali razbacani po engleskim forumima, u tuđim kontekstima, i najčešće
+      napisani za ljude koji već znaju.
+    </p>
+    <p>
+      {site.name} je pokušaj da to bude na jednom mestu, na srpskom, i
+      napisano tako da se razume iz prvog čitanja. Bez pretpostavke da znaš
+      šta je MQTT, i bez pretvaranja da je sve prosto kad nije.
+    </p>
+
+    <h2>Kako pišemo</h2>
+    <ul>
+      <li>
+        <strong>Korak po korak.</strong> Ako vodič kaže „otvori terminal", piše
+        i šta tačno da ukucaš.
+      </li>
+      <li>
+        <strong>Bez preterivanja.</strong> Gde nešto ima manu, ona je napisana
+        — i gde ti nešto <em>ne</em> treba, i to piše.
+      </li>
+      <li>
+        <strong>Iz prakse.</strong> Preporučuje se ono što je zaista korišćeno,
+        ne ono što najbolje zvuči u opisu proizvoda.
+      </li>
+    </ul>
+
+    <h2>Novac</h2>
+    <p>
+      Sajt košta oko 5-6€ mesečno (server i domen). Cilj je da se sam izdržava,
+      preko affiliate linkova ka hardveru i eventualno oglasa. To znači jednu
+      obavezu prema tebi: <strong>preporuka se ne menja zbog provizije</strong>.
+      Gde tekst sadrži affiliate link, to je jasno napisano. Detalji su u
+      <a href="/privatnost/">politici privatnosti</a>.
+    </p>
+
+    <h2>Ko stoji iza sajta</h2>
+    <p>
+      Sajt razvija i održava <strong>{site.company.name}</strong> — firma koja
+      se bavi IT rešenjima, između ostalog i postavljanjem pametnog doma,
+      kućnih servera i mreža. Vodiči nastaju iz tog posla: uglavnom se pišu
+      odgovori na pitanja koja se u praksi ponavljaju.
+    </p>
+
+    <h2>Kontakt</h2>
+    <p>
+      Pitanje, ispravka, predlog teme — sve je dobrodošlo. Naročito ispravke:
+      ako nešto u vodiču ne radi kod tebe, to je greška vodiča dok se ne dokaže
+      suprotno.
+    </p>
+    <p>
+      Piši na <a href={`mailto:${site.email}`}>{site.email}</a>.
+    </p>
+  </div>
+</BaseLayout>

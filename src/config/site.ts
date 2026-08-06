@@ -8,9 +8,16 @@ export const site = {
   description:
     'Praktični, jednostavni vodiči za Home Assistant i Linux za početnike.',
   url: 'https://opameti.me',
+  // ⚠️ Za ovu adresu još ne postoji MX zapis — dok se ne podesi prosleđivanje
+  // (npr. Cloudflare Email Routing → Gmail), pošta poslata ovde nigde ne stiže.
+  email: 'kontakt@opameti.me',
   nav: [
     { href: '/blog', label: 'Vodiči' },
+    { href: '/o-sajtu', label: 'O sajtu' },
   ],
+  // Firma koja stoji iza sajta. `url` je namerno prazan dok nextit.rs ne
+  // proradi (zona je na Cloudflare-u, ali NS još nisu prebačeni).
+  company: { name: 'NextIT', url: '' },
 };
 
 export const analytics = {
