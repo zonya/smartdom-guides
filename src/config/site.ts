@@ -18,7 +18,10 @@ export const analytics = {
   // banner. Token se dobija na Cloudflare → Analytics & Logs → Web Analytics
   // → Add a site (opameti.me); iz ponuđenog snippeta prepiši samo vrednost
   // "token". Dok je prazno, nikakva skripta se ne učitava.
-  cloudflareToken: '',
+  // Sajt „opameti.me" u Web Analytics, site_tag 93e1b97deaae443e88dc78e11ac0f532.
+  // auto_install je namerno isključen — zona je DNS-only (sivi oblak), pa
+  // Cloudflare ne može sam da ubaci beacon; ide kroz ovaj token.
+  cloudflareToken: '8c6dffbd517a451a8a3d3ac7628913ae',
 };
 
 export const monetization = {
