@@ -8,8 +8,9 @@ export const site = {
   description:
     'Praktični, jednostavni vodiči za Home Assistant i Linux za početnike.',
   url: 'https://opameti.me',
-  // ⚠️ Za ovu adresu još ne postoji MX zapis — dok se ne podesi prosleđivanje
-  // (npr. Cloudflare Email Routing → Gmail), pošta poslata ovde nigde ne stiže.
+  // Cloudflare Email Routing prosleđuje ovu adresu na marko.dusic@gmail.com
+  // (pravilo „kontakt → gmail" na zoni opameti.me). Domen NIŠTA ne šalje —
+  // DMARC je p=reject, pa svaki budući izvor slanja mora prvo u SPF/DKIM.
   email: 'kontakt@opameti.me',
   nav: [
     { href: '/blog', label: 'Vodiči' },
