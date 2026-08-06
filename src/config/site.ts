@@ -13,6 +13,14 @@ export const site = {
   ],
 };
 
+export const analytics = {
+  // Cloudflare Web Analytics — besplatan, bez kolačića, ne traži cookie
+  // banner. Token se dobija na Cloudflare → Analytics & Logs → Web Analytics
+  // → Add a site (opameti.me); iz ponuđenog snippeta prepiši samo vrednost
+  // "token". Dok je prazno, nikakva skripta se ne učitava.
+  cloudflareToken: '',
+};
+
 export const monetization = {
   // Oglasi se ne prikazuju dok se ovo ne uključi. Kad AdSense nalog bude
   // odobren: enabled: true + upiši client/slot ID-jeve i stavi ads.txt

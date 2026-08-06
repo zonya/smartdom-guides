@@ -102,6 +102,16 @@ ništa se ne renderuje dok se ne uključi u `src/config/site.ts`.
 - Linkovi mogu i dalje da idu inline u markdown gde je prirodno; boks je za
   zbirnu preporuku hardvera.
 
-### Ostalo
+### Analitika
 
-- Cloudflare Web Analytics — još nije uključen (besplatan, bez cookie-ja).
+- **Cloudflare Web Analytics** — besplatan, bez kolačića, ne traži cookie
+  banner. Kod je na mestu, čeka samo token: Cloudflare → Analytics & Logs →
+  Web Analytics → Add a site (`opameti.me`), pa iz snippeta prepiši vrednost
+  `token` u `analytics.cloudflareToken` (`src/config/site.ts`). Dok je
+  prazno, nikakva skripta se ne učitava.
+
+### SEO
+
+- `src/pages/rss.xml.js` → `/rss.xml` (link u `<head>` i u podnožju).
+- `@astrojs/sitemap` → `/sitemap-index.xml`, na koji upućuje
+  `public/robots.txt`. Sitemap prijaviti u Google Search Console.

@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { site, monetization } from '../config/site';
+import { site, monetization, analytics } from '../config/site';
 
 interface Props {
   title: string;
@@ -25,6 +25,12 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
     <title>{pageTitle}</title>
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={site.name}
+      href="/rss.xml"
+    />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
@@ -104,6 +110,8 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
         <p>&copy; {new Date().getFullYear()} {site.name}</p>
         <p>
           <a href="/blog">Vodiči</a>
+          <span aria-hidden="true"> · </span>
+          <a href="/rss.xml">RSS</a>
         </p>
       </div>
     </footer>
@@ -118,6 +126,17 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
         localStorage.setItem('theme', next);
       });
     </script>
+
+    {
+      analytics.cloudflareToken && (
+        <script
+          is:inline
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: analytics.cloudflareToken })}
+        />
+      )
+    }
 
     {
       adsLive && (
