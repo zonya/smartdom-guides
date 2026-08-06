@@ -15,7 +15,7 @@ const { href, title, description, pubDate, tags = [], readingTime } = Astro.prop
   <h3 class="card__title"><a href={href}>{title}</a></h3>
   <p class="card__meta">
     <time datetime={pubDate.toISOString()}>
-      {pubDate.toLocaleDateString('sr-RS', { day: 'numeric', month: 'long', year: 'numeric' })}
+      {pubDate.toLocaleDateString('sr-Latn-RS', { day: 'numeric', month: 'long', year: 'numeric' })}
     </time>
     {readingTime && <span class="card__dot">·</span>}
     {readingTime && <span>{readingTime} min čitanja</span>}
