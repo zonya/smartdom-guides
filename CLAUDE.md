@@ -50,10 +50,10 @@ tek počinju. Postojeći tekstovi su dobar primer stila.
 Objavljeno:
 - Šta je Home Assistant i da li ti uopšte treba?
 - Home Assistant za apsolutne početnike — instalacija za 30 minuta
-
-U planu (redosled po prioritetu, prva 4 su prirodno mesto za affiliate
-linkove ka hardveru):
 - Koji hardver ti treba za pametan dom: Zigbee vs Z-Wave vs WiFi
+
+U planu (redosled po prioritetu, prva 3 su prirodno mesto za affiliate
+linkove ka hardveru):
 - Prvih 5 automatizacija koje svako treba da napravi
 - Najbolji jeftini Zigbee senzori i utičnice za početak
 - Kako da instaliraš Home Assistant na svom Linux serveru (Docker)
