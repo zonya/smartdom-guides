@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout
+  title="Svi vodiči"
+  description="Svi vodiči za Home Assistant i Linux na jednom mestu."
+>
+  <h1>Svi vodiči</h1>
+  <ul class="post-list">
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+          <br />
+          <time datetime={post.data.pubDate.toISOString()}>
+            {post.data.pubDate.toLocaleDateString('sr-RS')}
+          </time>
+          <p>{post.data.description}</p>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

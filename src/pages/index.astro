@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5);
+---
+
+<BaseLayout
+  title="Home Assistant i Linux vodiči za početnike"
+  description="Praktični, jednostavni vodiči za Home Assistant i Linux za početnike."
+>
+  <section>
+    <h1>Home Assistant i Linux, objašnjeno jednostavno</h1>
+    <p>
+      Vodiči za pametan dom i Linux, pisani za ljude koji tek počinju — bez
+      žargona, korak po korak.
+    </p>
+  </section>
+
+  <section>
+    <h2>Najnoviji tekstovi</h2>
+    <ul class="post-list">
+      {
+        posts.map((post) => (
+          <li>
+            <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+            <br />
+            <time datetime={post.data.pubDate.toISOString()}>
+              {post.data.pubDate.toLocaleDateString('sr-RS')}
+            </time>
+          </li>
+        ))
+      }
+    </ul>
+    <p><a href="/blog">Svi vodiči →</a></p>
+  </section>
+</BaseLayout>
