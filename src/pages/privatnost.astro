@@ -15,8 +15,10 @@ const updated = new Date('2026-08-06').toLocaleDateString('sr-Latn-RS', {
   title="Politika privatnosti"
   description="Koje podatke sajt prikuplja, čime meri posetu i kako se ophodi prema affiliate linkovima."
 >
-  <h1>Politika privatnosti</h1>
-  <p class="post__lead">Poslednja izmena: {updated}.</p>
+  <header class="post__header">
+    <h1>Politika privatnosti</h1>
+    <p class="post__lead">Poslednja izmena: {updated}.</p>
+  </header>
 
   <div class="prose">
     <h2>Ukratko</h2>
@@ -87,7 +89,7 @@ const updated = new Date('2026-08-06').toLocaleDateString('sr-Latn-RS', {
     <h2>Tvoja prava</h2>
     <p>
       Pošto se lični podaci ne prikupljaju, nema baze iz koje bi se nešto
-      brisalo ili izvozilo. Ako ipak imaš pitanje u vezi sa privatnošću, piši na
+      brisalo ili izvozilo. Ako ipak imaš pitanje u vezi sa privatnošću, piši na{' '}
       <a href={`mailto:${site.email}`}>{site.email}</a>.
     </p>
 
