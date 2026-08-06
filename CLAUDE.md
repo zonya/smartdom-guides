@@ -26,17 +26,24 @@ ostaje ispod prihoda (server + domen su ukupno ~5-6€/mesec).
 ## Deploy
 
 - Hetzner Cloud CX23, Ubuntu 24.04, IP `168.119.53.13`.
-- Domen `opameti.me` (+ wildcard `*.opameti.me`), DNS na Cloudflare
-  (trenutno DNS-only/siv oblak — Caddy sam pribavlja Let's Encrypt sertifikat;
-  proxy/oranž oblak može da se uključi kasnije za CDN/DDoS).
+- Domen `opameti.me` (+ wildcard `*.opameti.me`), DNS na Cloudflare,
+  **proxied (oranž oblak)**. Caddy na originu i dalje ima svoj Let's Encrypt
+  sertifikat, a SSL režim je **Full (strict)**, pa taj cert mora biti važeći —
+  ako istekne, sajt pada sa greškom 526.
+- ⚠️ **Edge kešira statiku.** Posle deploy-a koji menja `robots.txt`,
+  `sitemap*.xml`, `ads.txt` i slično, keš se mora očistiti — inače se i dalje
+  servira stara verzija. `deploy.sh` to radi automatski ako je postavljen
+  `CF_API_TOKEN`.
 - `Dockerfile` (multi-stage: Node build → Caddy serve), `docker-compose.yml`,
   `Caddyfile` (čita domen iz `DOMAIN` env varijable).
 - Na serveru: `~/smartdom-guides`, `.env` sadrži `DOMAIN=opameti.me`.
-- **Update na produkciji:**
+- **Update na produkciji** — `./deploy.sh` (deploy + purge keša + provera), ili ručno:
   ```sh
   ssh root@168.119.53.13
   cd smartdom-guides && git pull && docker compose up -d --build
   ```
+  Token za purge se drži van repoa (`~/.config/opameti/env`, `CF_API_TOKEN`);
+  bez njega skripta radi deploy i samo upozori da keš nije očišćen.
 - Repo je javan (public) — kloniranje/push ne traži autentikaciju.
 
 ## Radni tok za nov tekst
