@@ -1,4 +1,14 @@
+# Content Signals (contentsignals.org) — šta smemo dozvoliti a šta ne:
+#   search    = indeksiranje i prikaz u rezultatima pretrage
+#   ai-input  = korišćenje sadržaja u AI odgovorima u realnom vremenu
+#   ai-train  = treniranje ili fino podešavanje AI modela
+#   use       = šta se sme zadržati posle pristupa (immediate/reference/full)
+#
+# Naša odluka: pretraga i citiranje u AI odgovorima su dobrodošli (donose
+# posetu), treniranje modela na ovim tekstovima nije.
+
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no, use=reference
 Allow: /
 
 Sitemap: https://opameti.me/sitemap-index.xml
