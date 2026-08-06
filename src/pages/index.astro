@@ -1,39 +1,53 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import PostCard from '../components/PostCard.astro';
+import AdSlot from '../components/AdSlot.astro';
+import { site } from '../config/site';
+import { getSortedPosts, readingTime } from '../utils/posts';
 
-const posts = (await getCollection('posts'))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 5);
+const posts = (await getSortedPosts()).slice(0, 5);
 ---
 
 <BaseLayout
-  title="Home Assistant i Linux vodiči za početnike"
-  description="Praktični, jednostavni vodiči za Home Assistant i Linux za početnike."
+  title={`${site.name} — ${site.tagline}`}
+  description={site.description}
+  bareTitle
 >
-  <section>
+  <section class="hero">
+    <span class="hero__eyebrow">Home Assistant · Linux</span>
     <h1>Automatizacija doma za svakoga</h1>
     <p>
-      Vodiči za Home Assistant i Linux, pisani za ljude koji tek počinju —
-      bez žargona, korak po korak.
+      Vodiči pisani za ljude koji tek počinju — bez žargona, korak po korak,
+      sa konkretnim primerima i preporukama hardvera koji se stvarno isplati.
+    </p>
+    <p>
+      <a class="btn" href="/blog/instalacija-home-assistant-30-minuta/">
+        Počni odavde
+      </a>
+      <a class="btn btn--ghost" href="/blog">Svi vodiči</a>
     </p>
   </section>
 
   <section>
-    <h2>Najnoviji tekstovi</h2>
-    <ul class="post-list">
+    <div class="section-title">
+      <h2>Najnoviji tekstovi</h2>
+      <a href="/blog">Svi vodiči →</a>
+    </div>
+    <div class="card-grid">
       {
         posts.map((post) => (
-          <li>
-            <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-            <br />
-            <time datetime={post.data.pubDate.toISOString()}>
-              {post.data.pubDate.toLocaleDateString('sr-RS')}
-            </time>
-          </li>
+          <PostCard
+            href={`/blog/${post.id}/`}
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            tags={post.data.tags}
+            readingTime={readingTime(post.body)}
+          />
         ))
       }
-    </ul>
-    <p><a href="/blog">Svi vodiči →</a></p>
+    </div>
   </section>
+
+  <AdSlot slot="list" />
 </BaseLayout>

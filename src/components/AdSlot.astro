@@ -1,0 +1,38 @@
+---
+import { monetization } from '../config/site';
+
+interface Props {
+  /** Koja jedinica iz monetization.ads.slots */
+  slot: 'inArticle' | 'belowArticle' | 'list';
+  /** Prikaži prazan okvir čak i kad su oglasi isključeni (za proveru izgleda) */
+  preview?: boolean;
+}
+
+const { slot, preview = false } = Astro.props;
+const { enabled, client, slots } = monetization.ads;
+const slotId = slots[slot];
+const live = enabled && client && slotId;
+const show = live || preview;
+---
+
+{
+  show && (
+    <aside class="ad-slot" aria-label="Oglas">
+      <span class="ad-slot__label">Oglas</span>
+      {live ? (
+        <ins
+          class="adsbygoogle"
+          style="display:block"
+          data-ad-client={client}
+          data-ad-slot={slotId}
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+      ) : (
+        <div class="ad-slot__placeholder">
+          mesto za oglas ({slot})
+        </div>
+      )}
+    </aside>
+  )
+}

@@ -1,12 +1,19 @@
 ---
 import '../styles/global.css';
+import { site, monetization } from '../config/site';
 
 interface Props {
   title: string;
   description: string;
+  /** Ako je true, u <title> se ne dodaje ime sajta (za naslovnu). */
+  bareTitle?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, bareTitle = false } = Astro.props;
+const pageTitle = bareTitle ? title : `${title} · ${site.name}`;
+const path = Astro.url.pathname;
+const canonical = new URL(path, site.url).href;
+const adsLive = monetization.ads.enabled && monetization.ads.client;
 ---
 
 <!doctype html>
@@ -15,21 +22,111 @@ const { title, description } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <title>{title} · SmartDom Guides</title>
+    <title>{pageTitle}</title>
+    <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="sr_RS" />
+    <meta name="twitter:card" content="summary" />
+
+    <!-- Tema se postavlja pre iscrtavanja da ne bi bljesnula pogrešna boja. -->
+    <script is:inline>
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.dataset.theme = saved;
+      }
+    </script>
+
+    {
+      adsLive && (
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${monetization.ads.client}`}
+          crossorigin="anonymous"
+        />
+      )
+    }
   </head>
   <body>
+    <a class="skip-link" href="#main">Preskoči na sadržaj</a>
+
     <header class="site-header">
-      <a href="/" class="logo">SmartDom Guides</a>
-      <nav>
-        <a href="/blog">Vodiči</a>
-      </nav>
+      <div class="wrap site-header__inner">
+        <a href="/" class="logo">
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+            <rect width="32" height="32" rx="6" fill="currentColor" opacity="0.12"></rect>
+            <path d="M16 6 6 14v12h8v-8h4v8h8V14L16 6z" fill="currentColor"></path>
+          </svg>
+          {site.name}
+        </a>
+        <nav class="site-nav">
+          {
+            site.nav.map((item) => (
+              <a
+                href={item.href}
+                aria-current={path.startsWith(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+          <button
+            class="theme-toggle"
+            type="button"
+            aria-label="Promeni temu (svetla/tamna)"
+            data-theme-toggle
+          >
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+            </svg>
+          </button>
+        </nav>
+      </div>
     </header>
-    <main>
-      <slot />
+
+    <main id="main">
+      <div class="wrap">
+        <slot />
+      </div>
     </main>
+
     <footer class="site-footer">
-      <p>&copy; {new Date().getFullYear()} SmartDom Guides</p>
+      <div class="wrap site-footer__inner">
+        <p>&copy; {new Date().getFullYear()} {site.name}</p>
+        <p>
+          <a href="/blog">Vodiči</a>
+        </p>
+      </div>
     </footer>
+
+    <script is:inline>
+      document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+        const root = document.documentElement;
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const current = root.dataset.theme || (systemDark ? 'dark' : 'light');
+        const next = current === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = next;
+        localStorage.setItem('theme', next);
+      });
+    </script>
+
+    {
+      adsLive && (
+        <script is:inline>
+          document.querySelectorAll('ins.adsbygoogle').forEach(() => {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+          });
+        </script>
+      )
+    }
   </body>
 </html>

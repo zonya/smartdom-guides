@@ -9,13 +9,19 @@ ostaje ispod prihoda (server + domen su ukupno ~5-6€/mesec).
 - Astro 7, static output (nema backend/bazu).
 - Sadržaj: content collections, `src/content/posts/*.md`, definisan u
   `src/content.config.ts`. Frontmatter: `title`, `description`, `pubDate`,
-  `tags` (array).
+  `tags` (array), opciono `affiliate` (lista proizvoda, vidi Monetizaciju).
 - Layout: `src/layouts/BaseLayout.astro`. Stranice: `src/pages/index.astro`
   (početna, poslednjih 5 tekstova), `src/pages/blog/index.astro` (svi
   tekstovi), `src/pages/blog/[slug].astro` (pojedinačan tekst, slug = ime
-  fajla bez ekstenzije).
-- Stil: `src/styles/global.css`, light/dark automatski
-  (`prefers-color-scheme`), bez CSS frameworka — namerno minimalno.
+  fajla bez ekstenzije), `src/pages/tag/[tag].astro` (tekstovi po temi).
+- Komponente: `src/components/` — `PostCard`, `AdSlot`, `AffiliateBox`.
+  Pomoćne funkcije (sortiranje, vreme čitanja): `src/utils/posts.ts`.
+- Konfiguracija: `src/config/site.ts` — ime/tagline/nav + sve monetizacijske
+  zastavice na jednom mestu.
+- Stil: `src/styles/global.css`, bez CSS frameworka — namerno minimalno.
+  Tema: `prefers-color-scheme` + ručno dugme u zaglavlju (`data-theme` na
+  `<html>`, pamti se u `localStorage`, inline skripta u `<head>` da nema
+  bljeska pogrešne boje).
 
 ## Deploy
 
@@ -62,11 +68,40 @@ linkove ka hardveru):
 - Osnove terminala — 20 komandi koje ti stvarno trebaju
 - Zaštita pametnog doma — osnove bezbednosti
 
-## Monetizacija (još nije podešeno)
+## Monetizacija
 
-- Amazon Associates / AliExpress affiliate — nalozi još nisu napravljeni.
-- Cloudflare Web Analytics — još nije uključen (razmatran, besplatan, bez
-  cookie-ja).
-- Kad affiliate nalozi budu spremni, linkove ubacivati direktno u markdown
-  tekstove; nema posebnog sistema za to za sada (namerno, dok ne bude
-  potrebno).
+Mesta za oglase i affiliate blokovi **postoje u kodu ali su isključeni** —
+ništa se ne renderuje dok se ne uključi u `src/config/site.ts`.
+
+### Oglasi (AdSense)
+
+- Sve se pali iz `monetization.ads` u `src/config/site.ts`:
+  `enabled: true` + `client` (`ca-pub-…`) + `slots` ID-jevi iz AdSense panela.
+- Postojeće pozicije (`<AdSlot slot="…" />`): `inArticle` (odmah ispod
+  naslova teksta), `belowArticle` (ispod teksta, iznad prev/next),
+  `list` (dno naslovne, liste vodiča i tag stranica).
+- Za proveru izgleda bez naloga: `<AdSlot slot="list" preview />` iscrta
+  isprekidan okvir sa natpisom.
+- `public/ads.txt` je šablon — AdSense ne servira oglase dok se ne popuni.
+- Skripta AdSense-a se učitava samo kad je `enabled` — dok je isključeno,
+  sajt nema nijedan eksterni zahtev.
+
+### Affiliate
+
+- Nalozi (Amazon Associates / AliExpress) još nisu napravljeni.
+- Proizvodi se dodaju u frontmatter teksta, ne u telo:
+  ```yaml
+  affiliate:
+    - title: "Sonoff Zigbee 3.0 USB Dongle Plus"
+      url: "https://…"
+      price: "~25€"
+      note: "Obavezno preko USB produžnog kabla."
+  ```
+  `AffiliateBox` ih iscrta na dnu teksta, sa `rel="sponsored nofollow"` i
+  obaveštenjem o proviziji (tekst u `monetization.affiliate.disclosure`).
+- Linkovi mogu i dalje da idu inline u markdown gde je prirodno; boks je za
+  zbirnu preporuku hardvera.
+
+### Ostalo
+
+- Cloudflare Web Analytics — još nije uključen (besplatan, bez cookie-ja).

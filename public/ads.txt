@@ -1,0 +1,5 @@
+# Šablon za AdSense. Kad nalog bude odobren, zameni PUB_ID svojim
+# izdavačkim ID-jem (bez "ca-" prefiksa) i otkomentariši liniju ispod.
+# Bez ispravnog ads.txt fajla AdSense odbija da servira oglase.
+#
+# google.com, pub-PUB_ID, DIRECT, f08c47fec0942fa0

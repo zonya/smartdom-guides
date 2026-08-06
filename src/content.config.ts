@@ -8,6 +8,18 @@ const posts = defineCollection({
     description: z.string(),
     pubDate: z.date(),
     tags: z.array(z.string()).default([]),
+    // Opciono: proizvodi koji se prikazuju u boksu na dnu teksta.
+    // Linkovi dobijaju rel="sponsored nofollow" i obaveštenje o proviziji.
+    affiliate: z
+      .array(
+        z.object({
+          title: z.string(),
+          url: z.string().url(),
+          note: z.string().optional(),
+          price: z.string().optional(),
+        })
+      )
+      .optional(),
   }),
 });
 

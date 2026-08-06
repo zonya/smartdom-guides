@@ -4,30 +4,25 @@ import PostCard from '../../components/PostCard.astro';
 import AdSlot from '../../components/AdSlot.astro';
 import { getSortedPosts, readingTime } from '../../utils/posts';
 
-const posts = await getSortedPosts();
-const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
+export async function getStaticPaths() {
+  const posts = await getSortedPosts();
+  const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
+  return tags.map((tag) => ({
+    params: { tag },
+    props: { posts: posts.filter((p) => p.data.tags.includes(tag)) },
+  }));
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
 ---
 
 <BaseLayout
-  title="Svi vodiči"
-  description="Svi vodiči za Home Assistant i Linux na jednom mestu."
+  title={`Tema: ${tag}`}
+  description={`Svi vodiči na temu „${tag}".`}
 >
-  <h1>Svi vodiči</h1>
-  <p class="post__lead">
-    {posts.length} tekstova, najnoviji prvi.
-  </p>
-
-  {
-    allTags.length > 0 && (
-      <p class="tags">
-        {allTags.map((tag) => (
-          <a class="tag" href={`/tag/${tag}/`}>
-            {tag}
-          </a>
-        ))}
-      </p>
-    )
-  }
+  <h1>Tema: {tag}</h1>
+  <p class="post__lead">{posts.length} tekstova.</p>
 
   <div class="card-grid" style="margin-top:2rem">
     {
@@ -43,6 +38,8 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
       ))
     }
   </div>
+
+  <p style="margin-top:2rem"><a href="/blog">← Svi vodiči</a></p>
 
   <AdSlot slot="list" />
 </BaseLayout>

@@ -1,0 +1,42 @@
+---
+import { monetization } from '../config/site';
+
+export interface AffiliateItem {
+  title: string;
+  url: string;
+  note?: string;
+  price?: string;
+}
+
+interface Props {
+  items: AffiliateItem[];
+  heading?: string;
+}
+
+const { items, heading = 'Hardver iz ovog teksta' } = Astro.props;
+---
+
+{
+  items.length > 0 && (
+    <aside class="affiliate">
+      <h2 class="affiliate__heading">{heading}</h2>
+      <ul class="affiliate__list">
+        {items.map((item) => (
+          <li class="affiliate__item">
+            <a
+              href={item.url}
+              class="affiliate__link"
+              rel="sponsored nofollow noopener"
+              target="_blank"
+            >
+              {item.title}
+            </a>
+            {item.price && <span class="affiliate__price">{item.price}</span>}
+            {item.note && <p class="affiliate__note">{item.note}</p>}
+          </li>
+        ))}
+      </ul>
+      <p class="affiliate__disclosure">{monetization.affiliate.disclosure}</p>
+    </aside>
+  )
+}

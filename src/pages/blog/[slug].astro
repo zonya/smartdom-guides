@@ -1,25 +1,101 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection, render } from 'astro:content';
+import AdSlot from '../../components/AdSlot.astro';
+import AffiliateBox from '../../components/AffiliateBox.astro';
+import { site } from '../../config/site';
+import { getSortedPosts, readingTime } from '../../utils/posts';
+import { render } from 'astro:content';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('posts');
-  return posts.map((post) => ({
+  const posts = await getSortedPosts();
+  return posts.map((post, i) => ({
     params: { slug: post.id },
-    props: { post },
+    props: {
+      post,
+      // lista je sortirana najnoviji-prvi, pa je "noviji" prethodni element
+      newer: posts[i - 1] ?? null,
+      older: posts[i + 1] ?? null,
+    },
   }));
 }
 
-const { post } = Astro.props;
+const { post, newer, older } = Astro.props;
 const { Content } = await render(post);
+const minutes = readingTime(post.body);
+const affiliate = post.data.affiliate ?? [];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  inLanguage: 'sr-RS',
+  publisher: { '@type': 'Organization', name: site.name },
+  mainEntityOfPage: new URL(`/blog/${post.id}/`, site.url).href,
+};
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
   <article>
-    <h1>{post.data.title}</h1>
-    <time datetime={post.data.pubDate.toISOString()}>
-      {post.data.pubDate.toLocaleDateString('sr-RS')}
-    </time>
-    <Content />
+    <header class="post__header">
+      <h1>{post.data.title}</h1>
+      <p class="post__meta">
+        <time datetime={post.data.pubDate.toISOString()}>
+          {
+            post.data.pubDate.toLocaleDateString('sr-RS', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })
+          }
+        </time>
+        <span class="card__dot">·</span>
+        <span>{minutes} min čitanja</span>
+      </p>
+      <p class="post__lead">{post.data.description}</p>
+      {
+        post.data.tags.length > 0 && (
+          <p class="tags">
+            {post.data.tags.map((tag) => (
+              <a class="tag" href={`/tag/${tag}/`}>
+                {tag}
+              </a>
+            ))}
+          </p>
+        )
+      }
+    </header>
+
+    <AdSlot slot="inArticle" />
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <AffiliateBox items={affiliate} />
+
+    <AdSlot slot="belowArticle" />
   </article>
+
+  {
+    (newer || older) && (
+      <nav class="post-nav" aria-label="Ostali tekstovi">
+        {older && (
+          <a href={`/blog/${older.id}/`} class="is-prev">
+            <span>← Prethodni tekst</span>
+            {older.data.title}
+          </a>
+        )}
+        {newer && (
+          <a href={`/blog/${newer.id}/`} class="is-next">
+            <span>Sledeći tekst →</span>
+            {newer.data.title}
+          </a>
+        )}
+      </nav>
+    )
+  }
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
 </BaseLayout>
