@@ -1,4 +1,4 @@
-# SmartDom Guides
+# opameti.me
 
 Statican Astro sajt sa vodicima za Home Assistant i Linux za pocetnike.
 

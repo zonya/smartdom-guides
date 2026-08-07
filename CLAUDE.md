@@ -1,4 +1,8 @@
-# SmartDom Guides
+# opameti.me
+
+Ime sajta je **opameti.me** (isto kao domen; „opameti me" je i igra reči).
+Ranije se zvao „SmartDom Guides" — ako to negde iskoči, to je ostatak.
+Repo i npm paket su i dalje `smartdom-guides`, to je namerno neizmenjeno.
 
 ## Gde smo stali (07.08.2026)
 
@@ -14,8 +18,8 @@ Sajt je uživo na `https://opameti.me` i radi. Objavljena 4 teksta + stranice
 4. AdSense — tek kad bude više sadržaja i posete.
 
 **Nezavršeno oko infrastrukture:**
-- `CF_API_TOKEN` za `deploy.sh` nije napravljen (purge keša se za sada radi
-  ručno / kroz Cloudflare MCP).
+- `CF_API_TOKEN` za `deploy.sh` još nije napravljen, ali više nije hitno —
+  vidi Cache Rule ispod (metapodaci se ne keširaju, pa purge nije potreban).
 - Google Search Console: domen i sitemap prijavljeni; indeksiranje se još
   nije proverilo.
 
@@ -49,10 +53,15 @@ ostaje ispod prihoda (server + domen su ukupno ~5-6€/mesec).
   **proxied (oranž oblak)**. Caddy na originu i dalje ima svoj Let's Encrypt
   sertifikat, a SSL režim je **Full (strict)**, pa taj cert mora biti važeći —
   ako istekne, sajt pada sa greškom 526.
-- ⚠️ **Edge kešira statiku.** Posle deploy-a koji menja `robots.txt`,
-  `sitemap*.xml`, `ads.txt` i slično, keš se mora očistiti — inače se i dalje
-  servira stara verzija. `deploy.sh` to radi automatski ako je postavljen
-  `CF_API_TOKEN`.
+- **Keš metapodataka je rešen Cache Rule-om** (07.08.2026). Na zoni postoji
+  ruleset u fazi `http_request_cache_settings`, pravilo „Ne kesiraj
+  metapodatke (robots/sitemap/rss/ads)" sa `set_cache_settings → cache:false`
+  za `/robots.txt`, `/ads.txt`, `/rss.xml` i `/sitemap*.xml`. Provereno:
+  `cf-cache-status: DYNAMIC` na sve četiri putanje. Purge posle deploy-a se
+  za njih više ne traži.
+- HTML se ionako ne kešira na edge-u (nema „Cache Everything" pravila), pa je
+  purge sada samo sigurnosna mreža. `deploy.sh` ga i dalje radi ako je
+  postavljen `CF_API_TOKEN`.
 - `Dockerfile` (multi-stage: Node build → Caddy serve), `docker-compose.yml`,
   `Caddyfile` (čita domen iz `DOMAIN` env varijable).
 - Na serveru: `~/smartdom-guides`, `.env` sadrži `DOMAIN=opameti.me`.
@@ -61,8 +70,13 @@ ostaje ispod prihoda (server + domen su ukupno ~5-6€/mesec).
   ssh root@168.119.53.13
   cd smartdom-guides && git pull && docker compose up -d --build
   ```
-  Token za purge se drži van repoa (`~/.config/opameti/env`, `CF_API_TOKEN`);
-  bez njega skripta radi deploy i samo upozori da keš nije očišćen.
+  Skripta sama učita `~/.config/opameti/env` (ili fajl iz `OPAMETI_ENV`) ako
+  postoji; token NIKAD ne ide u repo. Bez tokena deploy prolazi normalno, samo
+  se preskoči purge.
+- ⚠️ Token za purge se **ne može napraviti kroz `cloudflare-api` MCP** — ta
+  sesija je OAuth i nema pravo nad `/user/tokens` (`9109 Unauthorized`).
+  Pravi se ručno u panelu: Custom Token → Zone → Cache Purge → Purge, samo
+  zona `opameti.me`.
 - Repo je javan (public) — kloniranje/push ne traži autentikaciju.
 
 ## Radni tok za nov tekst

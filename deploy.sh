@@ -1,15 +1,21 @@
 #!/usr/bin/env bash
 # Deploy na produkciju + čišćenje Cloudflare keša.
 #
-# Zona je proxied, pa edge kešira statiku — bez purge-a se posle deploy-a i
-# dalje servira stara verzija fajlova kao robots.txt i sitemap.
+# Zona je proxied. robots.txt, ads.txt, rss.xml i sitemap*.xml su izuzeti iz
+# edge keša Cache Rule-om ("Ne kesiraj metapodatke"), pa se za njih purge više
+# ne traži. Purge ostaje kao sigurnosna mreža za sve ostalo.
 #
 # Purge je opcion: radi samo ako je postavljen CF_API_TOKEN (token sa
 # ovlašćenjem "Zone → Cache Purge → Purge" za opameti.me). Token NIKAD ne ide
-# u repo — drži ga u ~/.config/opameti/env i učitaj pre pokretanja:
-#   set -a; . ~/.config/opameti/env; set +a; ./deploy.sh
+# u repo — skripta ga sama učita iz ~/.config/opameti/env (ili iz fajla na koji
+# pokazuje OPAMETI_ENV), a može i da se prosledi kao promenljiva okruženja.
 
 set -euo pipefail
+
+ENV_FILE="${OPAMETI_ENV:-$HOME/.config/opameti/env}"
+if [ -z "${CF_API_TOKEN:-}" ] && [ -r "$ENV_FILE" ]; then
+  set -a; . "$ENV_FILE"; set +a
+fi
 
 SERVER="root@168.119.53.13"
 ZONE_ID="e3a7d3c7c242e26d3df32a8d820e7eb7"
@@ -30,9 +36,9 @@ if [ -n "${CF_API_TOKEN:-}" ]; then
     && echo "  keš očišćen" \
     || { echo "  ⚠️ purge nije uspeo"; exit 1; }
 else
-  echo "⚠️  CF_API_TOKEN nije postavljen — keš NIJE očišćen."
-  echo "   Ako si menjao robots.txt, sitemap ili druge statične fajlove,"
-  echo "   očisti keš ručno (Cloudflare panel → Caching → Purge Everything)."
+  echo "ℹ️  CF_API_TOKEN nije postavljen ($ENV_FILE) — keš nije očišćen."
+  echo "   Metapodaci (robots/sitemap/rss/ads) su Cache Rule-om izuzeti iz keša,"
+  echo "   pa je to obično u redu. Za ostalo: Cloudflare → Caching → Purge Everything."
 fi
 
 echo "→ Provera"

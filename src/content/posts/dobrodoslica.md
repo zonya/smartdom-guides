@@ -1,5 +1,5 @@
 ---
-title: "Dobrodošli na SmartDom Guides"
+title: "Dobrodošli na opameti.me"
 description: "Vodiči za Home Assistant i Linux, pisani jednostavno, za ljude koji tek počinju."
 pubDate: 2026-08-06
 tags: ["najave"]

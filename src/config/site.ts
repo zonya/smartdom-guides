@@ -3,7 +3,9 @@
 // po komponentama.
 
 export const site = {
-  name: 'SmartDom Guides',
+  // Ime = domen. Namerno: „opameti me" je i igra reči na srpskom, pa ime
+  // sajta, adresa i ono što sajt radi ostaju jedna ista stvar.
+  name: 'opameti.me',
   tagline: 'Pametan dom i Linux, objašnjeni jednostavno',
   description:
     'Praktični, jednostavni vodiči za Home Assistant i Linux za početnike.',
