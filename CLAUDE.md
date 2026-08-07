@@ -1,5 +1,24 @@
 # SmartDom Guides
 
+## Gde smo stali (07.08.2026)
+
+Sajt je uživo na `https://opameti.me` i radi. Objavljena 4 teksta + stranice
+„O sajtu" i „Politika privatnosti". Analitika, RSS, sitemap i pošta rade.
+
+**Sledeće na redu:**
+1. Slike u tekstovima — nema nijedne. Odluka nije doneta: HA screenshotovi /
+   fotografije stvarnog hardvera / stock.
+2. Tekst „Prvih 5 automatizacija koje svako treba da napravi".
+3. Affiliate nalozi (Amazon Associates, AliExpress) — nisu napravljeni; kad
+   budu, linkovi idu u `affiliate` frontmatter (vidi Monetizaciju).
+4. AdSense — tek kad bude više sadržaja i posete.
+
+**Nezavršeno oko infrastrukture:**
+- `CF_API_TOKEN` za `deploy.sh` nije napravljen (purge keša se za sada radi
+  ručno / kroz Cloudflare MCP).
+- Google Search Console: domen i sitemap prijavljeni; indeksiranje se još
+  nije proverilo.
+
 Sajt sa vodičima za Home Assistant i Linux za početnike, na srpskom (ekavica).
 Cilj: da zarađuje malo preko affiliate linkova i/ili oglasa, uz trošak koji
 ostaje ispod prihoda (server + domen su ukupno ~5-6€/mesec).
