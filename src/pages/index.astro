@@ -43,6 +43,8 @@ const posts = (await getSortedPosts()).slice(0, 5);
             pubDate={post.data.pubDate}
             tags={post.data.tags}
             readingTime={readingTime(post.body)}
+            cover={post.data.cover}
+            coverAlt={post.data.coverAlt}
           />
         ))
       }

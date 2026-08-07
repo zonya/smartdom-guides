@@ -150,6 +150,35 @@ ništa se ne renderuje dok se ne uključi u `src/config/site.ts`.
   `token` u `analytics.cloudflareToken` (`src/config/site.ts`). Dok je
   prazno, nikakva skripta se ne učitava.
 
+## Slike
+
+Odluka (07.08.2026), u dva sloja:
+
+**1. Slika za deljenje — automatska, za svaki tekst.** `/og/<slug>.png`
+(1200×630) se iscrtava na build-u iz naslova teksta:
+`src/pages/og/[...slug].png.ts` + `src/utils/og.ts`. Ne traži nikakav ručni
+rad i ne može da se zaboravi. Ostatak sajta koristi `/og/default.png`.
+Crta se SVG-om koji `sharp` rasterizuje — `sharp` ionako dolazi uz Astro, pa
+nema nove zavisnosti.
+⚠️ `sharp` tekst crta **sistemskim fontovima**. Zato `Dockerfile` u build fazi
+instalira `fontconfig font-dejavu`. Ako se to ukloni, build **neće pući** —
+slike će samo izaći bez teksta. Posle izmena tu obavezno pogledati sliku.
+
+**2. Slike u tekstu — ručno, i samo prave.** Screenshotovi iz stvarnog Home
+Assistant-a i fotografije hardvera koji zaista imamo. **Stock fotografije se ne
+koriste** — generički „pametan dom" iz banke slika je tačno ono po čemu se
+prepoznaju sajtovi bez vrednosti, a to je i ono što AdSense odbija.
+
+Kako se dodaje naslovna slika:
+- fajl u `src/assets/posts/` (ne u `public/` — tamo Astro ne optimizuje),
+- u frontmatter: `cover: ../../assets/posts/ime.jpg` i `coverAlt: "opis"`.
+- `coverAlt` je **obavezan uz `cover`** — bez njega build pada (provera je u
+  `src/content.config.ts`). Namerno: slika bez opisa je propust koji se lako
+  previdi.
+- Slika se pojavljuje na vrhu teksta i kao sličica u karticama (16:9).
+- Slike unutar teksta idu običnim markdown-om; stil je u `global.css`
+  (`.prose img`).
+
 ### SEO
 
 - `src/pages/rss.xml.js` → `/rss.xml` (link u `<head>` i u podnožju).

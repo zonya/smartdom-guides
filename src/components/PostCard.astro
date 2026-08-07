@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Props {
   href: string;
   title: string;
@@ -6,12 +9,37 @@ interface Props {
   pubDate: Date;
   tags?: string[];
   readingTime?: number;
+  /** Naslovna slika teksta; kartica je prikazuje kao sličicu. */
+  cover?: ImageMetadata;
+  coverAlt?: string;
 }
 
-const { href, title, description, pubDate, tags = [], readingTime } = Astro.props;
+const {
+  href,
+  title,
+  description,
+  pubDate,
+  tags = [],
+  readingTime,
+  cover,
+  coverAlt,
+} = Astro.props;
 ---
 
 <article class="card">
+  {
+    cover && (
+      <a href={href} class="card__thumb" tabindex="-1" aria-hidden="true">
+        <Image
+          src={cover}
+          alt={coverAlt ?? ''}
+          widths={[320, 640]}
+          sizes="(min-width: 46rem) 20rem, 100vw"
+          loading="lazy"
+        />
+      </a>
+    )
+  }
   <h3 class="card__title"><a href={href}>{title}</a></h3>
   <p class="card__meta">
     <time datetime={pubDate.toISOString()}>

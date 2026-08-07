@@ -673,6 +673,72 @@ main {
   outline-offset: 2px;
 }
 
+/* ---------- Slike ---------- */
+
+/* Sličica u kartici ide preko cele širine, van unutrašnjeg razmaka kartice. */
+.card {
+  overflow: hidden;
+}
+
+.card__thumb {
+  display: block;
+  margin: -1.1rem -1.25rem 0.9rem;
+  background: var(--surface-2);
+  line-height: 0;
+}
+
+.card__thumb img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.card:hover .card__thumb img {
+  transform: scale(1.02);
+}
+
+/* Naslovna slika teksta. */
+.post__cover {
+  margin: 0 0 1.75rem;
+}
+
+.post__cover img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.post__cover figcaption,
+.prose figcaption {
+  margin-top: 0.55rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Slike unutar teksta (iz markdown-a). */
+.prose img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.75rem 0;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.prose figure {
+  margin: 1.75rem 0;
+}
+
+.prose figure img {
+  margin: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;

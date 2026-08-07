@@ -3,5 +3,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://opameti.me',
-  integrations: [sitemap()],
+  // Slike za deljenje (/og/*.png) su tehnički fajlovi, ne stranice — nemaju
+  // šta da traže u sitemapu.
+  integrations: [sitemap({ filter: (page) => !page.includes('/og/') })],
 });

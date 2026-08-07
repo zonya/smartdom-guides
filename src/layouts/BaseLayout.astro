@@ -7,12 +7,26 @@ interface Props {
   description: string;
   /** Ako je true, u <title> se ne dodaje ime sajta (za naslovnu). */
   bareTitle?: boolean;
+  /**
+   * Putanja do slike za deljenje. Tekstovi šalju svoju (`/og/<slug>.png`),
+   * ostatak sajta pada na zajedničku. Slike pravi `src/pages/og/[...slug].png.ts`.
+   */
+  ogImage?: string;
+  /** `article` za pojedinačan tekst, inače `website`. */
+  ogType?: 'website' | 'article';
 }
 
-const { title, description, bareTitle = false } = Astro.props;
+const {
+  title,
+  description,
+  bareTitle = false,
+  ogImage = '/og/default.png',
+  ogType = 'website',
+} = Astro.props;
 const pageTitle = bareTitle ? title : `${title} · ${site.name}`;
 const path = Astro.url.pathname;
 const canonical = new URL(path, site.url).href;
+const ogImageUrl = new URL(ogImage, site.url).href;
 const adsLive = monetization.ads.enabled && monetization.ads.client;
 ---
 
@@ -32,13 +46,18 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
       href="/rss.xml"
     />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="sr_RS" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <!-- Tema se postavlja pre iscrtavanja da ne bi bljesnula pogrešna boja. -->
     <script is:inline>
