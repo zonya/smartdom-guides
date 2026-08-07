@@ -18,8 +18,9 @@ Sajt je uživo na `https://opameti.me` i radi. Objavljena 4 teksta + stranice
 4. AdSense — tek kad bude više sadržaja i posete.
 
 **Nezavršeno oko infrastrukture:**
-- `CF_API_TOKEN` za `deploy.sh` još nije napravljen, ali više nije hitno —
-  vidi Cache Rule ispod (metapodaci se ne keširaju, pa purge nije potreban).
+- `CF_API_TOKEN` za `deploy.sh` još nije napravljen. Cache Rule pokriva sve
+  fajlove sa stalnim imenom koje danas imamo, ali purge i dalje treba kad se
+  doda nov takav fajl — dotle se radi kroz `cloudflare-api` MCP.
 - Google Search Console: domen i sitemap prijavljeni; indeksiranje se još
   nije proverilo.
 
@@ -53,12 +54,15 @@ ostaje ispod prihoda (server + domen su ukupno ~5-6€/mesec).
   **proxied (oranž oblak)**. Caddy na originu i dalje ima svoj Let's Encrypt
   sertifikat, a SSL režim je **Full (strict)**, pa taj cert mora biti važeći —
   ako istekne, sajt pada sa greškom 526.
-- **Keš metapodataka je rešen Cache Rule-om** (07.08.2026). Na zoni postoji
-  ruleset u fazi `http_request_cache_settings`, pravilo „Ne kesiraj
-  metapodatke (robots/sitemap/rss/ads)" sa `set_cache_settings → cache:false`
-  za `/robots.txt`, `/ads.txt`, `/rss.xml` i `/sitemap*.xml`. Provereno:
-  `cf-cache-status: DYNAMIC` na sve četiri putanje. Purge posle deploy-a se
-  za njih više ne traži.
+- **Keš fajlova sa stalnim imenom rešen je Cache Rule-om** (07.08.2026). Na
+  zoni postoji ruleset u fazi `http_request_cache_settings`, pravilo „Ne
+  kesiraj fajlove sa stalnim imenom" sa `set_cache_settings → cache:false` za
+  `/robots.txt`, `/ads.txt`, `/rss.xml`, `/favicon.svg`,
+  `/apple-touch-icon.png`, `/sitemap*.xml` i sve pod `/og/`.
+- ⚠️ **Pravilo se mora dopuniti kad god se doda fajl sa stalnim imenom.**
+  Astro heširaj imena za CSS/JS/slike, pa se oni sami obnavljaju — ali sve
+  ručno imenovano (ikonice, `manifest.json`, `.well-known/…`) se zaglavi na
+  edge-u. Ovo nas je već uhvatilo sa `favicon.svg` posle promene logoa.
 - HTML se ionako ne kešira na edge-u (nema „Cache Everything" pravila), pa je
   purge sada samo sigurnosna mreža. `deploy.sh` ga i dalje radi ako je
   postavljen `CF_API_TOKEN`.

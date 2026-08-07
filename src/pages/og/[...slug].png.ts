@@ -35,7 +35,9 @@ export const GET: APIRoute = async ({ props }) => {
   return new Response(new Uint8Array(png), {
     headers: {
       'Content-Type': 'image/png',
-      'Cache-Control': 'public, max-age=31536000, immutable',
+      // Ime fajla ne sadrži heš sadržaja, pa `immutable` ne bi bila istina —
+      // slika se promeni čim se promeni naslov teksta.
+      'Cache-Control': 'public, max-age=3600',
     },
   });
 };
