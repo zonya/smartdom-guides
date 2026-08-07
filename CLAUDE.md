@@ -150,6 +150,24 @@ ništa se ne renderuje dok se ne uključi u `src/config/site.ts`.
   `token` u `analytics.cloudflareToken` (`src/config/site.ts`). Dok je
   prazno, nikakva skripta se ne učitava.
 
+## Logo
+
+Znak je **krov (kuća) nad promptom `>_` (terminal)** — dve teme sajta u jednom
+potezu. Izabran 07.08.2026 iz četiri predloga.
+
+**Geometrija stoji samo u `src/config/logo.ts`** i odatle je koriste sva četiri
+mesta: zaglavlje (`BaseLayout.astro`), favicon (`pages/favicon.svg.ts`), iOS
+ikonica (`pages/apple-touch-icon.png.ts`) i slike za deljenje (`utils/og.ts`).
+Ako se menja znak, menja se tu i propagira svuda. `public/favicon.svg` više ne
+postoji — favicon je generisana ruta, ne statičan fajl.
+
+- U zaglavlju je znak **linijski, u `currentColor`**, pa sam prati temu.
+- Favicon i iOS ikonica su **puna pločica** (`LOGO_TILE`, `#1d5cf0`) sa belim
+  znakom — traka kartica ima nepoznatu boju pozadine, linijski znak bi na
+  jednoj od tema nestao.
+- Ime se piše u dva dela: `opameti` u boji teksta, `.me` u akcentnoj
+  (`.logo__tld`). Isto važi i na OG slikama.
+
 ## Slike
 
 Odluka (07.08.2026), u dva sloja:

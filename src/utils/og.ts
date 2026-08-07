@@ -10,6 +10,7 @@
 // instalirati, inače naslov izađe prazan. Vidi `Dockerfile`.
 
 import sharp from 'sharp';
+import { LOGO_PATHS, LOGO_STROKE } from '../config/logo';
 
 const WIDTH = 1200;
 const HEIGHT = 630;
@@ -106,6 +107,21 @@ export async function renderOgImage({
     ? `<text x="${PAD}" y="${firstBaseline - blockHeight / lines.length - 28}" font-family="${FONT}" font-size="28" font-weight="700" fill="${ACCENT}" letter-spacing="2">${escapeXml(kicker.toUpperCase())}</text>`
     : '';
 
+  // Podnožje: znak, pa ime sajta („.me" u akcentu, kao u zaglavlju), pa slogan.
+  const footY = HEIGHT - 62;
+  const markSize = 40;
+  const dot = siteName.lastIndexOf('.');
+  const stem = dot > 0 ? siteName.slice(0, dot) : siteName;
+  const tld = dot > 0 ? siteName.slice(dot) : '';
+  const nameX = PAD + markSize + 16;
+  const tldX = nameX + textWidth(stem, 30);
+  const taglineX = tldX + textWidth(tld, 30) + 20;
+
+  const markScale = markSize / 32;
+  const mark = `<g transform="translate(${PAD} ${footY - markSize + 8}) scale(${markScale})" fill="none" stroke="${TEXT}" stroke-width="${LOGO_STROKE}" stroke-linecap="round" stroke-linejoin="round">
+    <path d="${LOGO_PATHS.roof}"/><path d="${LOGO_PATHS.chevron}"/><path d="${LOGO_PATHS.underscore}"/>
+  </g>`;
+
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}">
   <defs>
     <radialGradient id="glow" cx="88%" cy="12%" r="70%">
@@ -118,8 +134,10 @@ export async function renderOgImage({
   <rect x="0" y="0" width="10" height="${HEIGHT}" fill="${ACCENT}"/>
   ${kickerSpan}
   ${titleSpans}
-  <text x="${PAD}" y="${HEIGHT - 62}" font-family="${FONT}" font-size="30" font-weight="700" fill="${TEXT}">${escapeXml(siteName)}</text>
-  <text x="${PAD}" y="${HEIGHT - 62}" dx="${textWidth(siteName, 30) + 18}" font-family="${FONT}" font-size="30" fill="${MUTED}">Pametan dom i Linux, objašnjeni jednostavno</text>
+  ${mark}
+  <text x="${nameX}" y="${footY}" font-family="${FONT}" font-size="30" font-weight="700" fill="${TEXT}">${escapeXml(stem)}</text>
+  <text x="${tldX}" y="${footY}" font-family="${FONT}" font-size="30" font-weight="700" fill="${ACCENT}">${escapeXml(tld)}</text>
+  <text x="${taglineX}" y="${footY}" font-family="${FONT}" font-size="30" fill="${MUTED}">Pametan dom i Linux, objašnjeni jednostavno</text>
 </svg>`;
 
   return sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toBuffer();

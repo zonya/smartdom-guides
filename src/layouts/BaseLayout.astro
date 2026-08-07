@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { site, monetization, analytics } from '../config/site';
+import { LOGO_PATHS, LOGO_STROKE } from '../config/logo';
 
 interface Props {
   title: string;
@@ -30,6 +31,12 @@ const pageTitle = bareTitle ? title : `${title} · ${site.name}`;
 const path = Astro.url.pathname;
 const canonical = new URL(path, site.url).href;
 const ogImageUrl = new URL(ogImage, site.url).href;
+
+// Ime se u zaglavlju piše u dva dela — domen se boji akcentom, pa se „opameti"
+// i „.me" vide kao ime i nastavak, a ne kao jedna adresa.
+const dot = site.name.lastIndexOf('.');
+const nameStem = dot > 0 ? site.name.slice(0, dot) : site.name;
+const nameTld = dot > 0 ? site.name.slice(dot) : '';
 const adsLive = monetization.ads.enabled && monetization.ads.client;
 ---
 
@@ -43,6 +50,7 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link
       rel="alternate"
       type="application/rss+xml"
@@ -87,11 +95,20 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
     <header class="site-header">
       <div class="wrap site-header__inner">
         <a href="/" class="logo">
-          <svg viewBox="0 0 32 32" aria-hidden="true">
-            <rect width="32" height="32" rx="6" fill="currentColor" opacity="0.12"></rect>
-            <path d="M16 6 6 14v12h8v-8h4v8h8V14L16 6z" fill="currentColor"></path>
+          <svg
+            viewBox="0 0 32 32"
+            fill="none"
+            stroke="currentColor"
+            stroke-width={LOGO_STROKE}
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d={LOGO_PATHS.roof}></path>
+            <path d={LOGO_PATHS.chevron}></path>
+            <path d={LOGO_PATHS.underscore}></path>
           </svg>
-          {site.name}
+          <span>{nameStem}<span class="logo__tld">{nameTld}</span></span>
         </a>
         <nav class="site-nav">
           {
