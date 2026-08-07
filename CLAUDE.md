@@ -6,16 +6,26 @@ Repo i npm paket su i dalje `smartdom-guides`, to je namerno neizmenjeno.
 
 ## Gde smo stali (07.08.2026)
 
-Sajt je uživo na `https://opameti.me` i radi. Objavljena 4 teksta + stranice
+Sajt je uživo na `https://opameti.me` i radi. Objavljeno 5 tekstova + stranice
 „O sajtu" i „Politika privatnosti". Analitika, RSS, sitemap i pošta rade.
+Rešeni su ime sajta, logo i slike (vidi sekcije ispod).
 
 **Sledeće na redu:**
-1. Slike u tekstovima — nema nijedne. Odluka nije doneta: HA screenshotovi /
-   fotografije stvarnog hardvera / stock.
-2. Tekst „Prvih 5 automatizacija koje svako treba da napravi".
-3. Affiliate nalozi (Amazon Associates, AliExpress) — nisu napravljeni; kad
-   budu, linkovi idu u `affiliate` frontmatter (vidi Monetizaciju).
-4. AdSense — tek kad bude više sadržaja i posete.
+1. Još tekstova — vidi Plan sadržaja. Ovo je jedino što sada stvarno pomera
+   stvar; sve ostalo čeka na saobraćaj.
+2. Prave slike u tekstovima (screenshotovi iz HA, fotografije hardvera).
+   Tehnički je sve spremno, nedostaju sami fajlovi.
+3. Affiliate nalozi — **AliExpress pre Amazona**: Amazon Associates gasi nalog
+   bez 3 prodaje u 180 dana, a naša publika sa Amazona ne kupuje.
+4. AdSense — **ne prijavljivati još**. Sa ~1.500 reči po tekstu i jedva nešto
+   poseta, prijava se odbija kao „low value content". Prag je oko 20-30
+   tekstova i nešto organskog saobraćaja.
+
+**Šire o monetizaciji (dogovoreno 07.08.2026):** najveći potencijal sajta nije
+AdSense nego to što dovodi klijente **NextIT-u** — jedan posao postavljanja
+pametnog doma vredi koliko dve godine oglasa na ovakvom saobraćaju. To ne menja
+plan sadržaja, ali kad dođe vreme za monetizaciju, prioritet je stranica usluga
+i poziv na kontakt, ne bolji raspored oglasa.
 
 **Nezavršeno oko infrastrukture:**
 - `CF_API_TOKEN` za `deploy.sh` još nije napravljen. Cache Rule pokriva sve
@@ -60,7 +70,7 @@ ostaje ispod prihoda (server + domen su ukupno ~5-6€/mesec).
   `/robots.txt`, `/ads.txt`, `/rss.xml`, `/favicon.svg`,
   `/apple-touch-icon.png`, `/sitemap*.xml` i sve pod `/og/`.
 - ⚠️ **Pravilo se mora dopuniti kad god se doda fajl sa stalnim imenom.**
-  Astro heširaj imena za CSS/JS/slike, pa se oni sami obnavljaju — ali sve
+  Astro hešira imena za CSS/JS/slike, pa se oni sami obnavljaju — ali sve
   ručno imenovano (ikonice, `manifest.json`, `.well-known/…`) se zaglavi na
   edge-u. Ovo nas je već uhvatilo sa `favicon.svg` posle promene logoa.
 - HTML se ionako ne kešira na edge-u (nema „Cache Everything" pravila), pa je
@@ -101,10 +111,10 @@ Objavljeno:
 - Šta je Home Assistant i da li ti uopšte treba?
 - Home Assistant za apsolutne početnike — instalacija za 30 minuta
 - Koji hardver ti treba za pametan dom: Zigbee vs Z-Wave vs WiFi
-
-U planu (redosled po prioritetu, prva 3 su prirodno mesto za affiliate
-linkove ka hardveru):
 - Prvih 5 automatizacija koje svako treba da napravi
+
+U planu (redosled po prioritetu, prva 2 su prirodno mesto za affiliate
+linkove ka hardveru):
 - Najbolji jeftini Zigbee senzori i utičnice za početak
 - Kako da instaliraš Home Assistant na svom Linux serveru (Docker)
 - Home Assistant vs gotova rešenja (Google Home, Alexa, Tuya)
