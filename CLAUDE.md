@@ -54,6 +54,14 @@ ostaje ispod prihoda (server + domen su ukupno ~5-6€/mesec).
   Pomoćne funkcije (sortiranje, vreme čitanja): `src/utils/posts.ts`.
 - Konfiguracija: `src/config/site.ts` — ime/tagline/nav + sve monetizacijske
   zastavice na jednom mestu.
+- **Širina:** `.wrap` je `--max-width` (44rem, širina za čitanje). Stranice sa
+  mrežom kartica (naslovna, `/blog`, `/tag/*`) šalju `wide` u `BaseLayout` i
+  dobijaju `--wide-width` (64rem). Tekstovi ostaju uski, namerno.
+- **Kartice** (`PostCard`) ne koriste naslovnu sliku teksta nego generisanu
+  pločicu `/og/card/<slug>.webp` — znak, tema i boja izvedena iz sluga, **bez
+  naslova** (naslov stoji ispod, kao pravi tekst). Razlog: nemaju svi tekstovi
+  `cover`, pa je mreža bila rasklimana, a screenshot na širini kartice je
+  nečitljiv i blješti u tamnoj temi. `cover` se i dalje koristi na vrhu teksta.
 - Stil: `src/styles/global.css`, bez CSS frameworka — namerno minimalno.
   Tema: `prefers-color-scheme` + ručno dugme u zaglavlju (`data-theme` na
   `<html>`, pamti se u `localStorage`, inline skripta u `<head>` da nema
