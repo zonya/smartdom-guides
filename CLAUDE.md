@@ -4,37 +4,60 @@ Ime sajta je **opameti.me** (isto kao domen; „opameti me" je i igra reči).
 Ranije se zvao „SmartDom Guides" — ako to negde iskoči, to je ostatak.
 Repo i npm paket su i dalje `smartdom-guides`, to je namerno neizmenjeno.
 
-## Gde smo stali (07.08.2026)
+## Gde smo stali (08.08.2026)
 
-Sajt je uživo na `https://opameti.me` i radi. Objavljeno 5 tekstova + stranice
-„O sajtu" i „Politika privatnosti". Analitika, RSS, sitemap i pošta rade.
-Rešeni su ime sajta, logo i slike (vidi sekcije ispod).
+Sajt je uživo na `https://opameti.me`. **5 tekstova** + „O sajtu" i „Politika
+privatnosti". Analitika, RSS, sitemap, pošta, logo i slike rade.
 
-**Sledeće na redu:**
-1. Još tekstova — vidi Plan sadržaja. Ovo je jedino što sada stvarno pomera
-   stvar; sve ostalo čeka na saobraćaj.
-2. Slike — **urađeno 08.08.2026.** Tekstovi „instalacija za 30 minuta" i
-   „Prvih 5 automatizacija" su ilustrovani (15 slika u `src/assets/posts/`).
-   Ostali tekstovi su još bez slika. Alat za pravljenje novih:
-   `tools/README.md`.
-3. Affiliate nalozi — **AliExpress pre Amazona**: Amazon Associates gasi nalog
-   bez 3 prodaje u 180 dana, a naša publika sa Amazona ne kupuje.
-4. AdSense — **ne prijavljivati još**. Sa ~1.500 reči po tekstu i jedva nešto
-   poseta, prijava se odbija kao „low value content". Prag je oko 20-30
-   tekstova i nešto organskog saobraćaja.
+**Urađeno 07-08.08.2026 (da se ne radi dvaput):**
+- ime sajta → `opameti.me` (bilo „SmartDom Guides")
+- logo — krov nad promptom `>_`; favicon i iOS ikonica se generišu iz istog
+  izvora (`src/config/logo.ts`)
+- OG slike za deljenje + pločice za kartice, obe generisane na build-u
+- prerada izgleda: mreža kartica dobila kolone, liste puštene na 64rem
+- nov tekst „Prvih 5 automatizacija" (1.400 reči)
+- 15 slika u tekstovima, iz čiste demo instance HA (bez Markovih uređaja)
+- ispravljen korak 1 u tekstu o instalaciji — bio netačan za Imager 2.0.6
+- pravila o licu i obraćanju čitaocu (vidi „Ton i stil sadržaja")
 
-**Šire o monetizaciji (dogovoreno 07.08.2026):** najveći potencijal sajta nije
-AdSense nego to što dovodi klijente **NextIT-u** — jedan posao postavljanja
-pametnog doma vredi koliko dve godine oglasa na ovakvom saobraćaju. To ne menja
-plan sadržaja, ali kad dođe vreme za monetizaciju, prioritet je stranica usluga
-i poziv na kontakt, ne bolji raspored oglasa.
+**Sledeće na redu, po važnosti:**
+1. **Još tekstova.** Jedino što stvarno pomera stvar; sve ostalo čeka na
+   saobraćaj. Sledeći je „Najbolji jeftini Zigbee senzori i utičnice za
+   početak" — prvi tekst gde affiliate linkovi imaju smisla.
+2. **Affiliate nalog — AliExpress pre Amazona.** Amazon Associates gasi nalog
+   bez 3 prodaje u 180 dana, a ova publika sa Amazona ne kupuje. Dobro bi bilo
+   da nalog postoji **pre** nego što se napiše tekst o senzorima.
+3. **AdSense — ne prijavljivati još.** Sa 5 tekstova i jedva nešto poseta,
+   prijava se odbija kao „low value content". Prag je oko 20-30 tekstova i
+   nešto organskog saobraćaja.
+
+**Sitnije, kad se ukaže prilika:**
+- Naslovna bi mogla da izdvoji jedan tekst kao veliku karticu, a
+  „Dobrodošli na opameti.me" (najava od 85 reči) da izađe iz liste — sada
+  stoji ravnopravno sa pravim vodičima. **Predloženo, nije odrađeno.**
+- Slike u preostala tri teksta („Šta je Home Assistant", „Zigbee vs Z-Wave",
+  „Dobrodošlica"). Alat je spreman, vidi `tools/README.md`.
+- Fotografija Raspberry Pi-ja za korak 2 teksta o instalaciji — jedina koju
+  niko još nije napravio.
+- Video za YouTube: prvi prolaz postoji (`~/opameti-slike/ha-prolaz.mp4`), ali
+  je grub — kadrovi se hvataju samo na promenu ekrana, pa nema pauza za
+  čitanje. Treba prolaz sa namernim pauzama.
 
 **Nezavršeno oko infrastrukture:**
-- `CF_API_TOKEN` za `deploy.sh` još nije napravljen. Cache Rule pokriva sve
-  fajlove sa stalnim imenom koje danas imamo, ali purge i dalje treba kad se
-  doda nov takav fajl — dotle se radi kroz `cloudflare-api` MCP.
-- Google Search Console: domen i sitemap prijavljeni; indeksiranje se još
-  nije proverilo.
+- ⏰ **`ha-demo` kontejner i dalje radi na Hetzneru** (`root@168.119.53.13`).
+  Marko je tražio da ostane, uz podsetnik. Gašenje:
+  `docker rm -f ha-demo && rm -rf /root/ha-demo`.
+- `CF_API_TOKEN` za `deploy.sh` nije napravljen. Cache Rule pokriva sve fajlove
+  sa stalnim imenom koje danas imamo, ali purge treba kad se doda nov takav
+  fajl — dotle ide kroz `cloudflare-api` MCP.
+- Google Search Console: domen i sitemap prijavljeni; **indeksiranje još nije
+  provereno**.
+
+**Monetizacija — dogovoreno 07.08.2026:** najveći potencijal sajta nije AdSense
+nego to što dovodi klijente **NextIT-u**. Jedan posao postavljanja pametnog
+doma vredi koliko dve godine oglasa na ovakvom saobraćaju. To ne menja plan
+sadržaja, ali kad dođe vreme za monetizaciju, prioritet je stranica usluga i
+poziv na kontakt, ne bolji raspored oglasa.
 
 Sajt sa vodičima za Home Assistant i Linux za početnike, na srpskom (ekavica).
 Cilj: da zarađuje malo preko affiliate linkova i/ili oglasa, uz trošak koji
@@ -133,11 +156,12 @@ Developer tools → States.
 
 ## Plan sadržaja
 
-Objavljeno:
+Objavljeno (5, uključujući uvodnu najavu):
+- Dobrodošli na opameti.me *(najava, 85 reči — kandidat za sklanjanje sa liste)*
 - Šta je Home Assistant i da li ti uopšte treba?
-- Home Assistant za apsolutne početnike — instalacija za 30 minuta
+- Home Assistant za apsolutne početnike — instalacija za 30 minuta ✅ ilustrovan
 - Koji hardver ti treba za pametan dom: Zigbee vs Z-Wave vs WiFi
-- Prvih 5 automatizacija koje svako treba da napravi
+- Prvih 5 automatizacija koje svako treba da napravi ✅ ilustrovan
 
 U planu (redosled po prioritetu, prva 2 su prirodno mesto za affiliate
 linkove ka hardveru):
