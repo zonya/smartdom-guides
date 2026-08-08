@@ -3,6 +3,8 @@ title: "Home Assistant za apsolutne početnike — instalacija za 30 minuta"
 description: "Korak po korak: kako da instaliraš Home Assistant OS na Raspberry Pi i pristupiš mu iz browsera, bez prethodnog iskustva."
 pubDate: 2026-08-06
 tags: ["home-assistant", "instalacija", "raspberry-pi"]
+cover: ../../assets/posts/ha-dashboard.png
+coverAlt: "Početni ekran Home Assistant-a posle instalacije, sa sobama i vremenskom prognozom"
 ---
 
 Ne treba ti Linux iskustvo ni programiranje da bi pokrenuo Home Assistant. Najlakši put je **Home Assistant OS** — gotov sistem koji se flash-uje na SD karticu ili SSD, kao instaliranje aplikacije na telefon.
@@ -37,6 +39,18 @@ Otvoriće se čarobnjak za podešavanje:
 3. Home Assistant automatski skenira mrežu i predlaže uređaje koje je pronašao — možeš ih dodati odmah ili kasnije.
 
 ## Korak 4 — Šta sad?
+
+Kad čarobnjak završi, dočeka te ovakav ekran. Prazan je — sobe su tu, ali u njima još nema nijednog uređaja:
+
+![Početni ekran Home Assistant-a odmah posle instalacije](../../assets/posts/ha-dashboard.png)
+
+Dole levo je **Settings**, odakle se podešava sve ostalo:
+
+![Ekran sa podešavanjima u Home Assistant-u](../../assets/posts/ha-podesavanja.png)
+
+Uređaji se dodaju pod **Devices & Services**. Na svežoj instalaciji je i to prazno; dugme **Add integration** dole desno je mesto odakle kreće svaki nov uređaj:
+
+![Ekran Devices & Services na svežoj instalaciji Home Assistant-a, bez ijedne integracije](../../assets/posts/ha-integracije.png)
 
 Imaš radan sistem. Sledeći logičan korak je da dodaš prvi pravi uređaj (pametnu utičnicu ili Zigbee senzor) i napraviš prvu automatizaciju — to pokrivamo u sledećem vodiču.
 

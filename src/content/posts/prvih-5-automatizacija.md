@@ -3,6 +3,8 @@ title: "Prvih 5 automatizacija koje svako treba da napravi"
 description: "Pet automatizacija u Home Assistant-u koje se stvarno koriste posle mesec dana — sa gotovim YAML-om i zamkama koje niko ne pominje unapred."
 pubDate: 2026-08-07
 tags: ["home-assistant", "automatizacija", "osnove"]
+cover: ../../assets/posts/ha-automatizacije-lista.png
+coverAlt: "Spisak automatizacija u Home Assistant-u sa sve tri automatizacije iz ovog teksta"
 ---
 
 Skoro svako svoju prvu automatizaciju napravi isto: svetlo se pali na pokret. Radi savršeno tri dana, a onda ti se ugasi usred kupatila, ukućani kažu „šta si to opet uradio", i ti je isključiš.
@@ -10,6 +12,12 @@ Skoro svako svoju prvu automatizaciju napravi isto: svetlo se pali na pokret. Ra
 Problem nije bio u pokretu. Problem je što je to automatizacija koja **rešava nepostojeći problem** — prekidač je bio na zidu, na dohvat ruke, i radio je. Automatizacije koje prežive prvi mesec imaju jednu zajedničku osobinu: rade nešto što ti ne bi mogao ručno, ili nešto što bi stalno zaboravljao.
 
 Ovih pet su iz kuće koja radi svakodnevno, već godinama. Napisane su tako da ih možeš prekopirati, ali važnije od YAML-a su zamke ispod svake — svaka od njih je nekad nešto pokvarila.
+
+Svaka automatizacija u Home Assistant-u ima ista tri dela, i vredi ih znati pre nego što nastaviš:
+
+![Prazan editor automatizacije u Home Assistant-u sa tri sekcije: When, And if, Then do](../../assets/posts/ha-editor-prazan.png)
+
+**When** je okidač — šta se desilo. **And if** su uslovi, koji su neobavezni i služe da automatizacija *ne* odradi kad ne treba. **Then do** je ono što se izvrši. Isto to u YAML-u su `trigger`, `condition` i `action`. Sve ispod je samo popunjavanje ta tri polja.
 
 ## 1. Prisustvo — temelj svega ostalog
 
@@ -94,6 +102,19 @@ automation:
             {{ 40 if n <= 1 else (50 if n == 2 else 60) }}
 ```
 
+**Ako nemaš pametan bojler**, a većina nema, radi isto sa običnim relejem — Shelly ili Sonoff iza bojlera. Tada nema podešavanja temperature, nego se bojler prosto pali i gasi, pa umesto `water_heater.set_temperature` ide:
+
+```yaml
+    action:
+      - service: switch.turn_on
+        target:
+          entity_id: switch.bojler
+```
+
+U vizuelnom editoru to izgleda ovako — okidač, uslov i akcija, tačno kao u YAML-u iznad:
+
+![Automatizacija za bojler u editoru Home Assistant-a: okidač u 23:30, uslov da je broj prisutnih veći od nule, akcija koja pali bojler](../../assets/posts/ha-editor-bojler.png)
+
 Broj prisutnih je običan template senzor koji sabira ukućane:
 
 ```yaml
@@ -141,6 +162,8 @@ automation:
           data:
             image: /api/camera_proxy/camera.ulazna_vrata
 ```
+
+![Automatizacija za zvono u editoru Home Assistant-a: okidač je promena stanja senzora zvona, akcija je slanje obaveštenja](../../assets/posts/ha-editor-zvono.png)
 
 **Zamka: kuća koja te bombarduje.** Ako okidač vežeš i za detekciju pokreta na vratima, dobićeš obaveštenje svaki put kad komšija prođe hodnikom. Posle drugog dana isključićeš ga. Zato **cooldown**:
 
@@ -226,6 +249,8 @@ automation:
         data:
           message: "Danas je Marijin rođendan 🎂"
 ```
+
+![Automatizacija za rođendan u editoru Home Assistant-a: okidač u 6 ujutru, uslov da je danas rođendan, akcija koja šalje čestitku](../../assets/posts/ha-editor-rodjendan.png)
 
 Isti obrazac radi za sve što se ponavlja a lako se zaboravi: zamena filtera, registracija kola, plaćanje osiguranja, dan za iznošenje smeća. **Ovo je automatizacija u svom najčistijem obliku — ne radi ništa fizički, samo pamti umesto tebe.**
 
