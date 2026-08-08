@@ -18,10 +18,35 @@ Ne treba ti Linux iskustvo ni programiranje da bi pokrenuo Home Assistant. Najla
 
 ## Korak 1 — Flash-uj Home Assistant OS
 
-1. Skini i instaliraj **Raspberry Pi Imager** (zvanični alat, besplatan).
-2. Ubaci SD karticu/SSD u računar.
-3. U Imager-u izaberi: *Choose OS → Other specific-purpose OS → Home Assistant → Home Assistant OS* (izaberi verziju za tvoj model Raspberry Pi-ja).
-4. Izaberi svoju SD karticu/SSD kao cilj i klikni **Write**. Ovo obriše sve što je prethodno bilo na kartici.
+Skini i instaliraj **Raspberry Pi Imager** (zvanični alat, besplatan). Slike ispod su iz verzije 2.0.6 — u starijim verzijama je redosled malo drugačiji, ali su nazivi isti.
+
+**1. Izaberi svoj model Raspberry Pi-ja.** Ovo je važno: verzija Home Assistant OS-a koja se nudi kasnije zavisi baš od ovog izbora.
+
+![Raspberry Pi Imager, prvi korak: izbor modela Raspberry Pi uređaja](../../assets/posts/imager-1-uredjaj.png)
+
+**2. Pod „Choose OS" idi na dno liste, na „Other specific-purpose OS".** Home Assistant nije među ponuđenim sistemima na prvom ekranu — zakopan je dva nivoa niže, i to je mesto gde većina ljudi zapne.
+
+![Raspberry Pi Imager, izbor kategorije „Other specific-purpose OS"](../../assets/posts/imager-2-os-kategorija.png)
+
+**3. Zatim „Home automation".**
+
+![Raspberry Pi Imager, izbor kategorije „Home automation"](../../assets/posts/imager-3-home-automation.png)
+
+**4. Pa „Home Assistant".**
+
+![Raspberry Pi Imager, izbor „Home Assistant" u listi sistema za kućnu automatizaciju](../../assets/posts/imager-4-home-assistant.png)
+
+**5. I na kraju verzija za tvoj model** — na slici je „Home Assistant OS 18.2 (RPi 5)". Pazi da u zagradi piše tvoj model.
+
+![Raspberry Pi Imager, izbor verzije Home Assistant OS-a za Raspberry Pi 5](../../assets/posts/imager-5-verzija.png)
+
+**6. Izaberi SD karticu ili SSD kao cilj**, pa klikni **Write**.
+
+![Raspberry Pi Imager, izbor uređaja za upis; lista je prazna jer kartica nije ubačena](../../assets/posts/imager-6-kartica.png)
+
+Ako je ova lista prazna kao na slici, kartica nije ubačena ili je čitač ne vidi. Kvačica **„Exclude system drives"** je tu da te zaštiti od toga da slučajno prepišeš sistemski disk — ostavi je uključenu.
+
+⚠️ **Upis briše sve** što je prethodno bilo na kartici.
 
 ## Korak 2 — Prvo pokretanje
 
@@ -35,7 +60,11 @@ Ne treba ti Linux iskustvo ni programiranje da bi pokrenuo Home Assistant. Najla
 Otvoriće se čarobnjak za podešavanje:
 
 1. Kreiraj korisničko ime i lozinku (ovo je tvoj glavni admin nalog).
-2. Unesi lokaciju (koristi se za automatizacije vezane za izlazak/zalazak sunca, vremensku prognozu).
+2. Unesi lokaciju. Dovoljno je da ukucaš grad i izabereš iz ponuđenog — Home Assistant sam nađe koordinate i vremensku zonu.
+
+![Home Assistant, unos lokacije tokom prvog podešavanja: ukucan je Beograd i izabran sa liste, ispod se vidi mapa](../../assets/posts/ha-lokacija.png)
+
+   Ovo nije formalnost: od lokacije zavise izlazak i zalazak sunca (najčešći okidač u automatizacijama) i vremenska prognoza.
 3. Home Assistant automatski skenira mrežu i predlaže uređaje koje je pronašao — možeš ih dodati odmah ili kasnije.
 
 ## Korak 4 — Šta sad?
