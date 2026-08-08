@@ -20,6 +20,8 @@ const { posts } = Astro.props;
 <BaseLayout
   title={`Tema: ${tag}`}
   description={`Svi vodiči na temu „${tag}".`}
+
+  wide
 >
   <h1>Tema: {tag}</h1>
   <p class="post__lead">{posts.length} tekstova.</p>
@@ -34,8 +36,7 @@ const { posts } = Astro.props;
           pubDate={post.data.pubDate}
           tags={post.data.tags}
           readingTime={readingTime(post.body)}
-          cover={post.data.cover}
-          coverAlt={post.data.coverAlt}
+          image={`/og/card/${post.id}.webp`}
         />
       ))
     }

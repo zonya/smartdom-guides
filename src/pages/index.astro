@@ -12,6 +12,7 @@ const posts = (await getSortedPosts()).slice(0, 5);
   title={`${site.name} — ${site.tagline}`}
   description={site.description}
   bareTitle
+  wide
 >
   <section class="hero">
     <span class="hero__eyebrow">Home Assistant · Linux</span>
@@ -43,8 +44,7 @@ const posts = (await getSortedPosts()).slice(0, 5);
             pubDate={post.data.pubDate}
             tags={post.data.tags}
             readingTime={readingTime(post.body)}
-            cover={post.data.cover}
-            coverAlt={post.data.coverAlt}
+            image={`/og/card/${post.id}.webp`}
           />
         ))
       }

@@ -11,6 +11,8 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
 <BaseLayout
   title="Svi vodiči"
   description="Svi vodiči za Home Assistant i Linux na jednom mestu."
+
+  wide
 >
   <h1>Svi vodiči</h1>
   <p class="post__lead">
@@ -39,8 +41,7 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
           pubDate={post.data.pubDate}
           tags={post.data.tags}
           readingTime={readingTime(post.body)}
-          cover={post.data.cover}
-          coverAlt={post.data.coverAlt}
+          image={`/og/card/${post.id}.webp`}
         />
       ))
     }

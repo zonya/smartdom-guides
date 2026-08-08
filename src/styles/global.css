@@ -127,6 +127,12 @@ h3 {
   padding-inline: 1.25rem;
 }
 
+/* Stranice sa mrežom kartica. Tekstovi ostaju na `--max-width`, jer je to
+   širina na kojoj se udobno čita. */
+.wrap--wide {
+  max-width: var(--wide-width);
+}
+
 main {
   flex: 1;
   padding-block: 2.5rem 4rem;
@@ -313,16 +319,26 @@ main {
 
 .card-grid {
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
+  /* `auto-fill` + `minmax` daje 1 kolonu na telefonu, 2 na tabletu i 3 u širokoj
+     koloni, bez ijednog media query-ja. Ranije ovde nije bilo `columns`, pa je
+     mreža celo vreme bila jednokolonska. */
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.1rem 1.25rem;
   transition: border-color 0.15s ease, transform 0.15s ease,
     box-shadow 0.15s ease;
+}
+
+/* Razmak je sada na telu, da bi sličica mogla da ide od ivice do ivice. */
+.card__body {
+  padding: 1.1rem 1.25rem;
 }
 
 .card:hover {
@@ -686,21 +702,17 @@ main {
 
 .card__thumb {
   display: block;
-  margin: -1.1rem -1.25rem 0.9rem;
   background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
   line-height: 0;
 }
 
 .card__thumb img {
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;
+  /* Tačna proporcija OG slike (1200×630). Bilo koja druga bi isekla naslov. */
+  aspect-ratio: 40 / 21;
   object-fit: cover;
-  transition: transform 0.25s ease;
-}
-
-.card:hover .card__thumb img {
-  transform: scale(1.02);
 }
 
 /* Naslovna slika teksta. */

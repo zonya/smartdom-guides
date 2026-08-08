@@ -73,13 +73,44 @@ export interface OgOptions {
   kicker?: string;
   /** Ime sajta u podnožju slike. */
   siteName: string;
+  /**
+   * Širina izlazne slike. Crta se uvek na 1200×630 pa se smanjuje, da bi
+   * kartica i slika za deljenje bile identične, samo različite veličine.
+   */
+  outputWidth?: number;
+  /** WebP je znatno manji za kartice; deljenje traži PNG. */
+  format?: 'png' | 'webp';
+  /**
+   * `share` nosi naslov, jer se na društvenim mrežama vidi sam.
+   * `card` ga NE nosi — na kartici naslov stoji odmah ispod slike, pa bi se
+   * ponavljao; uz to je tekst u slici neizbirljiv i neprevodiv.
+   */
+  variant?: 'share' | 'card';
+  /** Iz ovoga se izvodi boja pločice, da svaka kartica ima svoju. */
+  seed?: string;
+}
+
+/** Stabilna boja po tekstu — isti slug uvek daje istu nijansu. */
+function hueFromSeed(seed: string): number {
+  let h = 0;
+  for (const ch of seed) h = (h * 31 + ch.charCodeAt(0)) % 360;
+  // Držimo se hladnog dela kruga (plavo–ljubičasto–tirkizno), da pločice
+  // ostanu u porodici sa akcentnom bojom sajta.
+  return 190 + (h % 90);
 }
 
 export async function renderOgImage({
   title,
   kicker,
   siteName,
+  outputWidth = WIDTH,
+  format = 'png',
+  variant = 'share',
+  seed,
 }: OgOptions): Promise<Buffer> {
+  if (variant === 'card') {
+    return renderCard({ kicker, siteName, seed: seed ?? title, outputWidth, format });
+  }
   const maxWidth = WIDTH - PAD * 2;
 
   // Duži naslovi idu manjim slovima da bi stali u najviše 4 reda.
@@ -140,5 +171,71 @@ export async function renderOgImage({
   <text x="${taglineX}" y="${footY}" font-family="${FONT}" font-size="30" fill="${MUTED}">Pametan dom i Linux, objašnjeni jednostavno</text>
 </svg>`;
 
-  return sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toBuffer();
+  const img = sharp(Buffer.from(svg));
+  if (outputWidth !== WIDTH) {
+    img.resize(outputWidth, Math.round((outputWidth / WIDTH) * HEIGHT), {
+      kernel: 'lanczos3',
+    });
+  }
+  return format === 'webp'
+    ? img.webp({ quality: 82 }).toBuffer()
+    : img.png({ compressionLevel: 9 }).toBuffer();
+}
+
+/**
+ * Pločica za karticu: znak sajta, tema teksta i boja izvedena iz sluga.
+ * Bez naslova — on stoji odmah ispod slike, u pravom tekstu koji se može
+ * izabrati, prevesti i pročitati čitačem ekrana.
+ */
+async function renderCard({
+  kicker,
+  siteName,
+  seed,
+  outputWidth,
+  format,
+}: {
+  kicker?: string;
+  siteName: string;
+  seed: string;
+  outputWidth: number;
+  format: 'png' | 'webp';
+}): Promise<Buffer> {
+  const hue = hueFromSeed(seed);
+  const tint = `hsl(${hue} 85% 62%)`;
+
+  const markScale = 5.2;
+  const markX = PAD + 6;
+  const markY = HEIGHT / 2 - (32 * markScale) / 2 - 22;
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}">
+  <defs>
+    <radialGradient id="g" cx="78%" cy="18%" r="80%">
+      <stop offset="0%" stop-color="${tint}" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="${tint}" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="${WIDTH}" height="${HEIGHT}" fill="${BG}"/>
+  <rect width="${WIDTH}" height="${HEIGHT}" fill="url(#g)"/>
+  <rect x="0" y="0" width="12" height="${HEIGHT}" fill="${tint}"/>
+  <g transform="translate(${markX} ${markY}) scale(${markScale})" fill="none" stroke="${tint}"
+     stroke-width="${LOGO_STROKE}" stroke-linecap="round" stroke-linejoin="round">
+    <path d="${LOGO_PATHS.roof}"/><path d="${LOGO_PATHS.chevron}"/><path d="${LOGO_PATHS.underscore}"/>
+  </g>
+  ${
+    kicker
+      ? `<text x="${markX + 4}" y="${markY + 32 * markScale + 62}" font-family="${FONT}" font-size="42" font-weight="700" fill="${TEXT}" letter-spacing="3">${escapeXml(kicker.toUpperCase())}</text>`
+      : ''
+  }
+  <text x="${WIDTH - PAD}" y="${HEIGHT - 54}" text-anchor="end" font-family="${FONT}" font-size="34" font-weight="700" fill="${MUTED}">${escapeXml(siteName)}</text>
+</svg>`;
+
+  const img = sharp(Buffer.from(svg));
+  if (outputWidth !== WIDTH) {
+    img.resize(outputWidth, Math.round((outputWidth / WIDTH) * HEIGHT), {
+      kernel: 'lanczos3',
+    });
+  }
+  return format === 'webp'
+    ? img.webp({ quality: 82 }).toBuffer()
+    : img.png({ compressionLevel: 9 }).toBuffer();
 }

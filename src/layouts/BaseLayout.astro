@@ -17,6 +17,11 @@ interface Props {
   ogType?: 'website' | 'article';
   /** Za radne stranice koje ne treba da završe u pretrazi. */
   noindex?: boolean;
+  /**
+   * Šira kolona za stranice sa mrežom kartica. Tekstovi ostaju uski — 44rem je
+   * širina na kojoj se udobno čita, a to je za spisak kartica pretesno.
+   */
+  wide?: boolean;
 }
 
 const {
@@ -26,6 +31,7 @@ const {
   ogImage = '/og/default.png',
   ogType = 'website',
   noindex = false,
+  wide = false,
 } = Astro.props;
 const pageTitle = bareTitle ? title : `${title} · ${site.name}`;
 const path = Astro.url.pathname;
@@ -140,7 +146,7 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
     </header>
 
     <main id="main">
-      <div class="wrap">
+      <div class:list={['wrap', { 'wrap--wide': wide }]}>
         <slot />
       </div>
     </main>

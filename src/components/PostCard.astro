@@ -1,7 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
-
 interface Props {
   href: string;
   title: string;
@@ -9,9 +6,12 @@ interface Props {
   pubDate: Date;
   tags?: string[];
   readingTime?: number;
-  /** Naslovna slika teksta; kartica je prikazuje kao sličicu. */
-  cover?: ImageMetadata;
-  coverAlt?: string;
+  /**
+   * Sličica kartice. Ovde ide generisana OG slika (`/og/card/<slug>.webp`), ne
+   * naslovna slika teksta: screenshot smanjen na širinu kartice je nečitljiv, a
+   * u tamnoj temi svetli kao bela ploča. Vidi `src/pages/og/card/`.
+   */
+  image?: string;
 }
 
 const {
@@ -21,43 +21,40 @@ const {
   pubDate,
   tags = [],
   readingTime,
-  cover,
-  coverAlt,
+  image,
 } = Astro.props;
 ---
 
 <article class="card">
   {
-    cover && (
+    image && (
       <a href={href} class="card__thumb" tabindex="-1" aria-hidden="true">
-        <Image
-          src={cover}
-          alt={coverAlt ?? ''}
-          widths={[320, 640]}
-          sizes="(min-width: 46rem) 20rem, 100vw"
-          loading="lazy"
-        />
+        {/* Slika samo ponavlja naslov koji je odmah ispod, pa je za čitače
+            ekrana nema — otuda prazan alt i aria-hidden na linku. */}
+        <img src={image} alt="" width="600" height="315" loading="lazy" decoding="async" />
       </a>
     )
   }
-  <h3 class="card__title"><a href={href}>{title}</a></h3>
-  <p class="card__meta">
-    <time datetime={pubDate.toISOString()}>
-      {pubDate.toLocaleDateString('sr-Latn-RS', { day: 'numeric', month: 'long', year: 'numeric' })}
-    </time>
-    {readingTime && <span class="card__dot">·</span>}
-    {readingTime && <span>{readingTime} min čitanja</span>}
-  </p>
-  {description && <p class="card__desc">{description}</p>}
-  {
-    tags.length > 0 && (
-      <p class="tags">
-        {tags.map((tag) => (
-          <a class="tag" href={`/tag/${tag}/`}>
-            {tag}
-          </a>
-        ))}
-      </p>
-    )
-  }
+  <div class="card__body">
+    <h3 class="card__title"><a href={href}>{title}</a></h3>
+    <p class="card__meta">
+      <time datetime={pubDate.toISOString()}>
+        {pubDate.toLocaleDateString('sr-Latn-RS', { day: 'numeric', month: 'long', year: 'numeric' })}
+      </time>
+      {readingTime && <span class="card__dot">·</span>}
+      {readingTime && <span>{readingTime} min čitanja</span>}
+    </p>
+    {description && <p class="card__desc">{description}</p>}
+    {
+      tags.length > 0 && (
+        <p class="tags">
+          {tags.map((tag) => (
+            <a class="tag" href={`/tag/${tag}/`}>
+              {tag}
+            </a>
+          ))}
+        </p>
+      )
+    }
+  </div>
 </article>
