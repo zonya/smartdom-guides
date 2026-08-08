@@ -107,6 +107,22 @@ ostaje ispod prihoda (server + domen su ukupno ~5-6€/mesec).
 Srpski (ekavica), jednostavno, bez žargona, korak-po-korak, za ljude koji
 tek počinju. Postojeći tekstovi su dobar primer stila.
 
+**Lice:**
+- Autor govori u **prvom licu množine** — „preporučujemo", „pišemo posebno",
+  „kad smo prvi put sklapali". Nikad u jednini.
+- Čitaocu se obraćamo sa **„ti"** — „ako nemaš Raspberry Pi", „podesi zonu".
+  To je namerno, jer je publika početnička; ne prelaziti na „vi".
+
+⚠️ **Zamka: pisanje Marku umesto čitaocu.** Tekstovi nastaju iz Markovog
+setupa, pa se lako provuče rečenica koja važi samo za njega. Uhvaćeno
+08.08.2026: „na istom onom serveru na kom hostuješ ovaj sajt" i „dobio si
+`person.marko`" (čitalac se ne zove Marko). Pre objave proveriti: **da li je
+ovo tačno za nekoga ko me nikad nije sreo?**
+
+Imena entiteta u primerima **jesu** iz Markove kuće i to je u redu — ali mora
+bar jednom u tekstu pisati da su primeri i da čitalac svoja imena vidi u
+Developer tools → States.
+
 ## Plan sadržaja
 
 Objavljeno:
