@@ -83,4 +83,4 @@ Uređaji se dodaju pod **Devices & Services**. Na svežoj instalaciji je i to pr
 
 Imaš radan sistem. Sledeći logičan korak je da dodaš prvi pravi uređaj (pametnu utičnicu ili Zigbee senzor) i napraviš prvu automatizaciju — to pokrivamo u sledećem vodiču.
 
-**Napomena:** ako nemaš Raspberry Pi, Home Assistant možeš pokrenuti i u Docker kontejneru na bilo kom Linux serveru (npr. na istom onom na kom hostuješ ovaj sajt) — o tome pišemo posebno, jer instalacija tada ima par dodatnih koraka oko mrežnog podešavanja.
+**Napomena:** ako nemaš Raspberry Pi, Home Assistant možeš pokrenuti i u Docker kontejneru na bilo kom Linux serveru — na starom laptopu, mini PC-ju ili iznajmljenom serveru. O tome pišemo posebno, jer instalacija tada ima par dodatnih koraka oko mrežnog podešavanja.

@@ -23,7 +23,9 @@ Svaka automatizacija u Home Assistant-u ima ista tri dela, i vredi ih znati pre 
 
 Ovo nije automatizacija koju „vidiš". Ovo je ono na čemu sve ostalo stoji. Dok Home Assistant pouzdano ne zna da li je neko kod kuće, sve pametno što napraviš biće glupo u pogrešnom trenutku.
 
-Najlakši način je aplikacija Home Assistant na telefonu, koja javlja lokaciju. Podesi zonu „Kuća" na oko 100 metara i dobio si `person.marko` sa stanjem `home` ili `not_home`.
+Najlakši način je aplikacija Home Assistant na telefonu, koja javlja lokaciju. Podesi zonu „Kuća" na oko 100 metara i dobio si entitet `person.<tvoje_ime>` sa stanjem `home` ili `not_home`.
+
+> **O primerima u ovom tekstu.** Imena entiteta (`person.marko`, `sensor.broj_prisutnih`, `switch.bojler`…) su iz stvarne kuće u kojoj sve ovo radi. Kod tebe će se zvati drugačije — zameni ih svojima. Tačna imena vidiš u **Developer tools → States**.
 
 Sad ono što ti niko ne kaže unapred.
 
