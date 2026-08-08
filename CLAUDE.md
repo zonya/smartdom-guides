@@ -13,8 +13,10 @@ Rešeni su ime sajta, logo i slike (vidi sekcije ispod).
 **Sledeće na redu:**
 1. Još tekstova — vidi Plan sadržaja. Ovo je jedino što sada stvarno pomera
    stvar; sve ostalo čeka na saobraćaj.
-2. Prave slike u tekstovima (screenshotovi iz HA, fotografije hardvera).
-   Tehnički je sve spremno, nedostaju sami fajlovi.
+2. Slike — **urađeno 08.08.2026.** Tekstovi „instalacija za 30 minuta" i
+   „Prvih 5 automatizacija" su ilustrovani (15 slika u `src/assets/posts/`).
+   Ostali tekstovi su još bez slika. Alat za pravljenje novih:
+   `tools/README.md`.
 3. Affiliate nalozi — **AliExpress pre Amazona**: Amazon Associates gasi nalog
    bez 3 prodaje u 180 dana, a naša publika sa Amazona ne kupuje.
 4. AdSense — **ne prijavljivati još**. Sa ~1.500 reči po tekstu i jedva nešto
