@@ -4,10 +4,19 @@ Ime sajta je **opameti.me** (isto kao domen; „opameti me" je i igra reči).
 Ranije se zvao „SmartDom Guides" — ako to negde iskoči, to je ostatak.
 Repo i npm paket su i dalje `smartdom-guides`, to je namerno neizmenjeno.
 
-## Gde smo stali (08.08.2026)
+## Gde smo stali (09.08.2026)
 
-Sajt je uživo na `https://opameti.me`. **5 tekstova** + „O sajtu" i „Politika
+Sajt je uživo na `https://opameti.me`. **6 tekstova** + „O sajtu" i „Politika
 privatnosti". Analitika, RSS, sitemap, pošta, logo i slike rade.
+
+**09.08.2026:** napisan tekst „Najbolji jeftini Zigbee senzori i utičnice za
+početak" (1.650 reči) — prvi tekst pisan sa affiliate linkovima u vidu.
+⚠️ **Frontmatter `affiliate:` je namerno prazan.** Nema još AliExpress naloga,
+a linkovi bez tracking ID-ja bi se ionako prepisivali — pa u tekstu nema
+nijednog spoljnog linka na proizvod, samo oznake modela. **Kad nalog bude
+napravljen, prvo se dopunjava ovaj tekst.** Modeli koje treba linkovati:
+ZBDongle-E, SLZB-06, S26R2ZB, Nous A1Z, SNZB-04P, SNZB-03P, SNZB-02D,
+SNZB-05P, Aqara P1, ZBMINIR2, USB produžni kabl.
 
 **Urađeno 07-08.08.2026 (da se ne radi dvaput):**
 - ime sajta → `opameti.me` (bilo „SmartDom Guides")
@@ -156,16 +165,15 @@ Developer tools → States.
 
 ## Plan sadržaja
 
-Objavljeno (5, uključujući uvodnu najavu):
+Objavljeno (6, uključujući uvodnu najavu):
 - Dobrodošli na opameti.me *(najava, 85 reči — kandidat za sklanjanje sa liste)*
 - Šta je Home Assistant i da li ti uopšte treba?
 - Home Assistant za apsolutne početnike — instalacija za 30 minuta ✅ ilustrovan
 - Koji hardver ti treba za pametan dom: Zigbee vs Z-Wave vs WiFi
 - Prvih 5 automatizacija koje svako treba da napravi ✅ ilustrovan
+- Najbolji jeftini Zigbee senzori i utičnice za početak ⏳ čeka affiliate linkove
 
-U planu (redosled po prioritetu, prva 2 su prirodno mesto za affiliate
-linkove ka hardveru):
-- Najbolji jeftini Zigbee senzori i utičnice za početak
+U planu (redosled po prioritetu):
 - Kako da instaliraš Home Assistant na svom Linux serveru (Docker)
 - Home Assistant vs gotova rešenja (Google Home, Alexa, Tuya)
 - Koji Linux distro da izabereš
