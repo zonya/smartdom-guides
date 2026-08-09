@@ -11,9 +11,16 @@ Sajt je uživo na `https://opameti.me`. **7 srpskih + 1 engleski tekst**, uz
 slike rade. Sajt je od 10.08. **dvojezičan** — vidi „Dvojezičnost".
 
 **10.08.2026:** napisan tekst „Kako da instaliraš Home Assistant na svom Linux
-serveru (Docker)" (1.390 reči). Nema affiliate potencijala (softver), ali hvata
-pretragu koju HA OS tekst ne pokriva. Bez slika — kandidat za screenshotove
-(`docker compose logs`, prvi ekran na `:8123`).
+serveru (Docker)" (1.535 reči), ilustrovan ✅. Nema affiliate potencijala
+(softver), ali hvata pretragu koju HA OS tekst ne pokriva.
+
+⚠️ **Terminologija ispravljena uz proveru na živom HA 2026.8.1:** ono što se
+zvalo **add-ons** sada se zove **Apps**, i stavka „Apps" **postoji** u
+Podešavanjima i u Container instalaciji — otvara objašnjenje da aplikacije
+zahtevaju HA OS. Tekst je prvo tvrdio da stavke nema, što bi svakog čitaoca
+koji uporedi sa svojim ekranom navelo da je tekst pogrešan. Slike
+(`ha-docker-apps.png`, `ha-docker-about.png`) su iz demo instance, koja je i
+sama običan `docker run`, pa dokazuju tvrdnju umesto da je samo iznose.
 
 **Ko-fi (09.08.2026):** `ko_fi: zonya2026` + sekcija „Podrži"/„Support" u svih
 8 javnih repoa. `sendspin-cinema-webos` je imao badge sa `TVOJ_USERNAME` →
