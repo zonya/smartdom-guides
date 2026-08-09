@@ -4,10 +4,20 @@ Ime sajta je **opameti.me** (isto kao domen; „opameti me" je i igra reči).
 Ranije se zvao „SmartDom Guides" — ako to negde iskoči, to je ostatak.
 Repo i npm paket su i dalje `smartdom-guides`, to je namerno neizmenjeno.
 
-## Gde smo stali (09.08.2026)
+## Gde smo stali (10.08.2026)
 
-Sajt je uživo na `https://opameti.me`. **6 tekstova** + „O sajtu" i „Politika
+Sajt je uživo na `https://opameti.me`. **7 tekstova** + „O sajtu" i „Politika
 privatnosti". Analitika, RSS, sitemap, pošta, logo i slike rade.
+
+**10.08.2026:** napisan tekst „Kako da instaliraš Home Assistant na svom Linux
+serveru (Docker)" (1.390 reči). Nema affiliate potencijala (softver), ali hvata
+pretragu koju HA OS tekst ne pokriva. Bez slika — kandidat za screenshotove
+(`docker compose logs`, prvi ekran na `:8123`).
+
+**Ko-fi (09.08.2026):** `ko_fi: zonya2026` + sekcija „Podrži"/„Support" u svih
+8 javnih repoa. `sendspin-cinema-webos` je imao badge sa `TVOJ_USERNAME` →
+mrtav link, ispravljeno. 4 repoa bila bez ijednog topica → dodati.
+⚠️ Ko-fi **API ključ nije potreban** za dugme (samo za webhookove).
 
 **09.08.2026:** napisan tekst „Najbolji jeftini Zigbee senzori i utičnice za
 početak" (1.650 reči) — prvi tekst pisan sa affiliate linkovima u vidu.
@@ -165,16 +175,16 @@ Developer tools → States.
 
 ## Plan sadržaja
 
-Objavljeno (6, uključujući uvodnu najavu):
+Objavljeno (7, uključujući uvodnu najavu):
 - Dobrodošli na opameti.me *(najava, 85 reči — kandidat za sklanjanje sa liste)*
 - Šta je Home Assistant i da li ti uopšte treba?
 - Home Assistant za apsolutne početnike — instalacija za 30 minuta ✅ ilustrovan
 - Koji hardver ti treba za pametan dom: Zigbee vs Z-Wave vs WiFi
 - Prvih 5 automatizacija koje svako treba da napravi ✅ ilustrovan
 - Najbolji jeftini Zigbee senzori i utičnice za početak ⏳ čeka affiliate linkove
+- Kako da instaliraš Home Assistant na svom Linux serveru (Docker)
 
 U planu (redosled po prioritetu):
-- Kako da instaliraš Home Assistant na svom Linux serveru (Docker)
 - Home Assistant vs gotova rešenja (Google Home, Alexa, Tuya)
 - Koji Linux distro da izabereš
 - Osnove terminala — 20 komandi koje ti stvarno trebaju
