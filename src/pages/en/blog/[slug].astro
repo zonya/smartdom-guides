@@ -1,25 +1,27 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import AdSlot from '../../components/AdSlot.astro';
-import AffiliateBox from '../../components/AffiliateBox.astro';
-import { site } from '../../config/site';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdSlot from '../../../components/AdSlot.astro';
+import AffiliateBox from '../../../components/AffiliateBox.astro';
+import { site } from '../../../config/site';
+import { localeMeta, localePath, ui } from '../../../config/i18n';
 import {
   findTranslation,
   getSortedPosts,
   postPath,
   readingTime,
-} from '../../utils/posts';
+} from '../../../utils/posts';
 import { render } from 'astro:content';
 import { Image } from 'astro:assets';
 
+const LOCALE = 'en' as const;
+
 export async function getStaticPaths() {
-  const posts = await getSortedPosts();
+  const posts = await getSortedPosts('en');
   return Promise.all(
     posts.map(async (post, i) => ({
       params: { slug: post.id },
       props: {
         post,
-        // lista je sortirana najnoviji-prvi, pa je "noviji" prethodni element
         newer: posts[i - 1] ?? null,
         older: posts[i + 1] ?? null,
         translation: await findTranslation(post),
@@ -30,11 +32,12 @@ export async function getStaticPaths() {
 
 const { post, newer, older, translation } = Astro.props;
 const { Content } = await render(post);
+const t = ui[LOCALE];
 const minutes = readingTime(post.body);
 const affiliate = post.data.affiliate ?? [];
 const cover = post.data.cover;
-// Slika za deljenje se generiše iz naslova (src/pages/og/[...slug].png.ts).
 const ogImage = `/og/${post.id}.png`;
+const here = localePath(LOCALE, `/blog/${post.id}/`);
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -42,10 +45,10 @@ const jsonLd = {
   headline: post.data.title,
   description: post.data.description,
   datePublished: post.data.pubDate.toISOString(),
-  inLanguage: 'sr-RS',
+  inLanguage: 'en',
   image: new URL(ogImage, site.url).href,
   publisher: { '@type': 'Organization', name: site.name },
-  mainEntityOfPage: new URL(`/blog/${post.id}/`, site.url).href,
+  mainEntityOfPage: new URL(here, site.url).href,
 };
 ---
 
@@ -54,6 +57,7 @@ const jsonLd = {
   description={post.data.description}
   ogImage={ogImage}
   ogType="article"
+  lang={LOCALE}
   altHref={translation ? postPath(translation) : undefined}
 >
   <article>
@@ -62,7 +66,7 @@ const jsonLd = {
       <p class="post__meta">
         <time datetime={post.data.pubDate.toISOString()}>
           {
-            post.data.pubDate.toLocaleDateString('sr-Latn-RS', {
+            post.data.pubDate.toLocaleDateString(localeMeta[LOCALE].dateLocale, {
               day: 'numeric',
               month: 'long',
               year: 'numeric',
@@ -70,14 +74,14 @@ const jsonLd = {
           }
         </time>
         <span class="card__dot">·</span>
-        <span>{minutes} min čitanja</span>
+        <span>{minutes} {t.minRead}</span>
       </p>
       <p class="post__lead">{post.data.description}</p>
       {
         post.data.tags.length > 0 && (
           <p class="tags">
             {post.data.tags.map((tag) => (
-              <a class="tag" href={`/tag/${tag}/`}>
+              <a class="tag" href={localePath(LOCALE, `/tag/${tag}/`)}>
                 {tag}
               </a>
             ))}
@@ -115,16 +119,16 @@ const jsonLd = {
 
   {
     (newer || older) && (
-      <nav class="post-nav" aria-label="Ostali tekstovi">
+      <nav class="post-nav" aria-label={t.otherPosts}>
         {older && (
-          <a href={`/blog/${older.id}/`} class="is-prev">
-            <span>← Prethodni tekst</span>
+          <a href={localePath(LOCALE, `/blog/${older.id}/`)} class="is-prev">
+            <span>{t.prevPost}</span>
             {older.data.title}
           </a>
         )}
         {newer && (
-          <a href={`/blog/${newer.id}/`} class="is-next">
-            <span>Sledeći tekst →</span>
+          <a href={localePath(LOCALE, `/blog/${newer.id}/`)} class="is-next">
+            <span>{t.nextPost}</span>
             {newer.data.title}
           </a>
         )}

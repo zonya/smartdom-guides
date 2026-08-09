@@ -10,6 +10,13 @@ const posts = defineCollection({
         description: z.string(),
         pubDate: z.date(),
         tags: z.array(z.string()).default([]),
+        // Jezik teksta. Podrazumevano srpski, pa postojeći tekstovi ostaju
+        // nedirnuti. Engleski dobija adresu pod `/en/`.
+        lang: z.enum(['sr', 'en']).default('sr'),
+        // `id` (ime fajla bez ekstenzije) teksta na drugom jeziku, ako postoji.
+        // Odavde se izvode `hreflang` oznake i dugme za promenu jezika. Piše se
+        // samo na JEDNOJ strani para — veza se čita u oba smera.
+        translationOf: z.string().optional(),
         // Naslovna slika teksta. Fajl stoji u `src/assets/posts/`, a ovde se
         // piše relativna putanja (npr. `../../assets/posts/ime.jpg`). Astro je
         // sam optimizuje i pravi više veličina. Ako je nema, tekst se prikazuje

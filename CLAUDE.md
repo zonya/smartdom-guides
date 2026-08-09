@@ -6,8 +6,9 @@ Repo i npm paket su i dalje `smartdom-guides`, to je namerno neizmenjeno.
 
 ## Gde smo stali (10.08.2026)
 
-Sajt je uživo na `https://opameti.me`. **7 tekstova** + „O sajtu" i „Politika
-privatnosti". Analitika, RSS, sitemap, pošta, logo i slike rade.
+Sajt je uživo na `https://opameti.me`. **7 srpskih + 1 engleski tekst**, uz
+„O sajtu" i „Politiku privatnosti". Analitika, RSS, sitemap, pošta, logo i
+slike rade. Sajt je od 10.08. **dvojezičan** — vidi „Dvojezičnost".
 
 **10.08.2026:** napisan tekst „Kako da instaliraš Home Assistant na svom Linux
 serveru (Docker)" (1.390 reči). Nema affiliate potencijala (softver), ali hvata
@@ -184,6 +185,9 @@ Objavljeno (7, uključujući uvodnu najavu):
 - Najbolji jeftini Zigbee senzori i utičnice za početak ⏳ čeka affiliate linkove
 - Kako da instaliraš Home Assistant na svom Linux serveru (Docker)
 
+Engleski (`/en/`, projekti — ne prevodi):
+- Sidecar Travel: use an iPad as a headless Mac's display ✅
+
 U planu (redosled po prioritetu):
 - Home Assistant vs gotova rešenja (Google Home, Alexa, Tuya)
 - Koji Linux distro da izabereš
@@ -231,6 +235,44 @@ ništa se ne renderuje dok se ne uključi u `src/config/site.ts`.
   Web Analytics → Add a site (`opameti.me`), pa iz snippeta prepiši vrednost
   `token` u `analytics.cloudflareToken` (`src/config/site.ts`). Dok je
   prazno, nikakva skripta se ne učitava.
+
+## Dvojezičnost (10.08.2026)
+
+Srpski je podrazumevan i **stoji na korenu** (`/blog/…`), engleski ide pod
+`/en/`. Sve postojeće srpske adrese su nedirnute — to je bio uslov, jer je
+promena putanje jedina stvar koja košta pozicije u pretrazi.
+
+⚠️ **Geo targeting se NE koristi i ne treba ga uvoditi.** Jezik po IP adresi
+znači da Google (koji crawluje sa američkih adresa) vidi samo englesku verziju,
+a srpska — koja je ceo saobraćaj — ispada iz pretrage. Odvojene adrese +
+`hreflang` + dugme u zaglavlju.
+
+**Kako se dodaje engleski tekst:** `.md` u isti folder (`src/content/posts/`),
+uz `lang: en` u frontmatter-u. Bez `lang`, tekst je srpski. Fajlovi su u
+zajedničkom, ravnom prostoru imena, pa su slugovi automatski jedinstveni.
+
+**Ako tekst ima prevod:** upiši `translationOf: <id-drugog-teksta>` na **jednoj**
+strani para. Veza se čita u oba smera (`findTranslation`), i iz nje se izvode
+`hreflang` oznake i cilj dugmeta za jezik.
+
+- `src/config/i18n.ts` — jezici, tekstovi interfejsa (`ui`), `localePath()`,
+  navigacija po jeziku. **Svaki nov tekst interfejsa ide ovde, ne u komponentu.**
+- `BaseLayout` prima `lang` i `altHref`. `hreflang` se emituje **samo kad
+  `altHref` postoji** — lažna veza između nepovezanih stranica je gore od
+  nikakve. Mora biti **uzajaman**: ako engleska strana pokazuje na srpsku, i
+  srpska mora na englesku, inače Google ignoriše obe oznake.
+- `altHref` uvek piši sa **kosom crtom na kraju** (`/en/blog/`), da `hreflang`
+  gađa kanonsku adresu.
+- Rute: `src/pages/en/{index,blog/index,blog/[slug],tag/[tag],rss.xml.js}`.
+- `PostCard` prima `locale` (format datuma + adrese tema).
+- OG slike rade same — generatori koriste `getAllPosts()` (svi jezici).
+
+**Otvoreno:**
+- `/en/` u podnožju vodi na **srpsku** „Privatnost" i nema „O sajtu". Kad se
+  napiše engleska verzija, dodati u `navFor()` i u podnožje.
+- Naslovna `/en/` je pisana za projekte, ne za vodiče — to je namerno (odluka
+  10.08.2026: prevodi vodiča ne bi rangirali, engleske stranice projekata
+  hoće, jer za njih nema konkurencije).
 
 ## Logo
 

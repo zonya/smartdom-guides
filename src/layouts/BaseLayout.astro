@@ -2,6 +2,14 @@
 import '../styles/global.css';
 import { site, monetization, analytics } from '../config/site';
 import { LOGO_PATHS, LOGO_STROKE } from '../config/logo';
+import {
+  DEFAULT_LOCALE,
+  localeMeta,
+  navFor,
+  otherLocale,
+  ui,
+  type Locale,
+} from '../config/i18n';
 
 interface Props {
   title: string;
@@ -22,6 +30,15 @@ interface Props {
    * širina na kojoj se udobno čita, a to je za spisak kartica pretesno.
    */
   wide?: boolean;
+  /** Jezik stranice. Podrazumevano srpski — postojeće stranice ne diraju ovo. */
+  lang?: Locale;
+  /**
+   * Adresa iste stranice na drugom jeziku, ako postoji. Kad je ima, u <head>
+   * idu `hreflang` oznake i dugme za jezik vodi tačno na taj prevod; kad je
+   * nema, dugme vodi na koren drugog jezika, a `hreflang` se NE emituje —
+   * lažna veza između nepovezanih stranica je gore od nikakve.
+   */
+  altHref?: string;
 }
 
 const {
@@ -32,7 +49,28 @@ const {
   ogType = 'website',
   noindex = false,
   wide = false,
+  lang = DEFAULT_LOCALE,
+  altHref,
 } = Astro.props;
+const meta = localeMeta[lang];
+const t = ui[lang];
+const other = otherLocale(lang);
+const otherMeta = localeMeta[other];
+const nav = navFor(lang);
+const langHref = altHref ?? otherMeta.home;
+const alternates = altHref
+  ? [
+      { hreflang: meta.htmlLang, href: new URL(Astro.url.pathname, site.url).href },
+      { hreflang: otherMeta.htmlLang, href: new URL(altHref, site.url).href },
+      {
+        hreflang: 'x-default',
+        href: new URL(
+          lang === DEFAULT_LOCALE ? Astro.url.pathname : altHref,
+          site.url
+        ).href,
+      },
+    ]
+  : [];
 const pageTitle = bareTitle ? title : `${title} · ${site.name}`;
 const path = Astro.url.pathname;
 const canonical = new URL(path, site.url).href;
@@ -47,13 +85,18 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
 ---
 
 <!doctype html>
-<html lang="sr">
+<html lang={meta.htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{pageTitle}</title>
     <link rel="canonical" href={canonical} />
+    {
+      alternates.map((alt) => (
+        <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+      ))
+    }
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -61,7 +104,7 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
       rel="alternate"
       type="application/rss+xml"
       title={site.name}
-      href="/rss.xml"
+      href={lang === DEFAULT_LOCALE ? '/rss.xml' : '/en/rss.xml'}
     />
 
     <meta property="og:type" content={ogType} />
@@ -69,7 +112,7 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content="sr_RS" />
+    <meta property="og:locale" content={meta.ogLocale} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -96,11 +139,11 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
     }
   </head>
   <body>
-    <a class="skip-link" href="#main">Preskoči na sadržaj</a>
+    <a class="skip-link" href="#main">{t.skipToContent}</a>
 
     <header class="site-header">
       <div class="wrap site-header__inner">
-        <a href="/" class="logo">
+        <a href={meta.home} class="logo">
           <svg
             viewBox="0 0 32 32"
             fill="none"
@@ -118,7 +161,7 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
         </a>
         <nav class="site-nav">
           {
-            site.nav.map((item) => (
+            nav.map((item) => (
               <a
                 href={item.href}
                 aria-current={path.startsWith(item.href) ? 'page' : undefined}
@@ -127,10 +170,20 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
               </a>
             ))
           }
+          <a
+            class="lang-toggle"
+            href={langHref}
+            hreflang={otherMeta.htmlLang}
+            lang={otherMeta.htmlLang}
+            aria-label={t.langToggle(t.otherLangName)}
+            title={t.langToggle(t.otherLangName)}
+          >
+            {otherMeta.short}
+          </a>
           <button
             class="theme-toggle"
             type="button"
-            aria-label="Promeni temu (svetla/tamna)"
+            aria-label={t.themeToggle}
             data-theme-toggle
           >
             <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
@@ -157,7 +210,7 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
           &copy; {new Date().getFullYear()} {site.name}
           <span aria-hidden="true"> · </span>
           <span>
-            Izradio{' '}
+            {t.builtBy}{' '}
             {
               site.company.url ? (
                 <a href={site.company.url} rel="noopener">{site.company.name}</a>
@@ -168,13 +221,17 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
           </span>
         </p>
         <p>
-          <a href="/blog">Vodiči</a>
+          {
+            nav.map((item) => (
+              <>
+                <a href={item.href}>{item.label}</a>
+                <span aria-hidden="true"> · </span>
+              </>
+            ))
+          }
+          <a href="/privatnost/">{t.privacy}</a>
           <span aria-hidden="true"> · </span>
-          <a href="/o-sajtu/">O sajtu</a>
-          <span aria-hidden="true"> · </span>
-          <a href="/privatnost/">Privatnost</a>
-          <span aria-hidden="true"> · </span>
-          <a href="/rss.xml">RSS</a>
+          <a href={lang === DEFAULT_LOCALE ? '/rss.xml' : '/en/rss.xml'}>RSS</a>
         </p>
       </div>
     </footer>

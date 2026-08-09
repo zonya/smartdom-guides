@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostCard from '../../../components/PostCard.astro';
+import AdSlot from '../../../components/AdSlot.astro';
+import { localePath, ui } from '../../../config/i18n';
+import { getSortedPosts, readingTime } from '../../../utils/posts';
+
+const LOCALE = 'en' as const;
+
+export async function getStaticPaths() {
+  const posts = await getSortedPosts('en');
+  const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
+  return tags.map((tag) => ({
+    params: { tag },
+    props: { posts: posts.filter((p) => p.data.tags.includes(tag)) },
+  }));
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+const t = ui[LOCALE];
+---
+
+<BaseLayout
+  title={`${t.topic}: ${tag}`}
+  description={`All articles tagged “${tag}”.`}
+  lang={LOCALE}
+  wide
+>
+  <h1>{t.topic}: {tag}</h1>
+  <p class="post__lead">{t.postsCount(posts.length)}</p>
+
+  <div class="card-grid" style="margin-top:2rem">
+    {
+      posts.map((post) => (
+        <PostCard
+          href={localePath(LOCALE, `/blog/${post.id}/`)}
+          title={post.data.title}
+          description={post.data.description}
+          pubDate={post.data.pubDate}
+          tags={post.data.tags}
+          readingTime={readingTime(post.body)}
+          image={`/og/card/${post.id}.webp`}
+          locale={LOCALE}
+        />
+      ))
+    }
+  </div>
+
+  <p style="margin-top:2rem">
+    <a href={localePath(LOCALE, '/blog')}>{t.backToAll}</a>
+  </p>
+
+  <AdSlot slot="list" />
+</BaseLayout>
