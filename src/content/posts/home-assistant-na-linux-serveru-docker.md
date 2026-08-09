@@ -3,6 +3,8 @@ title: "Kako da instaliraš Home Assistant na svom Linux serveru (Docker)"
 description: "Instalacija Home Assistant-a u Docker kontejneru na serveru koji već imaš — kompletan compose fajl, Zigbee dongle, Bluetooth i ono što u ovoj varijanti nećeš dobiti."
 pubDate: 2026-08-10
 tags: ["home-assistant", "instalacija", "docker", "linux"]
+cover: ../../assets/posts/ha-docker-about.png
+coverAlt: "Stranica About u Home Assistant-u, gde pod „Installation method“ piše Home Assistant Container"
 ---
 
 Ako ti već radi Linux server 24/7 — mini PC, stari laptop, NAS ili virtualka na Proxmox-u — nema mnogo smisla da kupuješ Raspberry Pi samo za Home Assistant. Docker kontejner je petnaest minuta posla i troši manje resursa nego što misliš.
@@ -15,11 +17,17 @@ Home Assistant se instalira na tri načina koja su u praksi različita:
 
 | | Šta dobijaš | Šta plaćaš |
 |---|---|---|
-| **HA OS** | ceo sistem, dodaci na klik, ugrađeni backup | zauzima celu mašinu ili virtualku |
-| **HA Container** (ovaj tekst) | ide pored ostalih servisa, štedi resurse | **nema dodataka (add-ons)** |
-| **HA Supervised** | dodaci + tvoj Linux | traži tačno određen sistem, lako se „raspadne" |
+| **HA OS** | ceo sistem, aplikacije na klik, ugrađeni backup | zauzima celu mašinu ili virtualku |
+| **HA Container** (ovaj tekst) | ide pored ostalih servisa, štedi resurse | **nema aplikacija (Apps)** |
+| **HA Supervised** | aplikacije + tvoj Linux | traži tačno određen sistem, lako se „raspadne" |
 
-Ključna stavka je ta srednja. **U Docker varijanti ne postoji Add-on Store.** Ono što se u HA OS-u instalira jednim klikom — Mosquitto, Zigbee2MQTT, ESPHome, Node-RED — ovde moraš da pokreneš **kao zasebne kontejnere**, sam.
+Ključna stavka je ta srednja. **U Docker varijanti ne postoji prodavnica aplikacija.** Ono što se u HA OS-u instalira jednim klikom — Mosquitto, Zigbee2MQTT, ESPHome, Node-RED — ovde moraš da pokreneš **kao zasebne kontejnere**, sam.
+
+Mala zamka u imenima: ono što se godinama zvalo **add-ons** sada se u Home Assistant-u zove **Apps**. Stavka „Apps" postoji u Podešavanjima i u Docker instalaciji, pa na prvi pogled izgleda da sve imaš — ali kad je otvoriš, dobiješ objašnjenje umesto prodavnice:
+
+![Stranica Apps u Home Assistant-u koji radi u Dockeru, sa objašnjenjem da aplikacije zahtevaju Home Assistant Operating System](../../assets/posts/ha-docker-apps.png)
+
+Slika je iz Home Assistant-a **2026.8.1** koji radi kao običan Docker kontejner. Ako u starijim tekstovima na internetu vidiš „Add-ons", to je isto ovo, samo pod starim imenom.
 
 Za koga je to u redu:
 
@@ -29,7 +37,7 @@ Za koga je to u redu:
 
 Za koga nije: ako ti je ovo prvi kontakt i sa Linux-om i sa Home Assistant-om, uzmi **HA OS u virtualki** i preskoči ovaj tekst. Nije ti manje vredan sistem — samo je manje posla. Za tu varijantu imamo [instalaciju za 30 minuta](/blog/instalacija-home-assistant-30-minuta/).
 
-Dobra vest: **HACS radi normalno** u Docker varijanti. HACS nije dodatak nego integracija, pa ti sve one integracije iz zajednice ostaju dostupne.
+Dobra vest: **HACS radi normalno** u Docker varijanti. HACS nije aplikacija nego integracija, pa ti sve one integracije iz zajednice ostaju dostupne.
 
 ## Šta ti treba
 
@@ -93,6 +101,10 @@ Kad u logu vidiš da je startovao, otvori u browseru:
 ```
 http://IP-ADRESA-SERVERA:8123
 ```
+
+Da proveriš da ti zaista radi ova varijanta, idi na **Settings → About**. Pod „Installation method" treba da piše `Home Assistant Container`:
+
+![Stranica About, gde pod Installation method piše Home Assistant Container, a ispod verzija Core-a](../../assets/posts/ha-docker-about.png)
 
 Dalje je isto kao u svakoj instalaciji — napraviš nalog (**ovo je lokalni nalog na tvom serveru**, ne cloud registracija), uneseš lokaciju i jedinice mera. Lokacija je važnija nego što izgleda: od nje zavise izlazak i zalazak sunca, a to je okidač za veliki deo automatizacija.
 
@@ -187,7 +199,7 @@ Zaustavljanje pre arhiviranja nije preterivanje — SQLite baza kopirana „u le
 
 ## Da li se može promeniti mišljenje kasnije
 
-Može, i lakše je nego što izgleda. Prelazak sa Container na HA OS radi se preko backup-a: `config` folder nosi automatizacije, uređaje, dashboard-e i istoriju. Ono što ne prelazi su kontejneri koje si sam pokrenuo — Mosquitto i Zigbee2MQTT se postavljaju iznova, kao dodaci.
+Može, i lakše je nego što izgleda. Prelazak sa Container na HA OS radi se preko backup-a: `config` folder nosi automatizacije, uređaje, dashboard-e i istoriju. Ono što ne prelazi su kontejneri koje si sam pokrenuo — Mosquitto i Zigbee2MQTT se tamo postavljaju iznova, ovog puta na klik.
 
 Nije prijatno, ali nije ni gubitak posla. Nemoj zato mesecima da se lomiš oko izbora.
 
