@@ -1,2 +1,2 @@
-2026/08/10-00:28:12.856 4d4fdc Creating DB /Users/marko/smartdom-guides/tools/ha-shots-docker/_profile/Default/IndexedDB/http_localhost_8124.indexeddb.leveldb since it was missing.
-2026/08/10-00:28:12.861 4d4fdc Reusing MANIFEST /Users/marko/smartdom-guides/tools/ha-shots-docker/_profile/Default/IndexedDB/http_localhost_8124.indexeddb.leveldb/MANIFEST-000001
+2026/08/10-00:40:28.539 4d80a0 Creating DB /Users/marko/smartdom-guides/tools/ha-shots-docker/_profile/Default/IndexedDB/http_localhost_8124.indexeddb.leveldb since it was missing.
+2026/08/10-00:40:28.542 4d80a0 Reusing MANIFEST /Users/marko/smartdom-guides/tools/ha-shots-docker/_profile/Default/IndexedDB/http_localhost_8124.indexeddb.leveldb/MANIFEST-000001

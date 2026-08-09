@@ -58,12 +58,25 @@ SNZB-05P, Aqara P1, ZBMINIR2, USB produžni kabl.
    prijava se odbija kao „low value content". Prag je oko 20-30 tekstova i
    nešto organskog saobraćaja.
 
+**Slike — dokle se stiglo sa demo instancom (10.08.2026):**
+Demo je iscrpljen za ono čemu je mogao da posluži. Sirovi snimci su prebačeni
+u `~/opameti-slike/ha-demo-2026-08-10/` da prežive gašenje kontejnera; u repou
+ostaje samo ono što je zaista upotrebljeno (`tools/ha-shots-docker/` je u
+`.gitignore`).
+- Iskorišćeno: `apps` i `about` za Docker tekst.
+- Neupotrebljivo: **History i Logbook su prazni** — demo nema podataka, a
+  prazan ekran je gori od nikakve slike.
+- Sačuvano za budući tekst o entitetima: `04-states.png`
+  (Developer tools → States, sa popunjenim automatizacijama).
+- ⚠️ **„Zigbee vs Z-Wave" i „Jeftini Zigbee senzori" NE mogu iz demo instance** —
+  njima trebaju **fotografije stvarnog hardvera**, a to mora Marko.
+- „Šta je Home Assistant" je 366 reči i konceptualan; slika mu ne bi pomogla,
+  pa je namerno ostao bez nje.
+
 **Sitnije, kad se ukaže prilika:**
 - Naslovna bi mogla da izdvoji jedan tekst kao veliku karticu, a
   „Dobrodošli na opameti.me" (najava od 85 reči) da izađe iz liste — sada
   stoji ravnopravno sa pravim vodičima. **Predloženo, nije odrađeno.**
-- Slike u preostala tri teksta („Šta je Home Assistant", „Zigbee vs Z-Wave",
-  „Dobrodošlica"). Alat je spreman, vidi `tools/README.md`.
 - Fotografija Raspberry Pi-ja za korak 2 teksta o instalaciji — jedina koju
   niko još nije napravio.
 - Video za YouTube: prvi prolaz postoji (`~/opameti-slike/ha-prolaz.mp4`), ali
