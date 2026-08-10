@@ -134,12 +134,22 @@ export const ui: Record<Locale, UiStrings> = {
   },
 };
 
-/** Navigacija po jeziku. Engleski nema „O sajtu" dok se ne napiše. */
+// Stranice koje nisu tekstovi imaju ručno prevedene slugove — `/o-sajtu/` nije
+// `/en/o-sajtu/`. Zato ovaj mali rečnik, da se par ne raspari na dva mesta.
+export const pagePaths = {
+  about: { sr: '/o-sajtu/', en: '/en/about/' },
+  privacy: { sr: '/privatnost/', en: '/en/privacy/' },
+} as const satisfies Record<string, Record<Locale, string>>;
+
+export function pagePath(page: keyof typeof pagePaths, locale: Locale): string {
+  return pagePaths[page][locale];
+}
+
+/** Navigacija po jeziku. */
 export function navFor(locale: Locale) {
   const t = ui[locale];
-  const items = [{ href: localePath(locale, '/blog'), label: t.navGuides }];
-  if (locale === 'sr') {
-    items.push({ href: '/o-sajtu', label: t.navAbout });
-  }
-  return items;
+  return [
+    { href: localePath(locale, '/blog'), label: t.navGuides },
+    { href: pagePath('about', locale), label: t.navAbout },
+  ];
 }

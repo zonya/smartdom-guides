@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site, monetization, analytics } from '../../config/site';
+import { localeMeta } from '../../config/i18n';
+
+const LOCALE = 'en' as const;
+const adsOn = monetization.ads.enabled && monetization.ads.client;
+const analyticsOn = Boolean(analytics.cloudflareToken);
+// Isti datum kao na srpskoj verziji — ista pravila, pa ista izmena.
+const updated = new Date('2026-08-06').toLocaleDateString(
+  localeMeta[LOCALE].dateLocale,
+  { day: 'numeric', month: 'long', year: 'numeric' }
+);
+---
+
+<BaseLayout
+  title="Privacy policy"
+  description="What this site collects, how visits are measured, and how affiliate links are handled."
+  lang={LOCALE}
+  altHref="/privatnost/"
+>
+  <header class="post__header">
+    <h1>Privacy policy</h1>
+    <p class="post__lead">Last updated: {updated}</p>
+  </header>
+
+  <div class="prose">
+    <h2>In short</h2>
+    <p>
+      This site has no sign-in, creates no accounts and collects no personal
+      data. There are no forms, no comments and no newsletter. If you are only
+      reading, nothing is stored that could identify you.
+    </p>
+
+    <h2>Cookies</h2>
+    {
+      adsOn ? (
+        <p>
+          This site shows ads through Google AdSense, which <strong>uses
+          cookies</strong> to serve and measure them. You can control those in
+          your browser settings and through Google's ad settings.
+        </p>
+      ) : (
+        <p>
+          <strong>This site currently sets no cookies at all.</strong> The only
+          thing stored in your browser is whether you chose the light or dark
+          theme, kept in local storage (<code>localStorage</code>). It is never
+          sent anywhere and disappears when you clear site data.
+        </p>
+      )
+    }
+
+    <h2>Measuring visits</h2>
+    {
+      analyticsOn ? (
+        <p>
+          <strong>Cloudflare Web Analytics</strong> is used. It counts visits
+          and which pages are read, but <strong>uses no cookies</strong>, does
+          no device fingerprinting, and does not follow you over time or across
+          other sites. The data is aggregate — how many people opened an
+          article, not who they were.
+        </p>
+      ) : (
+        <p>Visits are currently not measured by any tool.</p>
+      )
+    }
+    <p>
+      Separately, the web server keeps ordinary access logs (IP address, time,
+      requested path, browser type), which are necessary to run and secure a
+      server. Those logs are not used for profiling.
+    </p>
+
+    <h2>Affiliate links</h2>
+    <p>
+      Some articles contain affiliate links to hardware retailers. If you buy
+      through one, this site earns a small commission
+      <strong> at no extra cost to you</strong>. Such links are marked in the
+      article itself, and recommendations are not chosen by commission rate.
+    </p>
+    <p>
+      Following an affiliate link takes you to the retailer's site, where their
+      privacy policy and their cookies apply. This site has no influence over
+      that.
+    </p>
+
+    <h2>Third-party services</h2>
+    <ul>
+      <li><strong>Cloudflare</strong> — DNS and traffic protection.</li>
+      {analyticsOn && (
+        <li>
+          <strong>Cloudflare Web Analytics</strong> — visit measurement, no
+          cookies.
+        </li>
+      )}
+      {adsOn && (
+        <li><strong>Google AdSense</strong> — ads, uses cookies.</li>
+      )}
+    </ul>
+
+    <h2>Your rights</h2>
+    <p>
+      Since no personal data is collected, there is no database to delete or
+      export anything from. If you have a privacy question anyway, write to{' '}
+      <a href={`mailto:${site.email}`}>{site.email}</a>.
+    </p>
+
+    <h2>Changes</h2>
+    <p>
+      If something changes — for example when ads start — this page is updated
+      before the change takes effect, with a new date at the top.
+    </p>
+  </div>
+</BaseLayout>

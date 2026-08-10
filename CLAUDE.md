@@ -7,7 +7,7 @@ Repo i npm paket su i dalje `smartdom-guides`, to je namerno neizmenjeno.
 ## Gde smo stali (10.08.2026)
 
 Sajt je uživo na `https://opameti.me`. **7 srpskih + 1 engleski tekst**, uz
-„O sajtu" i „Politiku privatnosti". Analitika, RSS, sitemap, pošta, logo i
+„O sajtu" i „Politiku privatnosti" na oba jezika. Analitika, RSS, sitemap, pošta, logo i
 slike rade. Sajt je od 10.08. **dvojezičan** — vidi „Dvojezičnost".
 
 **10.08.2026:** napisan tekst „Kako da instaliraš Home Assistant na svom Linux
@@ -287,9 +287,12 @@ strani para. Veza se čita u oba smera (`findTranslation`), i iz nje se izvode
 - `PostCard` prima `locale` (format datuma + adrese tema).
 - OG slike rade same — generatori koriste `getAllPosts()` (svi jezici).
 
+Stranice koje nisu tekstovi imaju **ručno prevedene slugove** — `/o-sajtu/` ↔
+`/en/about/`, `/privatnost/` ↔ `/en/privacy/`. Par se drži na jednom mestu, u
+`pagePaths` u `i18n.ts`; `navFor()` i podnožje čitaju odatle. Kad se dodaje nova
+takva stranica, prvo par u `pagePaths`, pa onda ruta.
+
 **Otvoreno:**
-- `/en/` u podnožju vodi na **srpsku** „Privatnost" i nema „O sajtu". Kad se
-  napiše engleska verzija, dodati u `navFor()` i u podnožje.
 - Naslovna `/en/` je pisana za projekte, ne za vodiče — to je namerno (odluka
   10.08.2026: prevodi vodiča ne bi rangirali, engleske stranice projekata
   hoće, jer za njih nema konkurencije).

@@ -7,6 +7,7 @@ import {
   localeMeta,
   navFor,
   otherLocale,
+  pagePath,
   ui,
   type Locale,
 } from '../config/i18n';
@@ -229,7 +230,7 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
               </>
             ))
           }
-          <a href="/privatnost/">{t.privacy}</a>
+          <a href={pagePath('privacy', lang)}>{t.privacy}</a>
           <span aria-hidden="true"> · </span>
           <a href={lang === DEFAULT_LOCALE ? '/rss.xml' : '/en/rss.xml'}>RSS</a>
         </p>

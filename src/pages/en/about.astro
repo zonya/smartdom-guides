@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../config/site';
+
+const LOCALE = 'en' as const;
+---
+
+<BaseLayout
+  title="About"
+  description="Who writes opameti.me, why the English and Serbian sides carry different things, and how to get in touch."
+  lang={LOCALE}
+  altHref="/o-sajtu/"
+>
+  <header class="post__header">
+    <h1>About</h1>
+    <p class="post__lead">
+      Open-source Home Assistant integrations and small tools, plus beginner
+      guides written in Serbian.
+    </p>
+  </header>
+
+  <div class="prose">
+    <h2>Two languages, different content</h2>
+    <p>
+      This is not a translated site, and that is deliberate. The
+      <a href="/">Serbian side</a> carries beginner guides — installing Home
+      Assistant, choosing Zigbee hardware, writing a first automation — because
+      those did not exist in Serbian. Translating them into English would put
+      them against a market that already has a thousand of each, and they would
+      help nobody.
+    </p>
+    <p>
+      The English side carries the <strong>projects</strong> instead: integrations
+      for devices and services nobody else supported, and the notes that explain
+      how they work. For those there is no competition, because in most cases
+      there is no alternative either.
+    </p>
+
+    <h2>What gets built here</h2>
+    <ul>
+      <li>
+        <strong>Home Assistant integrations</strong> for Serbian utility and
+        telecom providers, bintec-elmeg access points, Candy/Haier appliances and
+        Bambu Lab printers.
+      </li>
+      <li>
+        <strong>Music Assistant players</strong> for webOS and Tizen televisions.
+      </li>
+      <li>
+        <strong>Small macOS tools</strong>, such as bringing up Sidecar
+        automatically on a Mac with no display.
+      </li>
+    </ul>
+    <p>
+      All of it is on <a href="https://github.com/zonya" rel="noopener">GitHub</a>,
+      free, and MIT or similar. Everything runs locally — no vendor cloud, no
+      account, no telemetry. It exists because it is used here every day, which
+      is also why it keeps working.
+    </p>
+
+    <h2>How it is written</h2>
+    <ul>
+      <li>
+        <strong>Limitations are stated.</strong> Where something is built on a
+        private API or can break on an OS update, that is in the text — not in
+        an issue you find later.
+      </li>
+      <li>
+        <strong>From practice.</strong> Recommendations are things actually run
+        here, not things that read well on a product page.
+      </li>
+      <li>
+        <strong>Corrections are welcome</strong> and outrank everything else. If
+        a guide does not work for you, the guide is wrong until proven otherwise.
+      </li>
+    </ul>
+
+    <h2>Money</h2>
+    <p>
+      The site costs about €5-6 a month to run. The aim is for it to cover
+      itself through affiliate links to hardware and possibly ads, which means
+      one commitment to you: <strong>a recommendation never changes because of a
+      commission</strong>. Where an article contains an affiliate link, it says
+      so. Details are in the <a href="/en/privacy/">privacy policy</a>.
+    </p>
+    <p>
+      The software is free and stays free. If a project saved you an afternoon,
+      <a href="https://ko-fi.com/zonya2026" rel="noopener"> a coffee</a> is a
+      nice way to say so — and a bug report is worth more.
+    </p>
+
+    <h2>Who is behind it</h2>
+    <p>
+      The site is built and maintained by <strong>{site.company.name}</strong>, an
+      IT company whose work includes smart-home installations, home servers and
+      networks. The guides come out of that work — mostly answers to questions
+      that keep coming up.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Questions, corrections and topic suggestions are all welcome. Write to{' '}
+      <a href={`mailto:${site.email}`}>{site.email}</a>, or open an issue on the
+      relevant repository.
+    </p>
+  </div>
+</BaseLayout>
