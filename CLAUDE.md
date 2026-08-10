@@ -292,6 +292,11 @@ Stranice koje nisu tekstovi imaju **ručno prevedene slugove** — `/o-sajtu/` �
 `pagePaths` u `i18n.ts`; `navFor()` i podnožje čitaju odatle. Kad se dodaje nova
 takva stranica, prvo par u `pagePaths`, pa onda ruta.
 
+ℹ️ **Sitemap pari samo stranice sa istim slugom** (`/blog/` ↔ `/en/blog/`), pa
+`/o-sajtu/` ↔ `/en/about/` u sitemapu **nisu** povezane — plugin ne zna za ručne
+prevode slugova. To nije greška i ne treba je „popravljati": `hreflang` u
+`<head>` te parove pokriva, i on je izvor koji Google uzima kao merodavan.
+
 **Otvoreno:**
 - Naslovna `/en/` je pisana za projekte, ne za vodiče — to je namerno (odluka
   10.08.2026: prevodi vodiča ne bi rangirali, engleske stranice projekata
