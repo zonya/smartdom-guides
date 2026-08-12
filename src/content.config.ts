@@ -42,7 +42,27 @@ const posts = defineCollection({
       .refine((data) => !data.cover || !!data.coverAlt, {
         message: 'Uz `cover` mora ići i `coverAlt` (opis slike).',
         path: ['coverAlt'],
-      }),
+      })
+      // Obična adresa proizvoda na aliexpress.com nema tracking ID, pa klik
+      // kroz nju ne donosi ništa. Greška se ne vidi na sajtu — link radi,
+      // samo ćuti — pa neka build padne umesto da tekst mesecima stoji sa
+      // linkovima koji ne zarađuju. Provizioni linkovi iz portala su na
+      // `s.click.aliexpress.com`.
+      .refine(
+        (data) =>
+          (data.affiliate ?? []).every((item) => {
+            const host = new URL(item.url).hostname;
+            return (
+              !/(^|\.)aliexpress\.(com|ru)$/.test(host) ||
+              host === 's.click.aliexpress.com'
+            );
+          }),
+        {
+          message:
+            'AliExpress link nije provizioni. Uzmi ga iz portala (Link Generator) — mora biti na s.click.aliexpress.com.',
+          path: ['affiliate'],
+        }
+      ),
 });
 
 export const collections = { posts };

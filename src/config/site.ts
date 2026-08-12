@@ -51,9 +51,17 @@ export const monetization = {
   },
 
   affiliate: {
+    // AliExpress Portals, nalog odobren 09.08.2026. Tracking ID se vidi u
+    // portalu (Account → Tracking ID) i služi samo kao podsetnik koji je
+    // nalog u igri — linkovi se NE sklapaju ovde, nego se u frontmatter
+    // teksta lepi gotov link iz portala (Link Generator).
+    aliexpressTrackingId: '',
     // Tekst obaveštenja koji se po zakonu/pravilima mreža prikazuje kad
-    // tekst sadrži affiliate linkove.
-    disclosure:
-      'Neki linkovi u ovom tekstu su affiliate linkovi — ako preko njih kupiš proizvod, sajt dobija malu proviziju, bez dodatnog troška za tebe. Preporučujemo samo ono što bismo i sami koristili.',
+    // tekst sadrži affiliate linkove. Po jeziku teksta — engleski čitalac je
+    // do 12.08.2026. dobijao srpsku rečenicu.
+    disclosure: {
+      sr: 'Neki linkovi u ovom tekstu su affiliate linkovi — ako preko njih kupiš proizvod, sajt dobija malu proviziju, bez dodatnog troška za tebe. Preporučujemo samo ono što bismo i sami koristili.',
+      en: 'Some links in this article are affiliate links — if you buy through them, the site earns a small commission at no extra cost to you. We only recommend things we would use ourselves.',
+    },
   },
 };

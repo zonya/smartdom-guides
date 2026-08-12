@@ -1,5 +1,6 @@
 ---
 import { monetization } from '../config/site';
+import { DEFAULT_LOCALE, type Locale } from '../config/i18n';
 
 export interface AffiliateItem {
   title: string;
@@ -10,10 +11,18 @@ export interface AffiliateItem {
 
 interface Props {
   items: AffiliateItem[];
+  locale?: Locale;
   heading?: string;
 }
 
-const { items, heading = 'Hardver iz ovog teksta' } = Astro.props;
+const HEADINGS: Record<Locale, string> = {
+  sr: 'Hardver iz ovog teksta',
+  en: 'Hardware from this article',
+};
+
+const { items, locale = DEFAULT_LOCALE, heading = HEADINGS[locale] } =
+  Astro.props;
+const disclosure = monetization.affiliate.disclosure[locale];
 ---
 
 {
@@ -36,7 +45,7 @@ const { items, heading = 'Hardver iz ovog teksta' } = Astro.props;
           </li>
         ))}
       </ul>
-      <p class="affiliate__disclosure">{monetization.affiliate.disclosure}</p>
+      <p class="affiliate__disclosure">{disclosure}</p>
     </aside>
   )
 }
