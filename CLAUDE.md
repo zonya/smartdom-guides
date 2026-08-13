@@ -281,6 +281,42 @@ ništa se ne renderuje dok se ne uključi u `src/config/site.ts`.
 - Linkovi mogu i dalje da idu inline u markdown gde je prirodno; boks je za
   zbirnu preporuku hardvera.
 
+### Linkovi u telu teksta
+
+Affiliate linkovi stoje i u prozi, na modelu, ne samo u boksu na dnu — tamo ih
+vidi samo manjina koja dočita. Pišu se kao **običan HTML u markdownu**:
+
+```html
+<a href="https://s.click.aliexpress.com/e/_xxx" rel="sponsored nofollow noopener" target="_blank"><strong>Sonoff ZBDongle-E</strong></a>
+```
+
+⚠️ **`[tekst](url)` oblik NE valja** — markdown link nema gde da nosi `rel`, a
+nemarkiran affiliate link Google tretira kao šemu linkova. Zato `npm run build`
+prvo pokreće `tools/check-affiliate-links.mjs`, koji obara build ako nađe
+markdown link na `s.click` ili `<a>` bez `rel="sponsored"`.
+
+🚫 **Ne uvoditi rehype plugin za ovo** (probano 13.08.2026 i vraćeno).
+`markdown.rehypePlugins` u Astru 7 povlači ceo markdown na `unified`
+(`@astrojs/markdown-remark`), a on kvari **srpske navodnike**: sa smartypants-om
+„ovako“ postaje „ovako”, a bez njega ostaju prosti `"`. Oba su vidljiv nazadak u
+svakom postojećem tekstu. Poređeno je izlazno HTML svih tekstova pre i posle.
+
+Obaveštenje o proviziji (`AffiliateNotice`) ide **iznad teksta**, jer prvi link
+sada dolazi mnogo pre dna. Boks na dnu i dalje nosi puno obaveštenje.
+
+### Stubac u margini (`PostRail`)
+
+Na ekranima ≥84rem stranica teksta dobija desnu marginu: **sadržaj teksta**
+(`h2` naslovi), **kratak spisak hardvera** (3 stavke, ostatak vodi na `#hardver`)
+i **poziv na kontakt za NextIT**. Ispod praga se prva dva gase, a poziv padne
+ispod teksta. Stubac teksta ostaje na 44rem — margina se dodaje pored njega.
+
+🚫 **Reklamni baneri su odbijeni, ne odloženi** (odluka 13.08.2026, Markov
+predlog). Na ovom saobraćaju baner ne zaradi ništa, a odmah plaća punu cenu:
+sajt počne da izgleda kao farma sadržaja, što odbija upravo klijenta za NextIT
+— a jedan takav posao vredi više od godina oglasa. Ako se ikad vrate, prvo
+pročitati ovaj pasus.
+
 ### Analitika
 
 - **Cloudflare Web Analytics** — besplatan, bez kolačića, ne traži cookie
