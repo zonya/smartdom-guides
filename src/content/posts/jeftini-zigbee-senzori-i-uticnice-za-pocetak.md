@@ -12,6 +12,10 @@ affiliate:
     url: "https://s.click.aliexpress.com/e/_c2zjHiVZ"
     price: "~35€"
     note: "Samo ako ti server stoji u lošem uglu. Za prvi put nije neophodan."
+  - title: "Sonoff S60ZBTPF — utičnica sa merenjem potrošnje"
+    url: "https://s.click.aliexpress.com/e/_c4qyHOr9"
+    price: "~13€"
+    note: "Uzmi dve i rasporedi ih — one su i pojačivači mreže. Pazi da je EU (TPF) i Zigbee (ZB)."
   - title: "Sonoff SNZB-04P — senzor otvaranja"
     url: "https://s.click.aliexpress.com/e/_c2xZBgSL"
     note: "Isti oglas nudi i pakovanje od dva komada — proveri cenu po komadu."
@@ -41,13 +45,15 @@ Jedna napomena pre svega: **nemoj kupiti sve odjednom.** Koordinator, dve utičn
 | Šta | Model | Okvirno |
 |---|---|---|
 | Koordinator | Sonoff ZBDongle-E | 20-25€ |
-| Utičnica ×2 | Sonoff S26R2ZB ili Nous A1Z | 10-13€ po kom. |
+| Utičnica ×2 | Sonoff S60ZBTPF | 13-16€ po kom. |
 | Senzor otvaranja | Sonoff SNZB-04P | 10-13€ |
 | Senzor pokreta | Sonoff SNZB-03P | 10-13€ |
 | Temperatura i vlažnost | Sonoff SNZB-02D | 10-13€ |
 | USB produžni kabl | bilo koji, 1m | 2-3€ |
 
-Ukupno oko **75-90€** sa domaćih sajtova, ili **45-60€** sa AliExpressa ako imaš strpljenja da čekaš. Cene su iz avgusta 2026. i prilično skaču na akcijama, pa ih uzmi kao red veličine, ne kao ponudu.
+Ukupno oko **85-100€**, i sa domaćih sajtova i sa AliExpressa. To „sa AliExpressa je duplo jeftinije" danas više ne stoji za ovakav hardver — otkad se porez naplaćuje na naplati, razlika se svela na nekoliko evra po uređaju, a čekaš dve do četiri nedelje. Ono što tamo i dalje dobijaš je izbor: pola ovih modela domaće radnje uopšte ne drže.
+
+Cene su iz avgusta 2026, prilično skaču na akcijama i zavise od kursa, pa ih uzmi kao red veličine, ne kao ponudu.
 
 ## Koordinator — jedan uređaj koji ne smeš da promašiš
 
@@ -69,13 +75,19 @@ Ako ti server stoji u ostavi ili u rack-u u uglu stana, vredi razmisliti o **SML
 
 Zigbee utičnice na struji rade i kao **pojačivači mreže**: prosleđuju signal daljim uređajima. Zato se ne kupuju „po potrebi" nego kao deo infrastrukture. Dve-tri utičnice raspoređene po stanu su razlika između mreže koja radi i mreže koja se povremeno gubi.
 
-**Sonoff S26R2ZB** je najjeftiniji razuman izbor. **Nous A1Z** je nešto skuplji i ima **merenje potrošnje**, što zvuči kao sitnica, a nije — merenje potrošnje ti otvara automatizacije koje inače ne možeš da napraviš:
+**Sonoff S60ZBTPF** je danas razuman podrazumevani izbor: evropski utikač, 16A i — što je najvažnije — **merenje potrošnje već u osnovnom modelu**.
+
+⚠️ **Pazi na tri slova na kraju.** `TPF` je evropska verzija, `TPG` je britanska i kod nas ti ne treba, a u pretrazi izlaze jedna pored druge. Postoji i WiFi verzija bez `ZB` u imenu — tebi treba ona sa `ZB`, to je Zigbee.
+
+Ako si po starijim spiskovima naleteo na **Sonoff S26R2ZB** ili **Nous A1Z**: obe su i dalje dobre utičnice, ali S26R2ZB je proizvođač zamenio ovom serijom, a Nous se kod nas realno kupuje iz evropskih radnji, ne sa AliExpressa. Ako ti neka od njih padne šaka po dobroj ceni, ništa nisi pogrešio.
+
+Merenje potrošnje zvuči kao sitnica, a nije — otvara automatizacije koje inače ne možeš da napraviš:
 
 - javi kad je mašina za pranje veša završila (potrošnja padne ispod 5W duže od dva minuta),
 - ugasi punjač koji je zaboravljen uključen,
 - vidi šta ti u kući stvarno jede struju, a ne po osećaju.
 
-Naš savet: uzmi **jednu sa merenjem** (stavi je na mašinu za veš ili sudove) i **jednu bez** (za lampu). Videćeš vrlo brzo koja ti se više isplati, pa dalje kupuj takve.
+Pošto merenje danas dolazi i na najjeftinijim modelima, nema razloga da ga izbegavaš da bi uštedeo evro-dva. Uzmi dve i **rasporedi ih po stanu** — jednu na mašinu za veš ili sudove, drugu na suprotan kraj, da mreži bude od koristi.
 
 Ako ti se ne pale i ne gase uređaji, nego ti treba da **običan zidni prekidač i dalje radi normalno** — utičnica nije rešenje, tu ide modul iza prekidača (Sonoff ZBMINIR2 ili Shelly). O tome pišemo posebno, jer podrazumeva rad sa strujom.
 
@@ -95,7 +107,9 @@ Za ostavu i podrum ista logika radi kao „upali svetlo kad otvorim, ugasi kad z
 
 ## Senzor pokreta
 
-**Sonoff SNZB-03P** je jeftin i sasvim dobar. **Aqara P1** je skuplji, ali ima jednu stvar koja se isplati: **možeš da menjaš interval prijavljivanja**. Jeftini senzori posle detekcije „ćute" oko minut da bi štedeli bateriju, i onda ti se svetlo u kupatilu ugasi dok si još unutra.
+**Sonoff SNZB-03P** je jeftin i sasvim dobar, i s njim počni.
+
+Ako kasnije budeš birao skuplji, gledaj jednu jedinu stavku: **da li se interval prijavljivanja može menjati**. Jeftini senzori posle detekcije „ćute" oko minut da bi štedeli bateriju, i onda ti se svetlo u kupatilu ugasi dok si još unutra. **Aqara Motion Sensor P1** je najpoznatiji koji to ume — samo ga je kod nas nezgodno naći, jer se pod imenom „Aqara P1" prodaje i senzor za vrata, a i sam Aqara ima više senzora pokreta sa sličnim imenima. Proveri oznaku modela pre nego što platiš.
 
 Zato jedno pravilo: **prvi senzor pokreta ne stavljaj u kupatilo.** Stavi ga u hodnik, ostavu ili predsoblje — mesta gde prolaziš, a ne mesta gde stojiš mirno. Kupatilo i radni sto su najteži slučajevi i tamo ćeš ionako pre ili kasnije preći na senzor prisustva (mmWave), koji je druga i skuplja priča.
 

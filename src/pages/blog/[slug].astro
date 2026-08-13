@@ -87,7 +87,7 @@ const jsonLd = {
     </header>
 
     {
-      cover && (
+      cover ? (
         <figure class="post__cover">
           <Image
             src={cover}
@@ -98,6 +98,20 @@ const jsonLd = {
             fetchpriority="high"
           />
           {post.data.coverAlt && <figcaption>{post.data.coverAlt}</figcaption>}
+        </figure>
+      ) : (
+        /* Bez svoje slike tekst je počinjao golim naslovom, a svaka kartica na
+           naslovnoj ima pločicu — otuda ista pločica i ovde. Čisto ukras: nosi
+           samo temu i znak sajta, pa je za čitače ekrana nema. */
+        <figure class="post__cover" aria-hidden="true">
+          <img
+            src={`/og/head/${post.id}.webp`}
+            alt=""
+            width="1000"
+            height="525"
+            loading="eager"
+            fetchpriority="high"
+          />
         </figure>
       )
     }
