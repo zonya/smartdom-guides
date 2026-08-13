@@ -40,6 +40,11 @@ interface Props {
    * lažna veza između nepovezanih stranica je gore od nikakve.
    */
   altHref?: string;
+  /**
+   * Stranica ima stubac u margini (`PostRail`). Na širokim ekranima kolona se
+   * proširi i podeli na tekst + marginu; ispod praga ostaje kao i pre.
+   */
+  rail?: boolean;
 }
 
 const {
@@ -52,6 +57,7 @@ const {
   wide = false,
   lang = DEFAULT_LOCALE,
   altHref,
+  rail = false,
 } = Astro.props;
 const meta = localeMeta[lang];
 const t = ui[lang];
@@ -200,7 +206,7 @@ const adsLive = monetization.ads.enabled && monetization.ads.client;
     </header>
 
     <main id="main">
-      <div class:list={['wrap', { 'wrap--wide': wide }]}>
+      <div class:list={['wrap', { 'wrap--wide': wide, 'wrap--rail': rail }]}>
         <slot />
       </div>
     </main>

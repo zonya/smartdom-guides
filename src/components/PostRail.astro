@@ -1,0 +1,97 @@
+---
+// Stubac u desnoj margini teksta, samo na širokim ekranima.
+//
+// Odluka 13.08.2026: taj prostor NE ide na reklamne banere. Sajt nema
+// saobraćaj koji bi baner isplatio, a izgled farme sadržaja odbija upravo
+// klijenta za NextIT — a jedan takav posao vredi više od godina oglasa na
+// ovakvoj poseti. Umesto toga: navigacija, isti hardver koji je već u tekstu,
+// i poziv na kontakt.
+//
+// Ispod praga se cela margina gasi osim poziva na kontakt — on se u toku
+// stranice pojavi ispod teksta, gde ionako ima smisla.
+import { DEFAULT_LOCALE, type Locale } from '../config/i18n';
+import type { AffiliateItem } from './AffiliateBox.astro';
+import { site } from '../config/site';
+
+interface Props {
+  /** `h2` naslovi iz teksta — od njih se pravi sadržaj. */
+  headings: { depth: number; slug: string; text: string }[];
+  /** Isti proizvodi kao u boksu na dnu; ovde stoje kao mirna kartica. */
+  affiliate?: AffiliateItem[];
+  locale?: Locale;
+}
+
+const T: Record<Locale, Record<string, string>> = {
+  sr: {
+    toc: 'U ovom tekstu',
+    hardware: 'Hardver iz teksta',
+    all: 'Ceo spisak ↓',
+    ctaTitle: 'Treba ti da ovo neko postavi?',
+    ctaBody:
+      'Ovaj sajt piše ekipa koja pametne domove postavlja i za druge. Ako ti se ne radi samom, javi se.',
+    ctaAction: 'Piši nam',
+  },
+  en: {
+    toc: 'In this article',
+    hardware: 'Hardware from this article',
+    all: 'Full list ↓',
+    ctaTitle: 'Want someone to set this up?',
+    ctaBody:
+      'This site is written by people who install smart homes for a living. If you would rather not do it yourself, get in touch.',
+    ctaAction: 'Email us',
+  },
+};
+
+const { headings, affiliate = [], locale = DEFAULT_LOCALE } = Astro.props;
+const t = T[locale];
+// Samo `h2` — `h3` bi napravio spisak duži od samog teksta u margini.
+const toc = headings.filter((h) => h.depth === 2);
+// Tri stavke su podsetnik, osam je drugi boks. Ostatak vodi na boks na dnu.
+const shortlist = affiliate.slice(0, 3);
+---
+
+<aside class="rail">
+  {
+    toc.length > 2 && (
+      <nav class="rail__block rail__toc" aria-label={t.toc}>
+        <h2 class="rail__heading">{t.toc}</h2>
+        <ol>
+          {toc.map((h) => (
+            <li>
+              <a href={`#${h.slug}`}>{h.text}</a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    )
+  }
+
+  {
+    shortlist.length > 0 && (
+      <div class="rail__block rail__hw">
+        <h2 class="rail__heading">{t.hardware}</h2>
+        <ul>
+          {shortlist.map((item) => (
+            <li>
+              <a href={item.url} rel="sponsored nofollow noopener" target="_blank">
+                {item.title}
+              </a>
+              {item.price && <span class="rail__price">{item.price}</span>}
+            </li>
+          ))}
+        </ul>
+        {affiliate.length > shortlist.length && (
+          <p class="rail__more">
+            <a href="#hardver">{t.all}</a>
+          </p>
+        )}
+      </div>
+    )
+  }
+
+  <div class="rail__block rail__cta">
+    <h2 class="rail__heading">{t.ctaTitle}</h2>
+    <p>{t.ctaBody}</p>
+    <a class="rail__button" href={`mailto:${site.email}`}>{t.ctaAction}</a>
+  </div>
+</aside>

@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../../components/AdSlot.astro';
 import AffiliateBox from '../../components/AffiliateBox.astro';
+import AffiliateNotice from '../../components/AffiliateNotice.astro';
+import PostRail from '../../components/PostRail.astro';
 import { site } from '../../config/site';
 import {
   findTranslation,
@@ -29,9 +31,12 @@ export async function getStaticPaths() {
 }
 
 const { post, newer, older, translation } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 const minutes = readingTime(post.body);
 const affiliate = post.data.affiliate ?? [];
+// Obaveštenje ide i kad linkovi postoje samo u prozi, bez boksa na dnu.
+const hasAffiliate =
+  affiliate.length > 0 || post.body.includes('s.click.aliexpress.com');
 const cover = post.data.cover;
 // Slika za deljenje se generiše iz naslova (src/pages/og/[...slug].png.ts).
 const ogImage = `/og/${post.id}.png`;
@@ -54,8 +59,10 @@ const jsonLd = {
   description={post.data.description}
   ogImage={ogImage}
   ogType="article"
+  rail
   altHref={translation ? postPath(translation) : undefined}
 >
+  <div class="post-col">
   <article>
     <header class="post__header">
       <h1>{post.data.title}</h1>
@@ -116,6 +123,8 @@ const jsonLd = {
       )
     }
 
+    <AffiliateNotice show={hasAffiliate} locale={'sr'} />
+
     <AdSlot slot="inArticle" />
 
     <div class="prose">
@@ -145,6 +154,9 @@ const jsonLd = {
       </nav>
     )
   }
+  </div>
+
+  <PostRail headings={headings} affiliate={affiliate} locale={'sr'} />
 
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
 </BaseLayout>

@@ -785,3 +785,157 @@ main {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- Stubac u margini teksta (PostRail) ---------- */
+
+/* Do praga se ništa ne menja: tekst je jedna kolona, a od margine se vidi samo
+   poziv na kontakt, koji jednostavno padne ispod teksta. Sadržaj i spisak
+   hardvera se gase — u uskoj koloni bi samo ponovili ono što je već tu. */
+.rail__toc,
+.rail__hw {
+  display: none;
+}
+
+.rail__block {
+  margin-top: 2.5rem;
+}
+
+.rail__heading {
+  margin: 0 0 0.6rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.rail__cta {
+  padding: 1.25rem;
+  /* Poziv na kontakt je rečenica, ne rubrika — zato ne ide u verzal kao
+     ostali naslovi u margini. */
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+}
+
+.rail__cta p {
+  margin: 0 0 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.rail__cta .rail__heading {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text);
+}
+
+.rail__button {
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.rail__button:hover {
+  filter: brightness(1.08);
+}
+
+/* Širok ekran: kolona se proširi i podeli. Stubac teksta ostaje na
+   `--max-width` — margina se dodaje pored njega, ne oduzima od njega. */
+@media (min-width: 84rem) {
+  .wrap--rail {
+    max-width: calc(var(--max-width) + 20rem);
+    display: grid;
+    grid-template-columns: minmax(0, var(--max-width)) 16rem;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .rail {
+    position: sticky;
+    top: 5.5rem;
+    font-size: 0.9375rem;
+    /* Dug sadržaj ume da preraste ekran, a lepljiv stubac viši od prozora ne
+       može da se doskroluje — pa mu se da sopstveni skrol. */
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .rail__toc,
+  .rail__hw {
+    display: block;
+  }
+
+  .rail__block:first-child {
+    margin-top: 0;
+  }
+
+  .rail__toc ol,
+  .rail__hw ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .rail__toc li,
+  .rail__hw li {
+    margin-bottom: 0.55rem;
+    line-height: 1.45;
+  }
+
+  .rail__toc a,
+  .rail__hw a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .rail__toc a:hover,
+  .rail__hw a:hover {
+    color: var(--text);
+    text-decoration: underline;
+  }
+
+  .rail__price {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  .rail__more {
+    margin: 0.75rem 0 0;
+    font-size: 0.875rem;
+  }
+}
+
+/* ---------- Obaveštenje o proviziji, pre prvog linka ---------- */
+
+.affiliate-notice {
+  margin: 0 0 1.75rem;
+  padding: 0.7rem 0.9rem;
+  border-left: 3px solid var(--border);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+/* Sidra ispod lepljivog zaglavlja.
+   Bez ovoga skok na `#slug` (sadržaj u margini, „Ceo spisak ↓") ostavi metu
+   tačno ispod trake koja stoji na vrhu, pa čitalac sleti na naslov koji ne
+   vidi. `scroll-margin-top` je jedini način koji radi i za klik i za adresu
+   sa heševom. */
+.prose :is(h2, h3),
+#hardver {
+  scroll-margin-top: 5.5rem;
+}

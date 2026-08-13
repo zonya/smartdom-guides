@@ -59,7 +59,7 @@ Cene su iz avgusta 2026, prilično skaču na akcijama i zavise od kursa, pa ih u
 
 Koordinator je USB stik koji pravi Zigbee mrežu. To je jedini deo gde loš izbor boli, jer ako mreža nije stabilna, svih dvadeset uređaja radi loše, a ti ne znaš zašto.
 
-**Sonoff ZBDongle-E** je najsigurniji izbor za početak. Najzastupljeniji je u Home Assistant zajednici, radi bez podešavanja, dolazi sa antenom i drži mrežu od nekoliko desetina uređaja bez muke.
+<a href="https://s.click.aliexpress.com/e/_c3zlpEp1" rel="sponsored nofollow noopener" target="_blank"><strong>Sonoff ZBDongle-E</strong></a> je najsigurniji izbor za početak. Najzastupljeniji je u Home Assistant zajednici, radi bez podešavanja, dolazi sa antenom i drži mrežu od nekoliko desetina uređaja bez muke.
 
 ⚠️ **Pazi na slovo na kraju.** Postoji i **ZBDongle-P**, koji izgleda skoro identično i često je jeftiniji — drugi je čip i drugačije se ponaša. Ako ne znaš zašto ti treba P, uzmi **E**.
 
@@ -69,13 +69,13 @@ Tri stvari koje se ponavljaju kao greške:
 2. **Razdvoji kanale od WiFi-ja.** Zigbee i WiFi dele 2.4GHz. Ako ti je WiFi na kanalu 1, Zigbee stavi na 25 ili 26 i obrnuto.
 3. **Ne stavljaj ga u orman u podrumu.** Koordinator treba da bude što bliže centru stana.
 
-Ako ti server stoji u ostavi ili u rack-u u uglu stana, vredi razmisliti o **SMLIGHT SLZB-06**. To nije USB stik nego mala kutija koja ide na mrežni kabl (ima i PoE verziju), pa je možeš staviti gde je najbolji signal, a ne gde je server. Skuplja je nekih 15-20€ i za prvi put nije neophodna — ali ako već znaš da će server biti u lošem uglu, uzmi je odmah i preskoči jednu buduću glavobolju.
+Ako ti server stoji u ostavi ili u rack-u u uglu stana, vredi razmisliti o <a href="https://s.click.aliexpress.com/e/_c2zjHiVZ" rel="sponsored nofollow noopener" target="_blank"><strong>SMLIGHT SLZB-06</strong></a>. To nije USB stik nego mala kutija koja ide na mrežni kabl (ima i PoE verziju), pa je možeš staviti gde je najbolji signal, a ne gde je server. Skuplja je nekih 15-20€ i za prvi put nije neophodna — ali ako već znaš da će server biti u lošem uglu, uzmi je odmah i preskoči jednu buduću glavobolju.
 
 ## Utičnice — one nisu samo utičnice
 
 Zigbee utičnice na struji rade i kao **pojačivači mreže**: prosleđuju signal daljim uređajima. Zato se ne kupuju „po potrebi" nego kao deo infrastrukture. Dve-tri utičnice raspoređene po stanu su razlika između mreže koja radi i mreže koja se povremeno gubi.
 
-**Sonoff S60ZBTPF** je danas razuman podrazumevani izbor: evropski utikač, 16A i — što je najvažnije — **merenje potrošnje već u osnovnom modelu**.
+<a href="https://s.click.aliexpress.com/e/_c4qyHOr9" rel="sponsored nofollow noopener" target="_blank"><strong>Sonoff S60ZBTPF</strong></a> je danas razuman podrazumevani izbor: evropski utikač, 16A i — što je najvažnije — **merenje potrošnje već u osnovnom modelu**.
 
 ⚠️ **Pazi na tri slova na kraju.** `TPF` je evropska verzija, `TPG` je britanska i kod nas ti ne treba, a u pretrazi izlaze jedna pored druge. Postoji i WiFi verzija bez `ZB` u imenu — tebi treba ona sa `ZB`, to je Zigbee.
 
@@ -89,13 +89,13 @@ Merenje potrošnje zvuči kao sitnica, a nije — otvara automatizacije koje ina
 
 Pošto merenje danas dolazi i na najjeftinijim modelima, nema razloga da ga izbegavaš da bi uštedeo evro-dva. Uzmi dve i **rasporedi ih po stanu** — jednu na mašinu za veš ili sudove, drugu na suprotan kraj, da mreži bude od koristi.
 
-Ako ti se ne pale i ne gase uređaji, nego ti treba da **običan zidni prekidač i dalje radi normalno** — utičnica nije rešenje, tu ide modul iza prekidača (Sonoff ZBMINIR2 ili Shelly). O tome pišemo posebno, jer podrazumeva rad sa strujom.
+Ako ti se ne pale i ne gase uređaji, nego ti treba da **običan zidni prekidač i dalje radi normalno** — utičnica nije rešenje, tu ide modul iza prekidača (<a href="https://s.click.aliexpress.com/e/_c4NcxCpD" rel="sponsored nofollow noopener" target="_blank">Sonoff ZBMINIR2</a> ili Shelly). O tome pišemo posebno, jer podrazumeva rad sa strujom.
 
 ## Senzor otvaranja vrata i prozora
 
 Najjeftiniji uređaj, a pokreće najviše automatizacija. Dva magneta — jedan na krilo, drugi na ram, i Home Assistant zna da li su vrata otvorena.
 
-**Sonoff SNZB-04P** je ovde jasan izbor. Koristi veću CR2477 bateriju i realno traje godinama, ima i **tamper** prekidač (javi ako neko odvali senzor sa zida), što je korisno ako ga koristiš kao deo alarma.
+<a href="https://s.click.aliexpress.com/e/_c2xZBgSL" rel="sponsored nofollow noopener" target="_blank"><strong>Sonoff SNZB-04P</strong></a> je ovde jasan izbor. Koristi veću CR2477 bateriju i realno traje godinama, ima i **tamper** prekidač (javi ako neko odvali senzor sa zida), što je korisno ako ga koristiš kao deo alarma.
 
 Šta se sve pravi od jednog senzora na ulaznim vratima:
 
@@ -107,7 +107,7 @@ Za ostavu i podrum ista logika radi kao „upali svetlo kad otvorim, ugasi kad z
 
 ## Senzor pokreta
 
-**Sonoff SNZB-03P** je jeftin i sasvim dobar, i s njim počni.
+<a href="https://s.click.aliexpress.com/e/_c3EP97rD" rel="sponsored nofollow noopener" target="_blank"><strong>Sonoff SNZB-03P</strong></a> je jeftin i sasvim dobar, i s njim počni.
 
 Ako kasnije budeš birao skuplji, gledaj jednu jedinu stavku: **da li se interval prijavljivanja može menjati**. Jeftini senzori posle detekcije „ćute" oko minut da bi štedeli bateriju, i onda ti se svetlo u kupatilu ugasi dok si još unutra. **Aqara Motion Sensor P1** je najpoznatiji koji to ume — samo ga je kod nas nezgodno naći, jer se pod imenom „Aqara P1" prodaje i senzor za vrata, a i sam Aqara ima više senzora pokreta sa sličnim imenima. Proveri oznaku modela pre nego što platiš.
 
@@ -117,7 +117,7 @@ Većina ovih senzora javlja i **osvetljenost**, pa svetlo ne mora da se pali po 
 
 ## Temperatura i vlažnost
 
-**Sonoff SNZB-02D** ima ekran, pa je koristan i kad Home Assistant ne radi — nekome u kući će to biti važnije nego tebi. Baterija traje oko godinu i po.
+<a href="https://s.click.aliexpress.com/e/_c3uuDxpl" rel="sponsored nofollow noopener" target="_blank"><strong>Sonoff SNZB-02D</strong></a> ima ekran, pa je koristan i kad Home Assistant ne radi — nekome u kući će to biti važnije nego tebi. Baterija traje oko godinu i po.
 
 Uzmi **dva**: jedan u dnevnoj, jedan u kupatilu ili spavaćoj. Sa jednim senzorom imaš broj; sa dva imaš **razliku**, a razlika je ono od čega se prave korisne stvari — uključi odvlaživač kad je vlažnost u kupatilu 20% viša od ostatka stana, javi kad je u dečjoj sobi hladnije od 19°C.
 
@@ -125,7 +125,7 @@ Ovi senzori su i najbolji test mreže. Ako ti onaj u najdaljoj sobi povremeno �
 
 ## Jedan senzor koji nije na spisku, ali ga stavi
 
-**Senzor vode (Sonoff SNZB-05P)**, oko 12€. Nije zabavan, nikad se ne aktivira, i jedini je uređaj sa ovog spiska koji može da ti se isplati sto puta u jednoj noći. Ide pod bojler, pod sudoperu, za mašinu za veš — svuda gde bi voda tekla tri sata pre nego što bi neko primetio.
+**Senzor vode (<a href="https://s.click.aliexpress.com/e/_c3eS65H5" rel="sponsored nofollow noopener" target="_blank">Sonoff SNZB-05P</a>)**, oko 8€. Nije zabavan, nikad se ne aktivira, i jedini je uređaj sa ovog spiska koji može da ti se isplati sto puta u jednoj noći. Ide pod bojler, pod sudoperu, za mašinu za veš — svuda gde bi voda tekla tri sata pre nego što bi neko primetio.
 
 Ako želiš da ideš do kraja, kombinuj ga sa Zigbee ventilom na dovodu vode, pa se voda sama zatvori. To je već skuplja investicija, ali logika automatizacije je ista i napraviš je u pet minuta.
 

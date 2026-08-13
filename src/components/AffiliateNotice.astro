@@ -1,0 +1,23 @@
+---
+// Kratko obaveštenje o proviziji, pre prvog affiliate linka u tekstu.
+//
+// Boks na dnu teksta već nosi puno obaveštenje, ali otkad linkovi stoje i u
+// samoj prozi, prvi od njih dolazi mnogo pre dna. Čitalac treba da zna čime
+// plaća pre nego što klikne, a ne posle.
+import { DEFAULT_LOCALE, type Locale } from '../config/i18n';
+
+interface Props {
+  /** Prikazuje se samo ako tekst zaista ima affiliate linkova. */
+  show: boolean;
+  locale?: Locale;
+}
+
+const TEXT: Record<Locale, string> = {
+  sr: 'Linkovi na proizvode u ovom tekstu su affiliate linkovi. Cena za tebe je ista; sajt dobija malu proviziju ako preko njih kupiš.',
+  en: 'Product links in this article are affiliate links. The price is the same for you; the site earns a small commission if you buy through them.',
+};
+
+const { show, locale = DEFAULT_LOCALE } = Astro.props;
+---
+
+{show && <p class="affiliate-notice">{TEXT[locale]}</p>}
