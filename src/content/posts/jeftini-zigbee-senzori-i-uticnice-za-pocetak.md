@@ -3,6 +3,33 @@ title: "Najbolji jeftini Zigbee senzori i utičnice za početak"
 description: "Konkretan spisak Zigbee hardvera za prvi pametan dom — koordinator, utičnice i senzori, sa modelima, okvirnim cenama i onim što se ne kupuje na početku."
 pubDate: 2026-08-09
 tags: ["home-assistant", "hardver", "zigbee", "senzori"]
+affiliate:
+  - title: "Sonoff ZBDongle-E — koordinator"
+    url: "https://s.click.aliexpress.com/e/_c3zlpEp1"
+    price: "~19€"
+    note: "Obavezno preko USB produžnog kabla, ne direktno u server."
+  - title: "SMLIGHT SLZB-06 — koordinator na mrežni kabl"
+    url: "https://s.click.aliexpress.com/e/_c2zjHiVZ"
+    price: "~35€"
+    note: "Samo ako ti server stoji u lošem uglu. Za prvi put nije neophodan."
+  - title: "Sonoff SNZB-04P — senzor otvaranja"
+    url: "https://s.click.aliexpress.com/e/_c2xZBgSL"
+    note: "Isti oglas nudi i pakovanje od dva komada — proveri cenu po komadu."
+  - title: "Sonoff SNZB-03P — senzor pokreta"
+    url: "https://s.click.aliexpress.com/e/_c3EP97rD"
+    price: "~10€"
+  - title: "Sonoff SNZB-02D — temperatura i vlažnost"
+    url: "https://s.click.aliexpress.com/e/_c3uuDxpl"
+    price: "~18€"
+    note: "Sa ekranom, pa je čitljiv i kad Home Assistant ne radi."
+  - title: "Sonoff SNZB-05P — senzor vode"
+    url: "https://s.click.aliexpress.com/e/_c3eS65H5"
+    price: "~8€"
+    note: "Pod bojler i pod sudoperu. Nikad se ne aktivira — dok se ne isplati."
+  - title: "Sonoff ZBMINIR2 — modul iza prekidača"
+    url: "https://s.click.aliexpress.com/e/_c4NcxCpD"
+    price: "~12€"
+    note: "Za slučaj kad zidni prekidač mora i dalje da radi normalno."
 ---
 
 Ako si već zaključio da ideš na Zigbee, ostaje najneprijatniji deo: da od hiljadu skoro istih uređaja izabereš prvih pet. Ovde nema ni jedne opšte priče — ovo je spisak koji bismo dali prijatelju koji sutra kupuje, sa modelima, okvirnim cenama i objašnjenjem zašto baš to.

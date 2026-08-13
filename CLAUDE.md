@@ -29,12 +29,25 @@ mrtav link, ispravljeno. 4 repoa bila bez ijednog topica → dodati.
 
 **09.08.2026:** napisan tekst „Najbolji jeftini Zigbee senzori i utičnice za
 početak" (1.650 reči) — prvi tekst pisan sa affiliate linkovima u vidu.
-⚠️ **Frontmatter `affiliate:` je namerno prazan.** Nema još AliExpress naloga,
-a linkovi bez tracking ID-ja bi se ionako prepisivali — pa u tekstu nema
-nijednog spoljnog linka na proizvod, samo oznake modela. **Kad nalog bude
-napravljen, prvo se dopunjava ovaj tekst.** Modeli koje treba linkovati:
-ZBDongle-E, SLZB-06, S26R2ZB, Nous A1Z, SNZB-04P, SNZB-03P, SNZB-02D,
-SNZB-05P, Aqara P1, ZBMINIR2, USB produžni kabl.
+
+**13.08.2026 — AliExpress affiliate linkovi ubačeni (7 od 11 modela).**
+Nalog odobren 09.08., linkovi napravljeni kroz Portals → Tools → Link Generator
+(Tracking ID `default`, Ship to `SRB`) i stoje u `affiliate:` frontmatteru.
+
+⚠️ **Dva ograničenja koja se ne vide dok ne probaš:**
+1. **Pola modela iz teksta se ne može kupiti na AliExpressu za Srbiju.** Nema
+   **Sonoff S26R2ZB** (zamenio ga S60ZBTPG), nema **Nous A1Z** (izlaze samo
+   generički Tuya utikači) i nema **Aqara P1 senzor pokreta** (pretraga vraća
+   samo P1 za vrata/prozor). To su baš obe preporuke za utičnice — sekcija o
+   utičnicama zato **nema nijedan link**. Ne menjati preporuke da bi se
+   popunio boks; ako se menjaju, to je posebna urednička odluka.
+2. **Nije svaki oglas u affiliate programu.** Generator na takav odgovori
+   „Non-affiliate items can't be used to generate links" i tiho zadrži
+   *prethodni* link u polju — lako se previdi. Odbila su prva dva SNZB-02D
+   oglasa i prvi SLZB-06. Uvek proveri da se link promenio.
+
+Modeli bez linka: S26R2ZB, Nous A1Z, Aqara P1 (pokret), USB produžni kabl
+(u tekstu ionako piše „bilo koji").
 
 **Urađeno 07-08.08.2026 (da se ne radi dvaput):**
 - ime sajta → `opameti.me` (bilo „SmartDom Guides")
@@ -51,9 +64,9 @@ SNZB-05P, Aqara P1, ZBMINIR2, USB produžni kabl.
 1. **Još tekstova.** Jedino što stvarno pomera stvar; sve ostalo čeka na
    saobraćaj. Sledeći je „Najbolji jeftini Zigbee senzori i utičnice za
    početak" — prvi tekst gde affiliate linkovi imaju smisla.
-2. **Affiliate nalog — AliExpress pre Amazona.** Amazon Associates gasi nalog
-   bez 3 prodaje u 180 dana, a ova publika sa Amazona ne kupuje. Dobro bi bilo
-   da nalog postoji **pre** nego što se napiše tekst o senzorima.
+2. ✅ **Affiliate nalog — gotovo.** AliExpress odobren 09.08., linkovi u tekstu
+   o senzorima od 13.08. Amazon Associates namerno preskočen (gasi nalog bez
+   3 prodaje u 180 dana, a ova publika sa Amazona ne kupuje).
 3. **AdSense — ne prijavljivati još.** Sa 5 tekstova i jedva nešto poseta,
    prijava se odbija kao „low value content". Prag je oko 20-30 tekstova i
    nešto organskog saobraćaja.
@@ -202,7 +215,7 @@ Objavljeno (7, uključujući uvodnu najavu):
 - Home Assistant za apsolutne početnike — instalacija za 30 minuta ✅ ilustrovan
 - Koji hardver ti treba za pametan dom: Zigbee vs Z-Wave vs WiFi
 - Prvih 5 automatizacija koje svako treba da napravi ✅ ilustrovan
-- Najbolji jeftini Zigbee senzori i utičnice za početak ⏳ čeka affiliate linkove
+- Najbolji jeftini Zigbee senzori i utičnice za početak ✅ affiliate linkovi (7)
 - Kako da instaliraš Home Assistant na svom Linux serveru (Docker)
 
 Engleski (`/en/`, projekti — ne prevodi):
@@ -234,7 +247,13 @@ ništa se ne renderuje dok se ne uključi u `src/config/site.ts`.
 
 ### Affiliate
 
-- Nalozi (Amazon Associates / AliExpress) još nisu napravljeni.
+- **AliExpress nalog radi** (od 09.08.2026). Linkovi se prave u Portals →
+  Tools → Link Generator, Tracking ID `default`, Ship to `SRB`. Amazon
+  Associates i dalje nije napravljen i nije prioritet.
+- ⚠️ **Build pada ako link nije provizioni** — svaki `aliexpress.com` link u
+  `affiliate:` mora biti na `s.click.aliexpress.com` (provera je u
+  `src/content.config.ts`). Običan link radi kad se klikne, samo ne zarađuje,
+  pa se greška inače nikad ne primeti.
 - Proizvodi se dodaju u frontmatter teksta, ne u telo:
   ```yaml
   affiliate:
@@ -244,7 +263,8 @@ ništa se ne renderuje dok se ne uključi u `src/config/site.ts`.
       note: "Obavezno preko USB produžnog kabla."
   ```
   `AffiliateBox` ih iscrta na dnu teksta, sa `rel="sponsored nofollow"` i
-  obaveštenjem o proviziji (tekst u `monetization.affiliate.disclosure`).
+  obaveštenjem o proviziji (`monetization.affiliate.disclosure` — po jeziku,
+  `sr`/`en`; `AffiliateBox` prima `locale`).
 - Linkovi mogu i dalje da idu inline u markdown gde je prirodno; boks je za
   zbirnu preporuku hardvera.
 
