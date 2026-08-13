@@ -46,8 +46,21 @@ Nalog odobren 09.08., linkovi napravljeni kroz Portals → Tools → Link Genera
    *prethodni* link u polju — lako se previdi. Odbila su prva dva SNZB-02D
    oglasa i prvi SLZB-06. Uvek proveri da se link promenio.
 
-Modeli bez linka: S26R2ZB, Nous A1Z, Aqara P1 (pokret), USB produžni kabl
-(u tekstu ionako piše „bilo koji").
+**Isti dan, drugi prolaz — tekst prepravljen na ono što se može kupiti:**
+sekcija o utičnicama sada vodi sa **Sonoff S60ZBTPF** (EU 16A, Zigbee, merenje
+potrošnje u osnovnom modelu, ~13€, link napravljen). S26R2ZB i Nous A1Z ostaju
+pomenuti kao „ako si naleteo na starije spiskove", ne kao preporuka. Aqara P1
+ostaje bez linka uz upozorenje da se pod tim imenom prodaje i senzor za vrata.
+
+⚠️ **Usput ispravljena netačnost koju su linkovi razotkrili:** tekst je tvrdio
+„45-60€ sa AliExpressa" naspram „75-90€ domaće. Stvarne cene na linkovanim
+oglasima daju **~85-100€ u oba slučaja** — otkad se porez naplaćuje na naplati,
+AliExpress više nije duplo jeftiniji za ovakav hardver. **Ovo je opšta lekcija:
+čim tekst dobije linkove, svaka tvrdnja o ceni u njemu postaje proverljiva u
+dva klika.** Kad se linkuje stariji tekst, prvo proveriti cene u njemu.
+
+Modeli bez linka: Aqara P1 (pokret) i USB produžni kabl (u tekstu ionako piše
+„bilo koji").
 
 **Urađeno 07-08.08.2026 (da se ne radi dvaput):**
 - ime sajta → `opameti.me` (bilo „SmartDom Guides")
@@ -215,7 +228,7 @@ Objavljeno (7, uključujući uvodnu najavu):
 - Home Assistant za apsolutne početnike — instalacija za 30 minuta ✅ ilustrovan
 - Koji hardver ti treba za pametan dom: Zigbee vs Z-Wave vs WiFi
 - Prvih 5 automatizacija koje svako treba da napravi ✅ ilustrovan
-- Najbolji jeftini Zigbee senzori i utičnice za početak ✅ affiliate linkovi (7)
+- Najbolji jeftini Zigbee senzori i utičnice za početak ✅ affiliate linkovi (8)
 - Kako da instaliraš Home Assistant na svom Linux serveru (Docker)
 
 Engleski (`/en/`, projekti — ne prevodi):
@@ -353,6 +366,14 @@ nema nove zavisnosti.
 ⚠️ `sharp` tekst crta **sistemskim fontovima**. Zato `Dockerfile` u build fazi
 instalira `fontconfig font-dejavu`. Ako se to ukloni, build **neće pući** —
 slike će samo izaći bez teksta. Posle izmena tu obavezno pogledati sliku.
+
+**1b. Pločica na vrhu teksta bez `cover`-a.** `/og/head/<slug>.webp` (1000px,
+ista crtana pločica kao u karticama, `variant: 'card'` — bez naslova, jer
+naslov stoji odmah iznad). Ruta: `src/pages/og/head/[...slug].webp.ts`, pravi
+se samo za tekstove **bez** `cover`-a. Razlog (13.08.2026): tekstovi bez slike
+su počinjali golim naslovom dok svaka kartica na naslovnoj ima pločicu, pa je
+stranica delovala nedovršeno. Prava fotografija i dalje pobeđuje pločicu — ovo
+je pod, ne cilj. Pločica je ukras, pa ide sa `aria-hidden` i praznim `alt`-om.
 
 **2. Slike u tekstu — ručno, i samo prave.** Screenshotovi iz stvarnog Home
 Assistant-a i fotografije hardvera koji zaista imamo. **Stock fotografije se ne
