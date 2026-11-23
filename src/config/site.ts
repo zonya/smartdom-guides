@@ -18,9 +18,8 @@ export const site = {
     { href: '/blog', label: 'Vodiči' },
     { href: '/o-sajtu', label: 'O sajtu' },
   ],
-  // Firma koja stoji iza sajta. `url` je namerno prazan dok nextit.rs ne
-  // proradi (zona je na Cloudflare-u, ali NS još nisu prebačeni).
-  company: { name: 'NextIT', url: '' },
+  // Firma koja stoji iza sajta (nextit.rs objavljen 24.11.2026).
+  company: { name: 'NextIT', url: 'https://nextit.rs' },
 };
 
 export const analytics = {
