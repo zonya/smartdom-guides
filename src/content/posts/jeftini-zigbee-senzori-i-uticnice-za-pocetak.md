@@ -27,10 +27,15 @@ affiliate:
     url: "https://s.click.aliexpress.com/e/_c3EP97rD"
     image: ../../assets/products/sonoff-snzb-03p.jpg
     price: "~10€"
+  - title: "Sonoff SNZB-06P — senzor prisustva"
+    url: "https://s.click.aliexpress.com/e/_c3OHa5Df"
+    image: ../../assets/products/sonoff-snzb-06p.jpg
+    price: "~13€"
+    note: "Za kupatilo i radni sto, gde senzor pokreta gasi svetlo dok sediš. Radi na USB napajanje, ne na bateriju."
   - title: "Sonoff SNZB-02D — temperatura i vlažnost"
-    url: "https://s.click.aliexpress.com/e/_c3uuDxpl"
+    url: "https://s.click.aliexpress.com/e/_c4Ox29sl"
     image: ../../assets/products/sonoff-snzb-02d.jpg
-    price: "~18€"
+    price: "~16€"
     note: "Sa ekranom, pa je čitljiv i kad Home Assistant ne radi."
   - title: "Sonoff SNZB-05P — senzor vode"
     url: "https://s.click.aliexpress.com/e/_c3eS65H5"
@@ -119,13 +124,15 @@ Za ostavu i podrum ista logika radi kao „upali svetlo kad otvorim, ugasi kad z
 
 Ako kasnije budeš birao skuplji, gledaj jednu jedinu stavku: **da li se interval prijavljivanja može menjati**. Jeftini senzori posle detekcije „ćute" oko minut da bi štedeli bateriju, i onda ti se svetlo u kupatilu ugasi dok si još unutra. **Aqara Motion Sensor P1** je najpoznatiji koji to ume — samo ga je kod nas nezgodno naći, jer se pod imenom „Aqara P1" prodaje i senzor za vrata, a i sam Aqara ima više senzora pokreta sa sličnim imenima. Proveri oznaku modela pre nego što platiš.
 
-Zato jedno pravilo: **prvi senzor pokreta ne stavljaj u kupatilo.** Stavi ga u hodnik, ostavu ili predsoblje — mesta gde prolaziš, a ne mesta gde stojiš mirno. Kupatilo i radni sto su najteži slučajevi i tamo ćeš ionako pre ili kasnije preći na senzor prisustva (mmWave), koji je druga i skuplja priča.
+Zato jedno pravilo: **prvi senzor pokreta ne stavljaj u kupatilo.** Stavi ga u hodnik, ostavu ili predsoblje — mesta gde prolaziš, a ne mesta gde stojiš mirno. Kupatilo i radni sto su najteži slučajevi i tamo ćeš ionako pre ili kasnije preći na senzor prisustva.
+
+Senzor prisustva ne čeka pokret, nego primećuje i čoveka koji mirno sedi, pa svetlo ostaje upaljeno dok si u prostoriji. Za to bismo uzeli <a href="https://s.click.aliexpress.com/e/_c3OHa5Df" rel="sponsored nofollow noopener" target="_blank"><strong>Sonoff SNZB-06P</strong></a> (oko 13€): radi na mikrotalasni radar i javlja i osvetljenost. Jedna stvar koju treba znati pre kupovine: **ne radi na bateriju**, nego na USB napajanje, pa mu mesto planiraj pored utičnice.
 
 Većina ovih senzora javlja i **osvetljenost**, pa svetlo ne mora da se pali po satu nego po tome koliko je zaista mračno. To je jedna od retkih automatizacija koju i ostatak kuće primeti kao poboljšanje, a ne kao tvoju igračku.
 
 ## Temperatura i vlažnost
 
-<a href="https://s.click.aliexpress.com/e/_c3uuDxpl" rel="sponsored nofollow noopener" target="_blank"><strong>Sonoff SNZB-02D</strong></a> ima ekran, pa je koristan i kad Home Assistant ne radi — nekome u kući će to biti važnije nego tebi. Baterija traje oko godinu i po.
+<a href="https://s.click.aliexpress.com/e/_c4Ox29sl" rel="sponsored nofollow noopener" target="_blank"><strong>Sonoff SNZB-02D</strong></a> ima ekran, pa je koristan i kad Home Assistant ne radi — nekome u kući će to biti važnije nego tebi. Baterija traje oko godinu i po.
 
 Uzmi **dva**: jedan u dnevnoj, jedan u kupatilu ili spavaćoj. Sa jednim senzorom imaš broj; sa dva imaš **razliku**, a razlika je ono od čega se prave korisne stvari — uključi odvlaživač kad je vlažnost u kupatilu 20% viša od ostatka stana, javi kad je u dečjoj sobi hladnije od 19°C.
 
