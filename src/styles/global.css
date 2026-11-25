@@ -600,6 +600,47 @@ main {
   font-family: var(--font-mono);
 }
 
+/* ---------- Baner na naslovnoj ---------- */
+
+.promo {
+  margin: 2.5rem auto 0;
+  width: fit-content;
+  display: grid;
+  justify-items: center;
+  gap: 0.4rem;
+}
+
+.promo__label {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.promo__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.promo img {
+  display: block;
+  width: 300px;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+.promo__note {
+  margin: 0;
+  max-width: 36rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
 /* ---------- Affiliate blok ---------- */
 
 .affiliate {
@@ -627,6 +668,27 @@ main {
 .affiliate__item {
   padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--border);
+}
+
+.affiliate__item--img {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  column-gap: 1rem;
+  align-items: start;
+}
+
+.affiliate__thumb {
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+}
+
+.affiliate__thumb img {
+  display: block;
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
 }
 
 .affiliate__item:last-child {

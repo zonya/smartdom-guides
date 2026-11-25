@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { monetization } from '../config/site';
 import { DEFAULT_LOCALE, type Locale } from '../config/i18n';
 
@@ -7,6 +9,7 @@ export interface AffiliateItem {
   url: string;
   note?: string;
   price?: string;
+  image?: ImageMetadata;
 }
 
 interface Props {
@@ -31,7 +34,20 @@ const disclosure = monetization.affiliate.disclosure[locale];
       <h2 class="affiliate__heading">{heading}</h2>
       <ul class="affiliate__list">
         {items.map((item) => (
-          <li class="affiliate__item">
+          <li class:list={['affiliate__item', { 'affiliate__item--img': item.image }]}>
+            {item.image && (
+              <a
+                href={item.url}
+                class="affiliate__thumb"
+                rel="sponsored nofollow noopener"
+                target="_blank"
+                tabindex="-1"
+                aria-hidden="true"
+              >
+                <Image src={item.image} alt="" width={160} height={160} />
+              </a>
+            )}
+            <div class="affiliate__body">
             <a
               href={item.url}
               class="affiliate__link"
@@ -42,6 +58,7 @@ const disclosure = monetization.affiliate.disclosure[locale];
             </a>
             {item.price && <span class="affiliate__price">{item.price}</span>}
             {item.note && <p class="affiliate__note">{item.note}</p>}
+            </div>
           </li>
         ))}
       </ul>

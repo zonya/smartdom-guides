@@ -49,6 +49,29 @@ export const monetization = {
     },
   },
 
+  // Baner na naslovnoj (Marko, 25.11.2026 — vidi CLAUDE.md, „Baner na
+  // naslovnoj"). Slika je kopija u src/assets/promo/, NE hotlink sa
+  // AliExpress CDN-a: tako naslovna i dalje nema nijedan spoljni zahtev, pa
+  // politika privatnosti ostaje tačna. `until` je poslednji dan prikaza —
+  // proverava se pri build-u, pa baner nestaje tek sa sledećim deploy-em.
+  promo: {
+    enabled: true,
+    until: '2026-12-01',
+    // `image` = ime fajla u src/assets/promo/ (300×250).
+    banners: [
+      {
+        url: 'https://s.click.aliexpress.com/e/_c4Vxvkyp?bz=300*250',
+        image: 'aliexpress-black-friday-2026.webp',
+        alt: 'AliExpress Black Friday — popusti',
+      },
+      {
+        url: 'https://s.click.aliexpress.com/e/_c3PDgFOh?bz=300*250',
+        image: 'aliexpress-cyber-monday-2026.webp',
+        alt: 'AliExpress Cyber Monday — popusti',
+      },
+    ],
+  },
+
   affiliate: {
     // AliExpress Portals, nalog odobren 09.08.2026. Tracking ID se vidi u
     // portalu (Account → Tracking ID) i služi samo kao podsetnik koji je

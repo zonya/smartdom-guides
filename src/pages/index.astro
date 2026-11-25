@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
 import AdSlot from '../components/AdSlot.astro';
+import PromoBanner from '../components/PromoBanner.astro';
 import { site } from '../config/site';
 import { getSortedPosts, readingTime } from '../utils/posts';
 
@@ -51,6 +52,8 @@ const posts = (await getSortedPosts()).slice(0, 5);
       }
     </div>
   </section>
+
+  <PromoBanner />
 
   <AdSlot slot="list" />
 </BaseLayout>

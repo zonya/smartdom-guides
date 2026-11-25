@@ -3,6 +3,12 @@ title: "Koji hardver ti treba za pametan dom: Zigbee vs Z-Wave vs WiFi"
 description: "Šta je razlika između Zigbee, Z-Wave i WiFi uređaja, koji protokol da izabereš za početak i koji hardver ti stvarno treba."
 pubDate: 2026-08-07
 tags: ["home-assistant", "hardver", "zigbee", "z-wave"]
+affiliate:
+  - title: "Sonoff SNZB-02D — temperatura i vlažnost"
+    url: "https://s.click.aliexpress.com/e/_c4Ox29sl"
+    image: ../../assets/products/sonoff-snzb-02d.jpg
+    price: "~18€"
+    note: "Sa ekranom, pa je čitljiv i kad Home Assistant ne radi. Ceo spisak za početak je u tekstu o jeftinim Zigbee senzorima."
 ---
 
 Kad počneš da kupuješ pametne uređaje, prva prepreka nije cena nego skraćenice. Ista pametna utičnica postoji u Zigbee, Z-Wave i WiFi verziji, po sličnoj ceni, a razlika je velika — i najlakše je pogrešiti baš na početku, dok kupuješ prvih pet uređaja.
@@ -48,7 +54,8 @@ Ako kreneš od nule, ovo je kombinacija koja se najređe ispostavi kao greška:
 1. **Zigbee koordinator (USB dongle)** — obavezno preko **USB produžnog kabla**, nikako direktno u server. Dongle pored USB 3.0 porta hvata smetnje i mreža ti radi loše bez očiglednog razloga.
 2. **Dve-tri Zigbee utičnice** — one su i uređaji i pojačivači mreže, pa postavi ih tako da pokriju stan.
 3. **Senzor pokreta i senzor otvaranja vrata** — najjeftiniji delovi, a najviše automatizacija kreće baš od njih.
-4. Po potrebi **Shelly modul** iza postojećeg prekidača, ako želiš da ti obični zidni prekidač i dalje radi normalno.
+4. **Senzor temperature i vlažnosti** — mi uzimamo <a href="https://s.click.aliexpress.com/e/_c4Ox29sl" rel="sponsored nofollow noopener" target="_blank"><strong>Sonoff SNZB-02D</strong></a> (oko 18€), jer ima ekran, pa ga ukućani čitaju i bez telefona. Od njega kreću automatizacije za grejanje, klimu i ventilator u kupatilu.
+5. Po potrebi **Shelly modul** iza postojećeg prekidača, ako želiš da ti obični zidni prekidač i dalje radi normalno.
 
 Ne kupuj sve odjednom. Uzmi dongle i tri uređaja, napravi prve automatizacije, pa onda proširuj — mnogo ćeš bolje znati šta ti stvarno treba nakon mesec dana.
 

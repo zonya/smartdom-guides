@@ -1,0 +1,36 @@
+---
+// Baneri na naslovnoj. Podešavaju se u `monetization.promo` (src/config/site.ts).
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { monetization } from '../config/site';
+
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/promo/*.{webp,png,jpg}',
+  { eager: true }
+);
+const { enabled, until, banners } = monetization.promo;
+const today = new Date().toISOString().slice(0, 10);
+const items = banners
+  .map((b) => ({ ...b, src: files[`../assets/promo/${b.image}`]?.default }))
+  .filter((b) => b.src);
+const show = enabled && today <= until && items.length > 0;
+---
+
+{
+  show && (
+    <aside class="promo" aria-label="Reklama">
+      <span class="promo__label">Affiliate · reklama</span>
+      <div class="promo__row">
+        {items.map((b) => (
+          <a href={b.url} rel="sponsored nofollow noopener" target="_blank">
+            <Image src={b.src!} alt={b.alt} width={300} height={250} />
+          </a>
+        ))}
+      </div>
+      <p class="promo__note">
+        Ako kupiš preko ovih linkova, sajt dobija malu proviziju, bez dodatnog
+        troška za tebe.
+      </p>
+    </aside>
+  )
+}

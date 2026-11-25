@@ -317,6 +317,19 @@ sajt počne da izgleda kao farma sadržaja, što odbija upravo klijenta za NextI
 — a jedan takav posao vredi više od godina oglasa. Ako se ikad vrate, prvo
 pročitati ovaj pasus.
 
+### Baner na naslovnoj (25.11.2026)
+
+Marko je preinačio gornju odluku za naslovnu: **AliExpress baneri 300×250**
+(Black Friday + Cyber Monday) stoje ispod „Najnovijih tekstova", u
+`PromoBanner.astro`, podešavaju se u `monetization.promo` (`site.ts`).
+- Slike su **kopije u `src/assets/promo/`**, ne hotlink sa `aliexpress-media.com` —
+  naslovna i dalje nema spoljni zahtev, pa politika privatnosti ostaje tačna.
+- Kod iz portala navodi pogrešne mere (Cyber Monday „725×90", a slika je
+  300×250) — uvek proveriti stvarnu veličinu fajla.
+- `until` (sada `2026-12-01`) se proverava **pri build-u**: baner nestaje tek
+  sa sledećim deploy-em posle tog datuma. Posle akcije: deploy, ili `enabled: false`.
+- U tekstovima baneri i dalje ne idu.
+
 ### Analitika
 
 - **Cloudflare Web Analytics** — besplatan, bez kolačića, ne traži cookie
@@ -415,6 +428,16 @@ je pod, ne cilj. Pločica je ukras, pa ide sa `aria-hidden` i praznim `alt`-om.
 Assistant-a i fotografije hardvera koji zaista imamo. **Stock fotografije se ne
 koriste** — generički „pametan dom" iz banke slika je tačno ono po čemu se
 prepoznaju sajtovi bez vrednosti, a to je i ono što AdSense odbija.
+
+**2b. Sličice proizvoda u affiliate boksu — da, sa oglasa (odluka 25.11.2026,
+Marko: „poenta je da sajt zarađuje").** Stavka u `affiliate:` može imati
+`image: ../../assets/products/ime.jpg` → sličica 5rem levo od naslova, klik vodi
+na isti provizioni link. Slike prodavca su promotivni materijal programa, pa je
+korišćenje uz affiliate link u redu. Pravilo: **iseći samo proizvod** — bez
+„HOT SALE", bez infografika, bez lifestyle kadrova (devojka za stolom, render
+kuće). Takve slike ne idu ni u telo teksta ni kao `cover`; tamo i dalje važe
+samo prave fotografije i screenshotovi. Primer: `sonoff-snzb-02d.jpg`, isečen
+iz 800×800 slike prodavca.
 
 Kako se dodaje naslovna slika:
 - fajl u `src/assets/posts/` (ne u `public/` — tamo Astro ne optimizuje),

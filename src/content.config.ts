@@ -33,6 +33,9 @@ const posts = defineCollection({
               url: z.string().url(),
               note: z.string().optional(),
               price: z.string().optional(),
+              // Sličica proizvoda u boksu (`src/assets/products/`). Fotografija
+              // proizvoda sa oglasa, bez reklamnih natpisa — vidi CLAUDE.md.
+              image: image().optional(),
             })
           )
           .optional(),

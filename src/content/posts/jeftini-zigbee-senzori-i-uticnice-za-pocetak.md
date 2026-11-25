@@ -6,32 +6,40 @@ tags: ["home-assistant", "hardver", "zigbee", "senzori"]
 affiliate:
   - title: "Sonoff ZBDongle-E — koordinator"
     url: "https://s.click.aliexpress.com/e/_c3zlpEp1"
+    image: ../../assets/products/sonoff-zbdongle-e.jpg
     price: "~19€"
     note: "Obavezno preko USB produžnog kabla, ne direktno u server."
   - title: "SMLIGHT SLZB-06 — koordinator na mrežni kabl"
     url: "https://s.click.aliexpress.com/e/_c2zjHiVZ"
+    image: ../../assets/products/smlight-slzb-06.jpg
     price: "~35€"
     note: "Samo ako ti server stoji u lošem uglu. Za prvi put nije neophodan."
   - title: "Sonoff S60ZBTPF — utičnica sa merenjem potrošnje"
     url: "https://s.click.aliexpress.com/e/_c4qyHOr9"
+    image: ../../assets/products/sonoff-s60zbtpf.jpg
     price: "~13€"
     note: "Uzmi dve i rasporedi ih — one su i pojačivači mreže. Pazi da je EU (TPF) i Zigbee (ZB)."
   - title: "Sonoff SNZB-04P — senzor otvaranja"
     url: "https://s.click.aliexpress.com/e/_c2xZBgSL"
+    image: ../../assets/products/sonoff-snzb-04p.jpg
     note: "Isti oglas nudi i pakovanje od dva komada — proveri cenu po komadu."
   - title: "Sonoff SNZB-03P — senzor pokreta"
     url: "https://s.click.aliexpress.com/e/_c3EP97rD"
+    image: ../../assets/products/sonoff-snzb-03p.jpg
     price: "~10€"
   - title: "Sonoff SNZB-02D — temperatura i vlažnost"
     url: "https://s.click.aliexpress.com/e/_c3uuDxpl"
+    image: ../../assets/products/sonoff-snzb-02d.jpg
     price: "~18€"
     note: "Sa ekranom, pa je čitljiv i kad Home Assistant ne radi."
   - title: "Sonoff SNZB-05P — senzor vode"
     url: "https://s.click.aliexpress.com/e/_c3eS65H5"
+    image: ../../assets/products/sonoff-snzb-05p.jpg
     price: "~8€"
     note: "Pod bojler i pod sudoperu. Nikad se ne aktivira — dok se ne isplati."
   - title: "Sonoff ZBMINIR2 — modul iza prekidača"
     url: "https://s.click.aliexpress.com/e/_c4NcxCpD"
+    image: ../../assets/products/sonoff-zbminir2.jpg
     price: "~12€"
     note: "Za slučaj kad zidni prekidač mora i dalje da radi normalno."
 ---
@@ -48,7 +56,7 @@ Jedna napomena pre svega: **nemoj kupiti sve odjednom.** Koordinator, dve utičn
 | Utičnica ×2 | Sonoff S60ZBTPF | 13-16€ po kom. |
 | Senzor otvaranja | Sonoff SNZB-04P | 10-13€ |
 | Senzor pokreta | Sonoff SNZB-03P | 10-13€ |
-| Temperatura i vlažnost | Sonoff SNZB-02D | 10-13€ |
+| Temperatura i vlažnost | Sonoff SNZB-02D | 15-18€ |
 | USB produžni kabl | bilo koji, 1m | 2-3€ |
 
 Ukupno oko **85-100€**, i sa domaćih sajtova i sa AliExpressa. To „sa AliExpressa je duplo jeftinije" danas više ne stoji za ovakav hardver — otkad se porez naplaćuje na naplati, razlika se svela na nekoliko evra po uređaju, a čekaš dve do četiri nedelje. Ono što tamo i dalje dobijaš je izbor: pola ovih modela domaće radnje uopšte ne drže.
